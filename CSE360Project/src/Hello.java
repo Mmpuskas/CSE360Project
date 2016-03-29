@@ -1,6 +1,6 @@
 /**
  * @description
- * @author Mercedes Perguson, Micheal, William, Tony, Yifan
+ * @author Mercedes Perguson, Michael, William, Tony, Yifan
  *
  */
 public class Hello 
