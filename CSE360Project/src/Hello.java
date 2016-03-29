@@ -13,6 +13,7 @@ public class Hello
 		System.out.println("Hi, this is studly Tony :)");
 		System.out.println("yifan Li");
 		System.out.println("William is cuddly...");
+		System.out.println("Michael is kind of a cool guy");
 		
 
 	}
