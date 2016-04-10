@@ -51,10 +51,10 @@ public class UIVisual
 		startNanoTime = System.nanoTime();
 
 		//Assets
-		board = new Image( "file:assets/board.png", 1024, 512, true, true);
-		fiddy = new Image( "file:assets/111209-50-cent.png", 60, 140, true, true);
-		die = new Image( "file:assets/die.png", 40, 40, true, true);
-		rollBackground = new Image( "file:assets/InnerBackground.png", 150, 100, true, true);
+		board = new Image( "/assets/board.png", 1024, 512, true, true);
+		fiddy = new Image( "/assets/111209-50-cent.png", 60, 140, true, true);
+		die = new Image( "/assets/die.png", 40, 40, true, true);
+		rollBackground = new Image( "/assets/InnerBackground.png", 150, 100, true, true);
 	}
 
 	/* ## Initializing variables that ARE part of the javaFX tree ## */
