@@ -205,14 +205,18 @@ public class UIVisual
 			
 			if(curX == targetX && curY == targetY)
 			{
-				if(spacesToMove == 0)
-					isMoving = false;
-				else
+				if(spacesToMove > 0)
 				{
 					curSpace++;
 					targetX = control.tileList.get(curSpace).x;
 					targetY = control.tileList.get(curSpace).y;
 					spacesToMove--;
+				}
+				else if(!root.getChildren().contains(makeMove))
+				{
+					isMoving = false;
+					rollGC.drawImage(rollBackground, 0, 0);
+					root.getChildren().add(makeMove);
 				}
 			}
 		}
