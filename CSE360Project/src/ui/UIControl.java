@@ -11,12 +11,11 @@ public class UIControl
 	
 	void initVals()
 	{
-		Tile tile = new Tile(0,0);
+		Tile tile;
 		for(int i = 0; i < 25; i++)
 		{
-			tile.x = i*25;
-			tile.y = (i % 5) * 25;
-			tileList.add(tile);
+			tile = new Tile((i*55)+75, 350);
+			tileList.add(i, tile);
 		}
 	}
 }

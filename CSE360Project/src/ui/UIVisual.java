@@ -52,8 +52,8 @@ public class UIVisual
 	UIVisual(UIControl Control)
 	{
 		//Starting board positions
-		startX = 60;
-		startY = 270;
+		startX = 75;
+		startY = 350;
 		curX = startX;
 		curY = startY;
 		spacesToMove = 0;
@@ -157,43 +157,33 @@ public class UIVisual
 			int timeDif = (int) ((currentNanoTime - startNanoTime) / 100000000);
 			int numXPos = ((int) rollCanvas.getWidth() / 2) - ((int) roll1.getWidth() / 2) - 20;
 			int numYPos = ((int) rollCanvas.getHeight() / 2) - ((int) roll1.getHeight() / 2) - 50;
-			if(timeDif % 3 == 0)
+			
+			if(timeDif < 30)
 			{
 				rollGC.clearRect(0, 0, rollCanvas.getWidth(), rollCanvas.getHeight());
-				rollGC.drawImage(roll3, numXPos, numYPos);
+				if(timeDif % 3 == 0)
+					rollGC.drawImage(roll3, numXPos, numYPos);
+				else if(timeDif % 2 == 0)
+					rollGC.drawImage(roll2, numXPos, numYPos);
+				else
+					rollGC.drawImage(roll1, numXPos, numYPos);
 			}
-			else if(timeDif % 2 == 0)
+			else if(timeDif == 30)
 			{
+				//Set the image to be displayed
 				rollGC.clearRect(0, 0, rollCanvas.getWidth(), rollCanvas.getHeight());
-				rollGC.drawImage(roll2, numXPos, numYPos);
+				if(spacesToMove == 1)
+					rollGC.drawImage(roll1, numXPos, numYPos);
+				else if(spacesToMove == 2)
+					rollGC.drawImage(roll2, numXPos, numYPos);
+				else if(spacesToMove == 3)
+					rollGC.drawImage(roll3, numXPos, numYPos);
 			}
 			else
 			{
-				rollGC.clearRect(0, 0, rollCanvas.getWidth(), rollCanvas.getHeight());
-				rollGC.drawImage(roll1, numXPos, numYPos);
-			}
-			
-			if(timeDif > 30) //If it's been 3 seconds
-			{
-				//Set the image to be displayed
-				if(spacesToMove == 1)
-				{
-					rollGC.clearRect(0, 0, rollCanvas.getWidth(), rollCanvas.getHeight());
-					rollGC.drawImage(roll1, numXPos, numYPos);
-				}
-				else if(spacesToMove == 2)
-				{
-					rollGC.clearRect(0, 0, rollCanvas.getWidth(), rollCanvas.getHeight());
-					rollGC.drawImage(roll2, numXPos, numYPos);
-				}
-				else if(spacesToMove == 3)
-				{
-					rollGC.clearRect(0, 0, rollCanvas.getWidth(), rollCanvas.getHeight());
-					rollGC.drawImage(roll3, numXPos, numYPos);
-				}
-				
+				//Pause for them to bask in their number's beauty, then move to moving phase
 				try {
-					Thread.sleep(1000);
+					Thread.sleep(2000);
 				} catch (InterruptedException e) {
 					System.out.println("Error in waiting after dice was rolled.");
 				}
@@ -219,10 +209,10 @@ public class UIVisual
 					isMoving = false;
 				else
 				{
-					startNanoTime = System.nanoTime();
 					curSpace++;
 					targetX = control.tileList.get(curSpace).x;
 					targetY = control.tileList.get(curSpace).y;
+					spacesToMove--;
 				}
 			}
 		}
@@ -245,7 +235,7 @@ public class UIVisual
 			@Override public void handle(ActionEvent e) 
 			{
 				root.getChildren().remove(makeMove); //Get the roll button out of the way
-				spacesToMove = (int) Math.random() * 3 + 1; //Set the spaces to move to a random number
+				spacesToMove = (int) (Math.random() * 3) + 1; //Set the spaces to move to a random number
 
 				curSpace++;
 				targetX = control.tileList.get(curSpace).x;
