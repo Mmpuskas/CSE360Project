@@ -1,14 +1,14 @@
 package ui;
 
-import javafx.application.Application;
 import javafx.stage.Stage;
 import javafx.scene.Scene;
 import javafx.scene.Group;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
-import javafx.scene.paint.Color;
+import javafx.scene.image.ImageView;
 import javafx.scene.control.Button;
+import javafx.beans.binding.Bindings;
 
 
 import javafx.animation.AnimationTimer;
@@ -33,6 +33,15 @@ public class UIVisual
 	private Image fiddy;
 	private Image die;
 	private Image rollBackground;
+	private Image splash;
+	
+	private enum Mode
+	{
+		splash,
+		play,
+		scores;
+	}
+	private Mode curMode = Mode.splash;
 	
 	private UIControl control;
 
@@ -52,6 +61,7 @@ public class UIVisual
 
 		//Assets
 		board = new Image( "/assets/board.png", 1024, 512, true, true);
+		splash = new Image( "/assets/splash.png", 1024, 512, true, true);
 		fiddy = new Image( "/assets/111209-50-cent.png", 60, 140, true, true);
 		die = new Image( "/assets/die.png", 40, 40, true, true);
 		rollBackground = new Image( "/assets/InnerBackground.png", 150, 100, true, true);
@@ -62,14 +72,18 @@ public class UIVisual
 	Scene theScene;
 	Canvas gameCanvas; //Canvas for the game board/related things
 	Canvas rollCanvas; //Canvas for the prompt window where you roll
+	Canvas splashCanvas; //Canvas for the splash screen where you can choose play/leaderboard
 	GraphicsContext gameGC;
 	GraphicsContext rollGC;
+	GraphicsContext splashGC;
 	Button makeMove;
+	Button playButton;
+	Button scoresButton;
 	
 	private void initTreeMembers()
 	{
 		int gameWidth = 1024;
-		int gameHeight = 512;
+		int gameHeight = 488;
 		int rollWidth = 150;
 		int rollHeight = 100;
 
@@ -78,69 +92,135 @@ public class UIVisual
 		theScene = new Scene(root);
         gameCanvas = new Canvas(gameWidth, gameHeight);
         rollCanvas = new Canvas(rollWidth, rollHeight);
+        splashCanvas = new Canvas(gameWidth, gameHeight);
 		gameGC = gameCanvas.getGraphicsContext2D();
 		rollGC = rollCanvas.getGraphicsContext2D();
-        rollGC.drawImage(rollBackground, 0, 0);
-        rollCanvas.relocate( (gameWidth / 2) - (rollWidth / 2), (gameHeight / 2) - (rollHeight / 2));
-        root.getChildren().add(gameCanvas);
+		splashGC = splashCanvas.getGraphicsContext2D();
+        rollGC.drawImage(rollBackground, 0, 0); //Sets background of roll window
+        rollCanvas.relocate((gameWidth / 2) - (rollWidth / 2), (gameHeight / 2) - (rollHeight / 2)); //Sets placement of roll window
+        splashGC.drawImage(splash, 0, 0);
+		root.getChildren().add(splashCanvas); //Gotta start with something on the root to set the size of the window
 
         //Interactables
-        makeMove = new Button( "Move" );
-        makeMove.relocate( rollCanvas.getLayoutX() + (rollWidth / 2) - 25 
-        		, rollCanvas.getLayoutY() + (rollHeight / 2) - 12);
-        makeMove.setOnAction(new EventHandler<ActionEvent>() {
-            @Override public void handle(ActionEvent e) {
-            	currentTileIndex++;
-            	targetX = control.xValues[currentTileIndex];
-            	targetY = control.yValues[currentTileIndex];
-            	
-            	isMoving = true;
-            	root.getChildren().remove(rollCanvas);
-				root.getChildren().remove(makeMove);
-            }
-        });
+        initButtons(gameWidth, gameHeight, rollWidth, rollHeight);
 	}
 
-    public void startVisual(Stage theStage) 
-    {
-        theStage.setTitle("TBA");
-        initTreeMembers();
-        theStage.setScene(theScene);
+	public void startVisual(Stage theStage) 
+	{
+		theStage.setTitle("TBA");
+		initTreeMembers();
+		theStage.setScene(theScene);
 
-
-        new AnimationTimer()
-        {
-            public void handle(long currentNanoTime)
-            {
-            	if(!isMoving && (currentNanoTime - startNanoTime) >= 3000 && !root.getChildren().contains(rollCanvas))
-            	{
-            		root.getChildren().add(rollCanvas);
-					root.getChildren().add(makeMove);
-            	}
-
-				if(isMoving)
+		new AnimationTimer()
+		{
+			public void handle(long currentNanoTime)
+			{
+				if(curMode == Mode.splash)
 				{
-					if(curX < targetX)
-						curX++;
-					else if (curX > targetX)
-						curX--;
-					if(curY < targetY)
-						curY++;
-					else if (curY > targetY)
-						curY--;
-					
-					if(curX == targetX && curY == targetY)
+					if(!root.getChildren().contains(playButton))
 					{
-						startNanoTime = System.nanoTime();
-						isMoving = false;
+						root.getChildren().clear();
+						root.getChildren().add(splashCanvas);
+						root.getChildren().add(playButton);
+						root.getChildren().add(scoresButton);
 					}
 				}
+				else if(curMode == Mode.play)
+				{
+					if(!root.getChildren().contains(rollCanvas))
+					{
+						root.getChildren().clear();
+						root.getChildren().add(gameCanvas);
+						playLogic(currentNanoTime);
+					}
+				}
+				else if(curMode == Mode.scores)
+				{
+					
+				}
+			}
+		}.start();
 
-				gameGC.drawImage( board, 0, 0 );
-				gameGC.drawImage( fiddy, curX, curY );
-            }
-        }.start();
+		theStage.show();
+	}
+	
+	private void playLogic(long currentNanoTime)
+	{
+		if(!isMoving && (currentNanoTime - startNanoTime) >= 3000)
+		{
+			root.getChildren().add(rollCanvas);
+			root.getChildren().add(makeMove);
+		}
 
-        theStage.show();
-    }
+		if(isMoving)
+		{
+			if(curX < targetX)
+				curX++;
+			else if (curX > targetX)
+				curX--;
+			if(curY < targetY)
+				curY++;
+			else if (curY > targetY)
+				curY--;
+			
+			if(curX == targetX && curY == targetY)
+			{
+				startNanoTime = System.nanoTime();
+				isMoving = false;
+			}
+		}
+
+		gameGC.drawImage(board, 0, 0);
+		gameGC.drawImage(fiddy, curX, curY);
+	}
+	
+	 private void initButtons(int gameWidth, int gameHeight, int rollWidth, int rollHeight)
+	 {
+		//makeMove button for rolling die
+		makeMove = new Button();
+		makeMove.relocate( rollCanvas.getLayoutX() + (rollWidth / 2) - 32 
+				, rollCanvas.getLayoutY() + (rollHeight / 2) - 25); //Sets the position of the button based on rollCanvas
+		ImageView makeMoveImage = new ImageView();
+		makeMoveImage.imageProperty().set(die);        
+		makeMove.setGraphic(makeMoveImage); //Set the button's graphic to the imageview defined
+		makeMove.setOnAction(new EventHandler<ActionEvent>() //Sets what the button does
+		{
+			@Override public void handle(ActionEvent e) 
+			{
+				currentTileIndex++;
+				targetX = control.xValues[currentTileIndex];
+				targetY = control.yValues[currentTileIndex];
+				
+				isMoving = true;
+				root.getChildren().remove(rollCanvas);
+				root.getChildren().remove(makeMove);
+			}
+		});
+		
+		//play button for starting the game from the splash
+		playButton = new Button("Play");
+		playButton.relocate(100, gameHeight / 2);
+		playButton.setPrefHeight(200);
+		playButton.setPrefWidth(200);
+		playButton.setOnAction(new EventHandler<ActionEvent>() 
+		{
+			@Override public void handle(ActionEvent e) 
+			{
+				curMode = Mode.play;
+			}
+		});
+
+		//score button for viewing the leaderboard
+		scoresButton = new Button("Leaderboard");
+		scoresButton.relocate(gameWidth - 300, gameHeight / 2);
+		scoresButton.setPrefHeight(200);
+		scoresButton.setPrefWidth(200);
+		scoresButton.setOnAction(new EventHandler<ActionEvent>() //Sets what the button does
+		{
+			@Override public void handle(ActionEvent e) 
+			{
+				curMode = Mode.scores;
+			}
+		});
+	 }
 }
