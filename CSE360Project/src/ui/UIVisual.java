@@ -24,6 +24,9 @@ public class UIVisual
 	private int startY;
 	private int curX;
 	private int curY;
+	private int targetX;
+	private int targetY;
+	private int currentTileIndex;
     private long startNanoTime;
 
 	private Image board;
@@ -40,6 +43,7 @@ public class UIVisual
 		startY = 270;
 		curX = startX;
 		curY = startY;
+		currentTileIndex = 0;
 
 		//Initialize the passed in control
 		control = Control;
@@ -86,6 +90,10 @@ public class UIVisual
         		, rollCanvas.getLayoutY() + (rollHeight / 2) - 12);
         makeMove.setOnAction(new EventHandler<ActionEvent>() {
             @Override public void handle(ActionEvent e) {
+            	currentTileIndex++;
+            	targetX = control.xValues[currentTileIndex];
+            	targetY = control.yValues[currentTileIndex];
+            	
             	isMoving = true;
             	root.getChildren().remove(rollCanvas);
 				root.getChildren().remove(makeMove);
@@ -99,8 +107,39 @@ public class UIVisual
         initTreeMembers();
         theStage.setScene(theScene);
 
-		gameGC.drawImage( board, 0, 0 );
-		gameGC.drawImage( fiddy, curX, curY );
+
+        new AnimationTimer()
+        {
+            public void handle(long currentNanoTime)
+            {
+            	if(!isMoving && (currentNanoTime - startNanoTime) >= 3000 && !root.getChildren().contains(rollCanvas))
+            	{
+            		root.getChildren().add(rollCanvas);
+					root.getChildren().add(makeMove);
+            	}
+
+				if(isMoving)
+				{
+					if(curX < targetX)
+						curX++;
+					else if (curX > targetX)
+						curX--;
+					if(curY < targetY)
+						curY++;
+					else if (curY > targetY)
+						curY--;
+					
+					if(curX == targetX && curY == targetY)
+					{
+						startNanoTime = System.nanoTime();
+						isMoving = false;
+					}
+				}
+
+				gameGC.drawImage( board, 0, 0 );
+				gameGC.drawImage( fiddy, curX, curY );
+            }
+        }.start();
 
         theStage.show();
     }
