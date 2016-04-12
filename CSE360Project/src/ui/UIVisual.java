@@ -14,10 +14,16 @@ import javafx.animation.AnimationTimer;
 import javafx.event.EventHandler;
 import javafx.event.ActionEvent;
 
+/* Class UIVisual
+ * Date Created: April 10, 2016
+ * Contributors: Michael Puskas (mpuskas@asu.edu)
+ * 
+ * Pulls data from the back-end through Class UIControl.
+ * Uses data to implement the game logic and display the current state of the program.
+ */
 public class UIVisual
 {
-	/* ## Initializing variables that are not part of the javaFX tree ## */
-
+	/* ## Instantiating variables that are not part of the javaFX tree ## */
 	private Boolean isMoving; //True while character is moving
 	private Boolean isRolling; //True during dice roll animation
 	private int startX;
@@ -26,14 +32,13 @@ public class UIVisual
 	private int curY;
 	private int targetX;
 	private int targetY;
-	private int spacesToMove; //The number of spaces from 0-3 that need to be moved based on the dice roll
+	private int spacesToMove; //The number of spaces from 1-3 that need to be moved based on the dice roll
 	private int curSpace;
     private long startNanoTime;
 
 	private Image board;
 	private Image fiddy;
 	private Image die;
-	private Image rollBackground;
 	private Image splash;
 	private Image roll1;
 	private Image roll2;
@@ -67,14 +72,16 @@ public class UIVisual
 
 		//Character and non-interactable assets
 		fiddy = new Image("/assets/111209-50-cent.png", 60, 140, true, true);
-		roll1 = new Image("/assets/1.png", 100, 200, true, true);
-		roll2 = new Image("/assets/2.png", 100, 200, true, true);
-		roll3 = new Image("/assets/3.png", 100, 200, true, true);
+		roll1 = new Image("/assets/1.png", 250, 250, false, true);
+		roll2 = new Image("/assets/2.png", 250, 250, false, true);
+		roll3 = new Image("/assets/3.png", 250, 250, false, true);
 	}
 
-	/* ## Initializing variables that ARE part of the javaFX tree ## */
+	/* ## Instantiating variables that ARE part of the javaFX tree ## */
+	//Roots contain the nodes that make up the javaFX tree (canvas, buttons, etc)
 	Group root;
 	Scene theScene;
+	//Canvas lets you draw (In this case, through a GraphicsContext)
 	Canvas gameCanvas; //Canvas for the game board/related things
 	Canvas rollCanvas; //Canvas for the prompt window where you roll
 	Canvas splashCanvas; //Canvas for the splash screen where you can choose play/leaderboard
@@ -87,16 +94,17 @@ public class UIVisual
 	
 	private void initTreeMembers()
 	{
-		int gameWidth = 1024;
-		int gameHeight = 512;
-		int rollWidth = 350;
-		int rollHeight = 300;
+		//Width/Height of game board
+		final int gameWidth = 1024;
+		final int gameHeight = 512;
+		//Width/Height of roll canvas (Used for rolling animation)
+		final int rollWidth = 250;
+		final int rollHeight = 250;
 
 		//Background/button assets
-		board = new Image( "/assets/board.png", gameWidth, gameHeight, true, true);
-		splash = new Image( "/assets/splash.png", gameWidth, gameHeight, true, true);
-		rollBackground = new Image( "/assets/InnerBackground.png", rollWidth, rollHeight, true, true);
-		die = new Image( "/assets/die.png", 40, 40, true, true);
+		board = new Image("/assets/board.png", gameWidth, gameHeight, true, true);
+		splash = new Image("/assets/splash.png", gameWidth, gameHeight, true, true);
+		die = new Image("/assets/die.png", rollWidth, rollHeight, true, true);
 
 		//Control Objects
 		root = new Group();
@@ -107,7 +115,6 @@ public class UIVisual
 		gameGC = gameCanvas.getGraphicsContext2D();
 		rollGC = rollCanvas.getGraphicsContext2D();
 		splashGC = splashCanvas.getGraphicsContext2D();
-        rollGC.drawImage(rollBackground, 0, 0); //Sets background of roll window
         rollCanvas.relocate((gameWidth / 2) - (rollWidth / 2), (gameHeight / 2) - (rollHeight / 2)); //Sets placement of roll window
         splashGC.drawImage(splash, 0, 0);
 		root.getChildren().add(splashCanvas); //Gotta start with something on the root to set the size of the window
@@ -152,32 +159,30 @@ public class UIVisual
 	
 	private void playLogic(long currentNanoTime)
 	{
-		if(isRolling)
+		if(isRolling) //Trigger this when you want to roll the dice
 		{
 			int timeDif = (int) ((currentNanoTime - startNanoTime) / 100000000);
-			int numXPos = ((int) rollCanvas.getWidth() / 2) - ((int) roll1.getWidth() / 2) - 20;
-			int numYPos = ((int) rollCanvas.getHeight() / 2) - ((int) roll1.getHeight() / 2) - 50;
 			
-			if(timeDif < 30)
+			if(timeDif < 30) //Draw the dice animation
 			{
 				rollGC.clearRect(0, 0, rollCanvas.getWidth(), rollCanvas.getHeight());
 				if(timeDif % 3 == 0)
-					rollGC.drawImage(roll3, numXPos, numYPos);
+					rollGC.drawImage(roll3, 0, 0);
 				else if(timeDif % 2 == 0)
-					rollGC.drawImage(roll2, numXPos, numYPos);
+					rollGC.drawImage(roll2, 0, 0);
 				else
-					rollGC.drawImage(roll1, numXPos, numYPos);
+					rollGC.drawImage(roll1, 0, 0);
 			}
-			else if(timeDif == 30)
+			else if(timeDif == 30) //Draw the result
 			{
 				//Set the image to be displayed
 				rollGC.clearRect(0, 0, rollCanvas.getWidth(), rollCanvas.getHeight());
 				if(spacesToMove == 1)
-					rollGC.drawImage(roll1, numXPos, numYPos);
+					rollGC.drawImage(roll1, 0, 0);
 				else if(spacesToMove == 2)
-					rollGC.drawImage(roll2, numXPos, numYPos);
+					rollGC.drawImage(roll2, 0, 0);
 				else if(spacesToMove == 3)
-					rollGC.drawImage(roll3, numXPos, numYPos);
+					rollGC.drawImage(roll3, 0, 0);
 			}
 			else
 			{
@@ -192,7 +197,7 @@ public class UIVisual
 				isMoving = true;
 			}
 		}
-		else if(isMoving)
+		else if(isMoving) //Triggers after roll, moves the character
 		{
 			if(curX < targetX)
 				curX++;
@@ -215,12 +220,12 @@ public class UIVisual
 				else if(!root.getChildren().contains(makeMove))
 				{
 					isMoving = false;
-					rollGC.drawImage(rollBackground, 0, 0);
 					root.getChildren().add(makeMove);
 				}
 			}
 		}
 
+		//We always want to draw the board and main character
 		gameGC.drawImage(board, 0, 0);
 		gameGC.drawImage(fiddy, curX, curY);
 	}
@@ -229,12 +234,12 @@ public class UIVisual
 	 {
 		//makeMove button for rolling die
 		makeMove = new Button();
-		makeMove.relocate( rollCanvas.getLayoutX() + (rollWidth / 2) - 32 
-				, rollCanvas.getLayoutY() + (rollHeight / 2) - 50); //Sets the position of the button based on rollCanvas
+		makeMove.relocate(gameCanvas.getWidth() / 2 - rollWidth / 2 - 10
+				,gameCanvas.getHeight() / 2 - rollHeight / 2 + 25); //Sets the position of the button
 		ImageView makeMoveImage = new ImageView();
 		makeMoveImage.imageProperty().set(die);        
 		makeMove.setGraphic(makeMoveImage); //Set the button's graphic to the imageview defined
-		makeMove.setOnAction(new EventHandler<ActionEvent>() //Sets what the button does
+		makeMove.setOnAction(new EventHandler<ActionEvent>() //Sets what the button does on click
 		{
 			@Override public void handle(ActionEvent e) 
 			{
@@ -250,7 +255,7 @@ public class UIVisual
 			}
 		});
 		
-		//play button for starting the game from the splash
+		//Play button for starting the game from the splash
 		playButton = new Button("Play");
 		playButton.relocate(100, gameHeight / 2);
 		playButton.setPrefHeight(200);
@@ -267,12 +272,12 @@ public class UIVisual
 			}
 		});
 
-		//score button for viewing the leaderboard
+		//Score button for viewing the leaderboard
 		scoresButton = new Button("Leaderboard");
 		scoresButton.relocate(gameWidth - 300, gameHeight / 2);
 		scoresButton.setPrefHeight(200);
 		scoresButton.setPrefWidth(200);
-		scoresButton.setOnAction(new EventHandler<ActionEvent>() //Sets what the button does
+		scoresButton.setOnAction(new EventHandler<ActionEvent>()
 		{
 			@Override public void handle(ActionEvent e) 
 			{

@@ -2,11 +2,14 @@ package ui;
 
 import java.util.LinkedList;
 
+/* UIControl
+ * Date Created: April 10, 2016
+ * Contributors: Michael Puskas (mpuskas@asu.edu)
+ * Takes in the linkedlist of position and text data from the back-end. 
+ * Class UIVisual creates an instance of this class to receive the data.
+ */
 public class UIControl 
 {
-	int xValues[] = new int[25];
-	int yValues[] = new int[25];
-	
 	LinkedList<Tile> tileList = new LinkedList<>();
 	
 	void initVals()
