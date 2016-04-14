@@ -5,7 +5,7 @@ import java.util.LinkedList;
 /* UIControl
  * Date Created: April 10, 2016
  * Contributors: Michael Puskas (mpuskas@asu.edu)
- * Takes in the linkedlist of position and text data from the back-end. 
+ * Creates a linkedlist of position and text data.
  * Class UIVisual creates an instance of this class to receive the data.
  */
 public class UIControl 

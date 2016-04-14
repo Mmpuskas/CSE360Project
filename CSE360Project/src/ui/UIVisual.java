@@ -38,11 +38,14 @@ public class UIVisual
 
 	private Image board;
 	private Image fiddy;
+	private Image orc;
 	private Image die;
 	private Image splash;
 	private Image roll1;
 	private Image roll2;
 	private Image roll3;
+	private Image play;
+	private Image leaderboard;
 	
 	private enum Mode
 	{
@@ -57,8 +60,8 @@ public class UIVisual
 	UIVisual(UIControl Control)
 	{
 		//Starting board positions
-		startX = 75;
-		startY = 350;
+		startX = 262;
+		startY = 280;
 		curX = startX;
 		curY = startY;
 		spacesToMove = 0;
@@ -71,35 +74,38 @@ public class UIVisual
 		startNanoTime = System.nanoTime();
 
 		//Character and non-interactable assets
-		fiddy = new Image("/assets/111209-50-cent.png", 60, 140, true, true);
-		roll1 = new Image("/assets/1.png", 250, 250, false, true);
-		roll2 = new Image("/assets/2.png", 250, 250, false, true);
-		roll3 = new Image("/assets/3.png", 250, 250, false, true);
+		fiddy = new Image("/assets/111209-50-cent.png", 140, 200, true, true);
+		orc = new Image("/assets/orc.png", 140, 200, true, true);
+		roll1 = new Image("/assets/1.png", 400, 400, false, true);
+		roll2 = new Image("/assets/2.png", 400, 400, false, true);
+		roll3 = new Image("/assets/3.png", 400, 400, false, true);
+		play = new Image("/assets/play.png", 200, 200, true, true);
+		leaderboard = new Image("/assets/leaderboard.png", 600, 800, true, true);
 	}
 
 	/* ## Instantiating variables that ARE part of the javaFX tree ## */
 	//Roots contain the nodes that make up the javaFX tree (canvas, buttons, etc)
-	Group root;
-	Scene theScene;
+	private Group root;
+	private Scene theScene;
 	//Canvas lets you draw (In this case, through a GraphicsContext)
-	Canvas gameCanvas; //Canvas for the game board/related things
-	Canvas rollCanvas; //Canvas for the prompt window where you roll
-	Canvas splashCanvas; //Canvas for the splash screen where you can choose play/leaderboard
-	GraphicsContext gameGC;
-	GraphicsContext rollGC;
-	GraphicsContext splashGC;
-	Button makeMove;
-	Button playButton;
-	Button scoresButton;
+	private Canvas gameCanvas; //Canvas for the game board/related things
+	private Canvas rollCanvas; //Canvas for the prompt window where you roll
+	private Canvas splashCanvas; //Canvas for the splash screen where you can choose play/leaderboard
+	private GraphicsContext gameGC;
+	private GraphicsContext rollGC;
+	private GraphicsContext splashGC;
+	private Button makeMove;
+	private Button playButton;
+	private Button scoresButton;
 	
 	private void initTreeMembers()
 	{
 		//Width/Height of game board
-		final int gameWidth = 1024;
-		final int gameHeight = 512;
+		final int gameWidth = 1536;
+		final int gameHeight = 1005;
 		//Width/Height of roll canvas (Used for rolling animation)
-		final int rollWidth = 250;
-		final int rollHeight = 250;
+		final int rollWidth = 400;
+		final int rollHeight = 400;
 
 		//Background/button assets
 		board = new Image("/assets/board.png", gameWidth, gameHeight, true, true);
@@ -227,7 +233,7 @@ public class UIVisual
 
 		//We always want to draw the board and main character
 		gameGC.drawImage(board, 0, 0);
-		gameGC.drawImage(fiddy, curX, curY);
+		gameGC.drawImage(orc, curX, curY);
 	}
 	
 	 private void initButtons(int gameWidth, int gameHeight, int rollWidth, int rollHeight)
@@ -239,6 +245,7 @@ public class UIVisual
 		ImageView makeMoveImage = new ImageView();
 		makeMoveImage.imageProperty().set(die);        
 		makeMove.setGraphic(makeMoveImage); //Set the button's graphic to the imageview defined
+		makeMove.setStyle("-fx-focus-color: darkgoldenrod;");
 		makeMove.setOnAction(new EventHandler<ActionEvent>() //Sets what the button does on click
 		{
 			@Override public void handle(ActionEvent e) 
@@ -256,10 +263,12 @@ public class UIVisual
 		});
 		
 		//Play button for starting the game from the splash
-		playButton = new Button("Play");
-		playButton.relocate(100, gameHeight / 2);
-		playButton.setPrefHeight(200);
-		playButton.setPrefWidth(200);
+		playButton = new Button();
+		ImageView playButtonImage = new ImageView();
+		playButtonImage.imageProperty().set(play);        
+		playButton.setGraphic(playButtonImage); 
+		playButton.setStyle("-fx-focus-color: darkgoldenrod;");
+		playButton.relocate(gameWidth - 400, gameHeight / 2);
 		playButton.setOnAction(new EventHandler<ActionEvent>() 
 		{
 			@Override public void handle(ActionEvent e) 
@@ -273,10 +282,12 @@ public class UIVisual
 		});
 
 		//Score button for viewing the leaderboard
-		scoresButton = new Button("Leaderboard");
-		scoresButton.relocate(gameWidth - 300, gameHeight / 2);
-		scoresButton.setPrefHeight(200);
-		scoresButton.setPrefWidth(200);
+		scoresButton = new Button();
+		ImageView scoresButtonImage = new ImageView();
+		scoresButtonImage.imageProperty().set(leaderboard);        
+		scoresButton.setGraphic(scoresButtonImage); 
+		scoresButton.setStyle("-fx-focus-color: darkgoldenrod;");
+		scoresButton.relocate(gameWidth - 800, gameHeight * 8 / 12);
 		scoresButton.setOnAction(new EventHandler<ActionEvent>()
 		{
 			@Override public void handle(ActionEvent e) 
