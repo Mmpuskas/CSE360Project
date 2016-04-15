@@ -1,0 +1,6 @@
+Design Overview:
+We will be creating a boardgame-style experience that includes UI and sound design elements. We will be using hand-drawn art for our game board, player character, and backgrounds. There will also be a story component to support our point system. 
+
+The player will roll a die to determine how many spaces are moved. Depending on the space that is landed on, a new frame will be drawn that displays a relevent paragraph of text, and the point amount that was gained/lost. This point amount will be tracked and saved, to be later shown in a leaderboard-style format. 
+
+The challenging aspects of this project will be implementing an interface that can display player movement, animating the player movement, and tying the UI into the stat-tracking and text store (Which holds the flavor text that is drawn upon landing on a space). 
