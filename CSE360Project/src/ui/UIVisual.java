@@ -223,7 +223,7 @@ public class UIVisual
 					targetY = control.tileList.get(curSpace).y;
 					spacesToMove--;
 				}
-				else if(!root.getChildren().contains(makeMove))
+				else
 				{
 					isMoving = false;
 					root.getChildren().add(makeMove);
@@ -253,9 +253,8 @@ public class UIVisual
 				root.getChildren().remove(makeMove); //Get the roll button out of the way
 				spacesToMove = (int) (Math.random() * 3) + 1; //Set the spaces to move to a random number
 
-				curSpace++;
-				targetX = control.tileList.get(curSpace).x;
-				targetY = control.tileList.get(curSpace).y;
+				targetX = control.tileList.get(curSpace + 1).x;
+				targetY = control.tileList.get(curSpace + 1).y;
 
 				startNanoTime = System.nanoTime();
 				isRolling = true;
