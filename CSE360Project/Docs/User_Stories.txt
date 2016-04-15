@@ -1,0 +1,8 @@
+User Stories:
+1. As a player I want to roll the dice so that I can move my character.
+2. As a player I want to move my character based on the dice roll so that I can play the game.
+3. As a player I want to press the play button so that I can begin the game.
+4. As a player I want to press the leaderboard button so that I can see the top scores.
+
+
+** There aren't many user stories since we only have one type of user, with a limited amount of player verbs (Press play button, press leaderboard button, press roll button.) **
