@@ -17,6 +17,7 @@ public class UIControl
 	ListIterator<Tile> tileIterator;
 	
 	
+	
 	public UIControl(){
 		tileList.add(new Tile(262, 280));
 		tileList.add(new Tile(262, 380));
@@ -47,18 +48,7 @@ public class UIControl
 		
 	}
 	
-	public Tile moveToNextTile(){
-		try{
-			return tileIterator.next();
-		}
-		catch(NoSuchElementException ex){
-			return tileList.getLast();
-		}
-		
-		
-	}
 	
-	public int roll(){
-		return (int) (Math.random() * 3 + 1);
-	}
+	
+	
 }
