@@ -8,7 +8,6 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.control.Button;
-import javafx.scene.layout.StackPane;
 
 import javafx.animation.AnimationTimer;
 import javafx.event.EventHandler;
@@ -28,8 +27,6 @@ public class UIVisual
 	private Boolean isRolling; //True during dice roll animation
 	private int startX;
 	private int startY;
-	private int curX;
-	private int curY;
 	private int targetX;
 	private int targetY;
 	private int spacesToMove; //The number of spaces from 1-3 that need to be moved based on the dice roll
@@ -47,6 +44,8 @@ public class UIVisual
 	private Image play;
 	private Image leaderboard;
 	
+	private Actor orcActor;
+	
 	private enum Mode
 	{
 		splash,
@@ -62,8 +61,6 @@ public class UIVisual
 		//Starting board positions
 		startX = 262;
 		startY = 280;
-		curX = startX;
-		curY = startY;
 		spacesToMove = 0;
 		curSpace = 0;
 
@@ -81,6 +78,7 @@ public class UIVisual
 		roll3 = new Image("/assets/3.png", 400, 400, false, true);
 		play = new Image("/assets/play.png", 200, 200, true, true);
 		leaderboard = new Image("/assets/leaderboard.png", 600, 800, true, true);
+		orcActor = new Actor(startX, startY, orc);
 	}
 
 	/* ## Instantiating variables that ARE part of the javaFX tree ## */
@@ -98,7 +96,7 @@ public class UIVisual
 	private Button playButton;
 	private Button scoresButton;
 	
-	private void initTreeMembers()
+	public void initTreeMembers()
 	{
 		//Width/Height of game board
 		final int gameWidth = 1536;
@@ -163,7 +161,7 @@ public class UIVisual
 		theStage.show();
 	}
 	
-	private void playLogic(long currentNanoTime)
+	public void playLogic(long currentNanoTime)
 	{
 		if(isRolling) //Trigger this when you want to roll the dice
 		{
@@ -205,16 +203,16 @@ public class UIVisual
 		}
 		else if(isMoving) //Triggers after roll, moves the character
 		{
-			if(curX < targetX)
-				curX++;
-			else if (curX > targetX)
-				curX--;
-			if(curY < targetY)
-				curY++;
-			else if (curY > targetY)
-				curY--;
+			if(orcActor.curX < targetX)
+				orcActor.curX++;
+			else if (orcActor.curX > targetX)
+				orcActor.curX--;
+			if(orcActor.curY < targetY)
+				orcActor.curY++;
+			else if (orcActor.curY > targetY)
+				orcActor.curY--;
 			
-			if(curX == targetX && curY == targetY)
+			if(orcActor.curX == targetX && orcActor.curY == targetY)
 			{
 				if(spacesToMove > 0)
 				{
@@ -233,7 +231,7 @@ public class UIVisual
 
 		//We always want to draw the board and main character
 		gameGC.drawImage(board, 0, 0);
-		gameGC.drawImage(orc, curX, curY);
+		gameGC.drawImage(orcActor.charImage, orcActor.curX, orcActor.curY);
 	}
 	
 	 private void initButtons(int gameWidth, int gameHeight, int rollWidth, int rollHeight)
@@ -295,4 +293,39 @@ public class UIVisual
 			}
 		});
 	 }
+
+	public Scene getTheScene() 
+	{
+		return theScene;
+	}
+
+	public Canvas getGameCanvas() 
+	{
+		return gameCanvas;
+	}
+
+	public Canvas getRollCanvas() 
+	{
+		return rollCanvas;
+	}
+
+	public Canvas getSplashCanvas() 
+	{
+		return splashCanvas;
+	}
+
+	public Button getMakeMove() 
+	{
+		return makeMove;
+	}
+
+	public Button getPlayButton() 
+	{
+		return playButton;
+	}
+
+	public Button getScoresButton() 
+	{
+		return scoresButton;
+	}
 }
