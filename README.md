@@ -8,5 +8,7 @@ The easiest way to play the game is to download the latest executable jar from t
 
 The program can also be compiled, unit tested, and ran as normal.
 
+Note: The program is currently targeted for 1920x1080 resolution displays. The final release will have alternatives for lower resolutions.
+
 # Documentation
 Use Case Diagram, User Stories, Backlog in Docs folder.
