@@ -23,12 +23,9 @@ import javafx.event.ActionEvent;
 public class UIVisual
 {
 	/* ## Instantiating variables that are not part of the javaFX tree ## */
-	private Boolean isMoving; //True while character is moving
 	private Boolean isRolling; //True during dice roll animation
 	private int startX;
 	private int startY;
-	private int targetX;
-	private int targetY;
 	private int spacesToMove; //The number of spaces from 1-3 that need to be moved based on the dice roll
 	private int curSpace;
     private long startNanoTime;
@@ -66,7 +63,6 @@ public class UIVisual
 
 		//Initialize the passed in control
 		control = Control;
-		isMoving = false;
 		isRolling = false;
 		startNanoTime = System.nanoTime();
 
@@ -198,32 +194,25 @@ public class UIVisual
 				}
 				rollGC.clearRect(0, 0, rollCanvas.getWidth(), rollCanvas.getHeight());
 				isRolling = false;
-				isMoving = true;
+				orcActor.setMoving(true);
 			}
 		}
-		else if(isMoving) //Triggers after roll, moves the character
+		else if(orcActor.getMoving()) //Triggers after roll, moves the character
 		{
-			if(orcActor.curX < targetX)
-				orcActor.curX++;
-			else if (orcActor.curX > targetX)
-				orcActor.curX--;
-			if(orcActor.curY < targetY)
-				orcActor.curY++;
-			else if (orcActor.curY > targetY)
-				orcActor.curY--;
+			orcActor.moveToPosition();
 			
-			if(orcActor.curX == targetX && orcActor.curY == targetY)
+			if(orcActor.curX == orcActor.getTargetX() && orcActor.curY == orcActor.getTargetY())
 			{
 				if(spacesToMove > 0)
 				{
 					curSpace++;
-					targetX = control.tileList.get(curSpace).x;
-					targetY = control.tileList.get(curSpace).y;
+					orcActor.setTargetX(control.tileList.get(curSpace).x);
+					orcActor.setTargetY(control.tileList.get(curSpace).y);
 					spacesToMove--;
 				}
 				else
 				{
-					isMoving = false;
+					orcActor.setMoving(false);
 					root.getChildren().add(makeMove);
 				}
 			}
@@ -251,8 +240,8 @@ public class UIVisual
 				root.getChildren().remove(makeMove); //Get the roll button out of the way
 				spacesToMove = (int) (Math.random() * 3) + 1; //Set the spaces to move to a random number
 
-				targetX = control.tileList.get(curSpace + 1).x;
-				targetY = control.tileList.get(curSpace + 1).y;
+				orcActor.setTargetX(control.tileList.get(curSpace + 1).x);
+				orcActor.setTargetY(control.tileList.get(curSpace).y + 1);
 
 				startNanoTime = System.nanoTime();
 				isRolling = true;

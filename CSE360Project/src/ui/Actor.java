@@ -7,15 +7,19 @@ public class Actor
 	int curX;
 	int curY;
 	Image charImage;
+	private int targetX;
+	private int targetY;
+	private boolean isMoving;
 	
 	Actor(int X, int Y, Image CHARIMAGE)
 	{
 		curX = X;
 		curY = Y;
 		charImage = CHARIMAGE;
+		isMoving = false;
 	}
 	
-	public void moveToPosition(int targetX, int targetY)
+	public void moveToPosition()
 	{
 		if(curX < targetX)
 			curX++;
@@ -25,5 +29,35 @@ public class Actor
 			curY++;
 		else if (curY > targetY)
 			curY--;
+	}
+	
+	public void setTargetX(int x)
+	{
+		targetX = x;
+	}
+
+	public void setTargetY(int y)
+	{
+		targetY = y;
+	}
+	
+	public int getTargetX()
+	{
+		return targetX;
+	}
+
+	public int getTargetY()
+	{
+		return targetY;
+	}
+	
+	public void setMoving(boolean b)
+	{
+		isMoving = b;
+	}
+	
+	public boolean getMoving()
+	{
+		return isMoving;
 	}
 }

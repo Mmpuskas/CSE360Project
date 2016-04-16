@@ -16,8 +16,6 @@ public class UIControl
 	LinkedList<Tile> tileList = new LinkedList<>();
 	ListIterator<Tile> tileIterator;
 	
-	
-	
 	public UIControl(){
 		tileList.add(new Tile(262, 280));
 		tileList.add(new Tile(262, 380));

@@ -16,7 +16,6 @@ public class Driver extends Application
     @Override
     public void start(Stage theStage) 
     {
-    	
     	visual.startVisual(theStage);
     }
 }
