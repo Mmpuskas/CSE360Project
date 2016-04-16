@@ -11,12 +11,18 @@ import java.util.Random;
  * Creates a linkedlist of position and text data.
  * Class UIVisual creates an instance of this class to receive the data.
  */
+/** Control class for "Journey to Chaos End". Comprises most of the back-end systems.
+ * 
+ * @author Michael Puskas (mpuskas@asu.edu), Yifan Li
+ *
+ */
 public class UIControl 
 {
 	LinkedList<Tile> tileList = new LinkedList<>();
 	ListIterator<Tile> tileIterator;
 	
-	public UIControl(){
+	public UIControl()
+	{
 		tileList.add(new Tile(262, 280));
 		tileList.add(new Tile(262, 380));
 		tileList.add(new Tile(262, 480));
@@ -43,10 +49,5 @@ public class UIControl
 		tileList.add(new Tile(1127, 530));
 		tileList.add(new Tile(1217, 540));
 		tileIterator = tileList.listIterator();
-		
 	}
-	
-	
-	
-	
 }

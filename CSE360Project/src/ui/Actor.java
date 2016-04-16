@@ -2,6 +2,11 @@ package ui;
 
 import javafx.scene.image.Image;
 
+/** Represents an actor. For the purposes of "Journey to Chaos End", represents the main character.
+ * 
+ * @author Michael Puskas (mpuskas@asu.edu), Yifan Li
+ *
+ */
 public class Actor 
 {
 	int curX;
@@ -19,6 +24,9 @@ public class Actor
 		isMoving = false;
 	}
 	
+	/** Moves the actor up to two pixels in the direction of the target x,y coordinate.
+	 * 
+	 */
 	public void moveToPosition()
 	{
 		if(curX < targetX)
@@ -41,6 +49,11 @@ public class Actor
 		targetY = y;
 	}
 	
+	public void setMoving(boolean b)
+	{
+		isMoving = b;
+	}
+
 	public int getTargetX()
 	{
 		return targetX;
@@ -49,11 +62,6 @@ public class Actor
 	public int getTargetY()
 	{
 		return targetY;
-	}
-	
-	public void setMoving(boolean b)
-	{
-		isMoving = b;
 	}
 	
 	public boolean getMoving()

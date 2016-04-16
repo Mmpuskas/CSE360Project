@@ -13,12 +13,10 @@ import javafx.animation.AnimationTimer;
 import javafx.event.EventHandler;
 import javafx.event.ActionEvent;
 
-/* Class UIVisual
- * Date Created: April 10, 2016
- * Contributors: Michael Puskas (mpuskas@asu.edu)
+/** UI class for "Journey to Chaos End"
+ * Controls all aspects of drawing to the display, along with some of the control aspects.
  * 
- * Pulls data from the back-end through Class UIControl.
- * Uses data to implement the game logic and display the current state of the program.
+ * @author Michael Puskas (mpuskas@asu.edu), Yifan Li, Willian Chen
  */
 public class UIVisual
 {
@@ -92,6 +90,8 @@ public class UIVisual
 	private Button playButton;
 	private Button scoresButton;
 	
+	/** Initializes the member variables that pertain to the JavaFX component tree.
+	 */
 	public void initTreeMembers()
 	{
 		//Width/Height of game board
@@ -123,6 +123,10 @@ public class UIVisual
         initButtons(gameWidth, gameHeight, rollWidth, rollHeight);
 	}
 
+	/** Receives the Stage from the driver class, and controls which "Mode" is currently being drawn.
+	 * 
+	 * @param theStage The stage from the start method of the driver class
+	 */
 	public void startVisual(Stage theStage) 
 	{
 		theStage.setTitle("TBA");
@@ -157,6 +161,10 @@ public class UIVisual
 		theStage.show();
 	}
 	
+	/** Controls what happens during the "Play" mode of the game.
+	 * 
+	 * @param currentNanoTime The current system time in nanoseconds.
+	 */
 	public void playLogic(long currentNanoTime)
 	{
 		if(isRolling) //Trigger this when you want to roll the dice
@@ -223,6 +231,13 @@ public class UIVisual
 		gameGC.drawImage(orcActor.charImage, orcActor.curX, orcActor.curY);
 	}
 	
+	/** Initializes all buttons and button handlers.
+	 * 
+	 * @param gameWidth The width of the game board.
+	 * @param gameHeight The height of the game board.
+	 * @param rollWidth The width of the roll canvas (where the animations are drawn).
+	 * @param rollHeight The height of the roll canvas.
+	 */
 	 private void initButtons(int gameWidth, int gameHeight, int rollWidth, int rollHeight)
 	 {
 		//makeMove button for rolling die
