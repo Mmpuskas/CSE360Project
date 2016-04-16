@@ -98,7 +98,7 @@ public class UIVisual
 	private Button playButton;
 	private Button scoresButton;
 	
-	private void initTreeMembers()
+	public void initTreeMembers()
 	{
 		//Width/Height of game board
 		final int gameWidth = 1536;
@@ -163,7 +163,7 @@ public class UIVisual
 		theStage.show();
 	}
 	
-	private void playLogic(long currentNanoTime)
+	public void playLogic(long currentNanoTime)
 	{
 		if(isRolling) //Trigger this when you want to roll the dice
 		{
@@ -295,4 +295,39 @@ public class UIVisual
 			}
 		});
 	 }
+
+	public Scene getTheScene() 
+	{
+		return theScene;
+	}
+
+	public Canvas getGameCanvas() 
+	{
+		return gameCanvas;
+	}
+
+	public Canvas getRollCanvas() 
+	{
+		return rollCanvas;
+	}
+
+	public Canvas getSplashCanvas() 
+	{
+		return splashCanvas;
+	}
+
+	public Button getMakeMove() 
+	{
+		return makeMove;
+	}
+
+	public Button getPlayButton() 
+	{
+		return playButton;
+	}
+
+	public Button getScoresButton() 
+	{
+		return scoresButton;
+	}
 }
