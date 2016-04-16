@@ -23,12 +23,9 @@ import javafx.event.ActionEvent;
 public class UIVisual
 {
 	/* ## Instantiating variables that are not part of the javaFX tree ## */
-	private Boolean isMoving; //True while character is moving
 	private Boolean isRolling; //True during dice roll animation
 	private int startX;
 	private int startY;
-	private int targetX;
-	private int targetY;
 	private int spacesToMove; //The number of spaces from 1-3 that need to be moved based on the dice roll
 	private int curSpace;
     private long startNanoTime;
@@ -66,7 +63,6 @@ public class UIVisual
 
 		//Initialize the passed in control
 		control = Control;
-		isMoving = false;
 		isRolling = false;
 		startNanoTime = System.nanoTime();
 
