@@ -1,6 +1,9 @@
 package ui;
 
 import java.util.LinkedList;
+import java.util.ListIterator;
+import java.util.NoSuchElementException;
+import java.util.Random;
 
 /* UIControl
  * Date Created: April 10, 2016
@@ -11,9 +14,10 @@ import java.util.LinkedList;
 public class UIControl 
 {
 	LinkedList<Tile> tileList = new LinkedList<>();
+	ListIterator<Tile> tileIterator;
 	
-	void initVals()
-	{
+	
+	public UIControl(){
 		tileList.add(new Tile(262, 280));
 		tileList.add(new Tile(262, 380));
 		tileList.add(new Tile(262, 480));
@@ -39,5 +43,22 @@ public class UIControl
 		tileList.add(new Tile(1037, 520));
 		tileList.add(new Tile(1127, 530));
 		tileList.add(new Tile(1217, 540));
+		tileIterator = tileList.listIterator();
+		
+	}
+	
+	public Tile moveToNextTile(){
+		try{
+			return tileIterator.next();
+		}
+		catch(NoSuchElementException ex){
+			return tileList.getLast();
+		}
+		
+		
+	}
+	
+	public int roll(){
+		return (int) (Math.random() * 3 + 1);
 	}
 }
