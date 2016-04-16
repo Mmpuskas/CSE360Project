@@ -14,4 +14,17 @@ public class Actor
 		curY = Y;
 		charImage = CHARIMAGE;
 	}
+	
+	public void moveToPosition(int targetX, int targetY){
+		if(curX < targetX)
+			curX++;
+		else if (curX > targetX)
+			curX--;
+		if(curY < targetY)
+			curY++;
+		else if (curY > targetY)
+			curY--;
+		
+		
+	}
 }
