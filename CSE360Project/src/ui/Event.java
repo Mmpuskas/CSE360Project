@@ -24,13 +24,21 @@ public class Event implements FrontEndCommunication{
 	public int rollResult;
 	private boolean haveRerolled = false;
 	
+	//debugging
+	public Event dummyEvent;
+	
+	public Event(Event copyEvent){ //used to copy this object, DO NOT USE to create instances
+		this.dummyEvent = copyEvent;
+	}
+	
 	private Event() throws IOException{ //private constructor limits creation of event objects to MAX_ALLOWED_EVENTS
 		for(int i = 0; i < EVENT_POOL_COUNT; i++){
 			nonRepeatingNums[i] = i+1; // initializes array to 0 1 2 3 4...
 		}
 		System.arraycopy(nonRepeatingNums, 0, selectedEventLineNumbers, 0, MAX_ALLOWED_INSTANCES);
-		String event = Files.readAllLines(Paths.get("/assets/EventsFile.txt")).get(selectedEventLineNumbers[eventObjectCount]); 
-		String[] eventDelimited = event.split(";");
+		//String event = Files.readAllLines(Paths.get("testfile.txt")).get(selectedEventLineNumbers[eventObjectCount]); 
+		String event = "description 1@ pass@ fail@ 50@ 1";
+		String[] eventDelimited = event.split("@");
 		eventFlavorText = eventDelimited[0].trim();
 		passEventText = eventDelimited[1].trim();
 		failEventText = eventDelimited[2].trim();
@@ -41,7 +49,7 @@ public class Event implements FrontEndCommunication{
 		eventObjectCount++;
 	}
 	
-	public static Event getEventInstance() throws IOException{
+	public static Event getEventInstance() throws IOException{ //this is the  "constructor"
 		if(eventObjectCount < MAX_ALLOWED_INSTANCES){ //call this method to get instance of Event, will return null if reached instance limit
 			//incrementing eventObjectCount handled in constructor. 
 			return new Event();
@@ -74,21 +82,7 @@ public class Event implements FrontEndCommunication{
 		
 	}
 	
-	public int getPointsForPass(){
-		return pointsForPass;
-	}
-	
-	public int getChanceToPass(){
-		return chanceToPass;
-	}
-	
-	public static int getEVENT_POOL_COUNT(){
-		return EVENT_POOL_COUNT;
-	}
-	
-	public static int getMAX_ALLOWED_INSTANCES(){
-		return MAX_ALLOWED_INSTANCES;
-	}
+
 	
 	@Override
 	public boolean getRollResults() {  //don't think we need this
@@ -111,8 +105,79 @@ public class Event implements FrontEndCommunication{
 	public String getFlavorText() {
 		return eventFlavorText;
 	}
-
 	
+	@Override
+	public boolean equals(Object otherEvent){
+		if(otherEvent == this){
+			return true;
+		}
+		if(!(otherEvent instanceof Event)){ 
+			return false;
+		}
+		
+		Event test = (Event)otherEvent;
+		
+		if(eventFlavorText.equals(test.getEventFlavorText())
+			&& passEventText.equals(test.getPassEventText())
+			&& failEventText.equals(test.getFailEventText())
+			){
+			
+			return true;
+		}
+		else{
+			return false;
+		}
+	}
+	
+	//debugging
+	public static void resetInstances(){
+		eventObjectCount = 0;
+	}
+	
+	public void forceEqualsFail(){
+		eventFlavorText = "asdafasdf";
+	}
+	
+	//getter methods
+	public int getPointsForPass(){
+		return pointsForPass;
+	}
+	
+	public int getChanceToPass(){
+		return chanceToPass;
+	}
+	
+	public static int getEVENT_POOL_COUNT(){
+		return EVENT_POOL_COUNT;
+	}
+	
+	public static int getMAX_ALLOWED_INSTANCES(){
+		return MAX_ALLOWED_INSTANCES;
+	}
+	
+	public String getEventFlavorText() {
+		return eventFlavorText;
+	}
+
+	public void setEventFlavorText(String eventFlavorText) {
+		this.eventFlavorText = eventFlavorText;
+	}
+
+	public String getPassEventText() {
+		return passEventText;
+	}
+
+	public void setPassEventText(String passEventText) {
+		this.passEventText = passEventText;
+	}
+
+	public String getFailEventText() {
+		return failEventText;
+	}
+
+	public void setFailEventText(String failEventText) {
+		this.failEventText = failEventText;
+	}
 	
 	
 	
