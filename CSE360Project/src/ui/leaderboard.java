@@ -42,15 +42,24 @@ public class leaderboard
 	
 	//functions that actually do stuff
 	
+	private void addToScore(int addIt)
+	{
+		int tots = getTotalScore() + addIt;
+		setTotalScore(tots);
+	}
+	
 	private void checkHighest(int tempScore)
 	{
 		
 	}
 	
-	private void saveScore()
+	private void saveScore(int tempScore)
 	{
-		
+	
+		//move into text file
 	}
+	
+	
 	
 	
 }
