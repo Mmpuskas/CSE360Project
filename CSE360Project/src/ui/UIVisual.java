@@ -98,8 +98,8 @@ public class UIVisual
 		final int gameWidth = 1536;
 		final int gameHeight = 1005;
 		//Width/Height of roll canvas (Used for rolling animation)
-		final int rollWidth = 400;
-		final int rollHeight = 400;
+		final double rollWidth = .26 * gameWidth;
+		final double rollHeight = .398 * gameHeight;
 
 		//Background/button assets
 		board = new Image("/assets/board.png", gameWidth, gameHeight, true, true);
@@ -238,7 +238,7 @@ public class UIVisual
 	 * @param rollWidth The width of the roll canvas (where the animations are drawn).
 	 * @param rollHeight The height of the roll canvas.
 	 */
-	 private void initButtons(int gameWidth, int gameHeight, int rollWidth, int rollHeight)
+	 private void initButtons(int gameWidth, int gameHeight, double rollWidth, double rollHeight)
 	 {
 		//makeMove button for rolling die
 		makeMove = new Button();
