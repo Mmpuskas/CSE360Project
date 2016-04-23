@@ -59,25 +59,27 @@ public class leaderboard
 	private void setPointsArray() throws Exception
 	{
 		//read all points from file and save to array to access easily
-		
-		 String  thisLine = null;
+		 String	thisLine = null;
+		 String historyPath = new File("").getAbsolutePath() + "/src/text/leaderboardRepository.txt";
+		 int counter = 0;
+		 int tempHolder;
+		 
 		 try
 		 {
-			 // open input stream test.txt for reading purpose.
-			 BufferedReader br = new BufferedReader(new FileReader("/leaderboardRepository.txt"));
+			 BufferedReader br = new BufferedReader(new FileReader(historyPath));
 			 
-			 while((thisLine = br.readLine()) != null)
+			 while(((thisLine = br.readLine()) != null) && (counter < TOP_TEN))
 			 {
-				 System.out.println(thisLine);
-			 }
-			 
-			 
+				 tempHolder = Integer.parseInt(thisLine);
+				 topTen[counter] = tempHolder;
+				// System.out.println(topTen[counter]);
+				 counter++;
+			 }	 
 		 }
 		 catch(Exception e)
 		 {
 			 e.printStackTrace();
-		 }
-		 
+		 }	 
 			 
 	}
 	
@@ -108,5 +110,3 @@ public class leaderboard
 	 }
 	 
 }
-	
-	
