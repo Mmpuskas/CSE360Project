@@ -22,8 +22,6 @@ public class UIVisual
 {
 	/* ## Instantiating variables that are not part of the javaFX tree ## */
 	private Boolean isRolling; //True during dice roll animation
-	private int startX;
-	private int startY;
 	private int spacesToMove; //The number of spaces from 1-3 that need to be moved based on the dice roll
 	private int curSpace;
     private long startNanoTime;
@@ -54,8 +52,6 @@ public class UIVisual
 	UIVisual(UIControl Control)
 	{
 		//Starting board positions
-		startX = 262;
-		startY = 280;
 		spacesToMove = 0;
 		curSpace = 0;
 
@@ -86,14 +82,15 @@ public class UIVisual
 	public void initTreeMembers()
 	{
 		//Width/Height of game board
-		final int gameWidth = 1536;
-		final int gameHeight = 1005;
+		final int gameWidth = 1024;//1536
+		final int gameHeight = 670;//1005
 		//Width/Height of roll canvas (Used for rolling animation)
-		final double rollWidth = .26 * gameWidth;
+		final double rollWidth = .26 * gameWidth;//
 		final double rollHeight = .398 * gameHeight;
 		//Initialize images
 		initImages(gameWidth, gameHeight); 
-
+		control.initTilePositions(gameWidth, gameHeight);
+		
 		//Background/button assets
 		board = new Image("/assets/board.png", gameWidth, gameHeight, true, true);
 		splash = new Image("/assets/splash.png", gameWidth, gameHeight, true, true);
@@ -306,8 +303,10 @@ public class UIVisual
 				roll3 = new Image("/assets/3.png", (gameWidth * 0.2604), (gameHeight * 0.398), false, true);
 				play = new Image("/assets/play.png", (gameWidth * 0.1302), (gameHeight * 0.199), true, true);
 				leaderboard = new Image("/assets/leaderboard.png", (gameWidth * 0.3906), (gameHeight * 0.796), true, true);
-				orcActor = new Actor(startX, startY, orc);
+				orcActor = new Actor((int) (0.170572917 * gameWidth), (int) (0.278606965 * gameHeight), orc);
 	}
+	
+	
 	public Scene getTheScene() 
 	{
 		return theScene;
