@@ -2,8 +2,6 @@ package ui;
 
 import java.util.LinkedList;
 import java.util.ListIterator;
-import java.util.NoSuchElementException;
-import java.util.Random;
 
 /* UIControl
  * Date Created: April 10, 2016

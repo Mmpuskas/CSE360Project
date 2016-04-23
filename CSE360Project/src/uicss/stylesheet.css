@@ -1,0 +1,4 @@
+.button
+{
+		scoresButton.setStyle("-fx-focus-color: darkgoldenrod;");
+}
