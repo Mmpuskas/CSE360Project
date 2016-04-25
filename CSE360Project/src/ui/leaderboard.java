@@ -81,24 +81,67 @@ public class leaderboard
 			 e.printStackTrace();
 		 }	 
 			 
+		 bubbleSort(topTen);
+		 
+		 for(int i = 0; i < TOP_TEN; i++)
+		 {
+			 System.out.println(topTen[i]);
+		 }
+	}
+	
+	private int[] bubbleSort(int[] tempArray)
+	{
+		
+		//descending
+		for(int i = 0; i < tempArray.length-1; i++)
+		{
+			for(int j = 1; j  <tempArray.length-i ; j++)
+			{
+	            if(tempArray[j-1] < tempArray[j])
+	            {
+	                int holder = tempArray[j - 1];
+	                tempArray[j-1] = tempArray[j];
+	                tempArray[j] = holder;
+	            }
+			}
+		}
+		
+		return tempArray;
 	}
 	
 	private void checkHighest(int tempScore)
 	{
+		int largerArray[] = new int[TOP_TEN + 1];
 		boolean isHigher = false;
+		int counter = 0;
+		int indexFound = 0;
 		
-		for(int counter = 0; counter < TOP_TEN; counter++)
-		{
-			//if(tempScore
-		}
-		 
 		
 	}
 	
-	private void saveScore()
+	private void insertScore(int score)
 	{
-	
-		//move into text file
+		int counter = 0;
+		
+        while(counter < TOP_TEN && topTen[counter] > score)
+        {
+            counter++;
+        }
+        
+        if(counter < topTen.length)
+        {
+            for(int insertCount = topTen.length-1; insertCount > counter; insertCount--) //insert score
+            {
+                topTen[insertCount] = topTen[insertCount - 1];
+            }
+            topTen[counter] = score;
+        }
+        
+        for(int i = 0; i < TOP_TEN; i++)
+		 {
+			 System.out.println(topTen[i]);
+		 }
+		
 	}
 	
 	
@@ -106,6 +149,7 @@ public class leaderboard
 	 {
 		 leaderboard demo = new leaderboard();
 		 demo.setPointsArray();
+		 demo.insertScore(800);
 		 
 	 }
 	 
