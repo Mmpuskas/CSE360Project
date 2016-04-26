@@ -1,9 +1,7 @@
 package ui;
 import java.io.*;
-import java.io.BufferedReader;
-import java.io.FileInputStream;
-import java.io.InputStream;
-import java.io.InputStreamReader;
+import java.util.Arrays;
+
 
 /*
  * Author: Mercedes
@@ -40,6 +38,7 @@ public class leaderboard
 
 	public int getHighestScore() 
 	{
+		highestScore = topTen[0];
 		return highestScore;
 	}
 
@@ -83,10 +82,10 @@ public class leaderboard
 			 
 		 bubbleSort(topTen);
 		 
-		 for(int i = 0; i < TOP_TEN; i++)
+		 /*for(int i = 0; i < TOP_TEN; i++)
 		 {
 			 System.out.println(topTen[i]);
-		 }
+		 }*/
 	}
 	
 	private int[] bubbleSort(int[] tempArray)
@@ -109,16 +108,6 @@ public class leaderboard
 		return tempArray;
 	}
 	
-	private void checkHighest(int tempScore)
-	{
-		int largerArray[] = new int[TOP_TEN + 1];
-		boolean isHigher = false;
-		int counter = 0;
-		int indexFound = 0;
-		
-		
-	}
-	
 	private void insertScore(int score)
 	{
 		int counter = 0;
@@ -136,21 +125,37 @@ public class leaderboard
             }
             topTen[counter] = score;
         }
-        
-        for(int i = 0; i < TOP_TEN; i++)
-		 {
-			 System.out.println(topTen[i]);
-		 }
 		
 	}
 	
+	private void rewriteFile() throws IOException
+	{
+		//**convert int array to string
+		String allData = Integer.toString(topTen[0]) + "\n"; // = Arrays.toString(topTen);
+		
+		for(int i = 1; i < TOP_TEN; i++)
+		{
+			allData = allData + Integer.toString(topTen[i]) + "\n";
+		}
+		
+		//System.out.println(allData);
+		
+		//**Rewrite file
+		String historyPath = new File("").getAbsolutePath() + "/src/text/leaderboardRepository.txt";
+		
+		File tempFile = new File(historyPath);
+		FileOutputStream fStream = new FileOutputStream(tempFile, false);	                                                                
+		byte[] myBytes = allData.getBytes(); 
+		fStream.write(myBytes);
+		fStream.close();
+	}
 	
 	 public static void main(String[] args) throws Exception
 	 {
 		 leaderboard demo = new leaderboard();
 		 demo.setPointsArray();
 		 demo.insertScore(800);
-		 
+		 demo.rewriteFile();
 	 }
 	 
 }
