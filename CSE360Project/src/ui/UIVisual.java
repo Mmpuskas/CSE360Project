@@ -1,5 +1,7 @@
 package ui;
 
+import javafx.geometry.Rectangle2D;
+import javafx.stage.Screen;
 import javafx.stage.Stage;
 import javafx.scene.Scene;
 import javafx.scene.Group;
@@ -82,8 +84,16 @@ public class UIVisual
 	public void initTreeMembers()
 	{
 		//Width/Height of game board
-		final int gameWidth = 1024;//1536
-		final int gameHeight = 670;//1005
+		//Width/Height of game board
+				int gameWidth = 1024;//width 1536, and 1005
+				int gameHeight = 670;//height
+				Rectangle2D primaryScreenBounds = Screen.getPrimary().getVisualBounds();
+				
+				if ((int) primaryScreenBounds.getWidth() > 1400 && (int) primaryScreenBounds.getHeight() > 800)
+				{
+					gameWidth = 1536;
+					gameHeight = 1005;
+				}
 		//Width/Height of roll canvas (Used for rolling animation)
 		final double rollWidth = .26 * gameWidth;//
 		final double rollHeight = .398 * gameHeight;
