@@ -216,7 +216,7 @@ public class leaderboard
 		fStream.close();
 	}
 	
-	
+	/*
 	 public static void main(String[] args) throws Exception
 	 {
 		 leaderboard demo = new leaderboard();
@@ -224,6 +224,7 @@ public class leaderboard
 		 demo.insertScore(1);
 		 demo.rewriteFile();
 	 }
+	 */
 	 
 	 
 }
