@@ -26,35 +26,72 @@ public class leaderboard
 	}
 
 	//getters & setters
+	
+	/**
+	 * getTotalScore()
+	 * @return the total score kept throughout the game
+	 */
 	public int getTotalScore() 
 	{
 		return totalScore;
 	}
 
+	/**
+	 * setTotalScore(int)
+	 * @param totalScore
+	 */
 	public void setTotalScore(int totalScore) 
 	{
 		this.totalScore = totalScore;
 	}
 
+	/**
+	 * getHighestScore()
+	 * @return the highest score out of the top 10 saved
+	 */
 	public int getHighestScore() 
 	{
 		highestScore = topTen[0];
 		return highestScore;
 	}
 
+	/**
+	 * setHighestScore(int)
+	 * @param highestScore
+	 */
 	public void setHighestScore(int highestScore) 
 	{
 		this.highestScore = highestScore;
 	}
 	
+	/**
+	 * getTopTen()
+	 * @return the array of top 10 scores
+	 */
+	public int[] getTopTen()
+	{
+		return topTen;
+	}
+	
 	//functions that actually do stuff
 	
+	/**
+	 * addToScore(int)
+	 * @param addIt
+	 * 	adds passed int to the total score kept throughout current game
+	 */
 	private void addToScore(int addIt)
 	{
 		int tots = getTotalScore() + addIt;
 		setTotalScore(tots);
 	}
 	
+	/**
+	 * setPointsArray()
+	 * @throws Exception
+	 * 	Will open text file that keeps the scores and save to an int array for easier access.
+	 * 	Then use bubble sort on array
+	 */
 	private void setPointsArray() throws Exception
 	{
 		//read all points from file and save to array to access easily
@@ -88,9 +125,13 @@ public class leaderboard
 		 }*/
 	}
 	
+	/**
+	 * bubbleSort(int[])
+	 * @param tempArray
+	 * @return sorted array in descending order
+	 */
 	private int[] bubbleSort(int[] tempArray)
 	{
-		
 		//descending
 		for(int i = 0; i < tempArray.length-1; i++)
 		{
@@ -98,7 +139,7 @@ public class leaderboard
 			{
 	            if(tempArray[j-1] < tempArray[j])
 	            {
-	                int holder = tempArray[j - 1];
+	                int holder = tempArray[j - 1]; //hold one before
 	                tempArray[j-1] = tempArray[j];
 	                tempArray[j] = holder;
 	            }
@@ -108,34 +149,59 @@ public class leaderboard
 		return tempArray;
 	}
 	
-	private void insertScore(int score)
+	/**
+	 * insertScore(int)
+	 * @param score
+	 * @throws IOException 
+	 *   1. finds the spot where the new score should be inserted 
+	 *   2. puts into top ten array
+	 *   3. calls rewriteFIle to save
+	 */
+	private void insertScore(int score) throws IOException
 	{
 		int counter = 0;
 		
+		//find the spot where score is higher than one after and lower than one before
         while(counter < TOP_TEN && topTen[counter] > score)
         {
             counter++;
         }
         
-        if(counter < topTen.length)
+        if(counter < topTen.length) //if it was found
         {
-            for(int insertCount = topTen.length-1; insertCount > counter; insertCount--) //insert score
+            for(int insertCount = topTen.length - 1; insertCount > counter; insertCount--) 
             {
                 topTen[insertCount] = topTen[insertCount - 1];
             }
-            topTen[counter] = score;
+            topTen[counter] = score;//insert score
         }
 		
+        rewriteFile();
 	}
 	
+	/**
+	 * rewriteFile()
+	 * @throws IOException
+	 * 	converts the int array to a string one score at a time,
+	 *  separated by a tab rewriting the text file
+	 */
 	private void rewriteFile() throws IOException
 	{
 		//**convert int array to string
-		String allData = Integer.toString(topTen[0]) + "\n"; // = Arrays.toString(topTen);
+		String allData = Integer.toString(topTen[0]) + "\n";
 		
-		for(int i = 1; i < TOP_TEN; i++)
+		for(int i = 1; i < TOP_TEN ; i++)
 		{
-			allData = allData + Integer.toString(topTen[i]) + "\n";
+			if(TOP_TEN - 1 == i)
+			{
+				allData = allData + Integer.toString(topTen[i]);
+			}
+			else
+			{
+				allData = allData + Integer.toString(topTen[i]) + "\n";	
+			}
+			
+			
 		}
 		
 		//System.out.println(allData);
@@ -150,12 +216,14 @@ public class leaderboard
 		fStream.close();
 	}
 	
+	
 	 public static void main(String[] args) throws Exception
 	 {
 		 leaderboard demo = new leaderboard();
 		 demo.setPointsArray();
-		 demo.insertScore(800);
+		 demo.insertScore(1);
 		 demo.rewriteFile();
 	 }
+	 
 	 
 }
