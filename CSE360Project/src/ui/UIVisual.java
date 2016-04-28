@@ -39,6 +39,16 @@ public class UIVisual
 	private Image roll3;
 	private Image play;
 	private Image leaderboard;
+	private Image fishingVillage;
+	private Image forest;
+	private Image greyHills;
+	private Image town;
+	private Image endGate;
+	private Image orcThief;
+	private Image troll;
+	private Image flufflesDog;
+	private Image spider;
+	
 	
 	private Actor orcActor;
 	
@@ -74,10 +84,13 @@ public class UIVisual
 	private Canvas gameCanvas; //Canvas for the game board/related things
 	private Canvas rollCanvas; //Canvas for the prompt window where you roll
 	private Canvas splashCanvas; //Canvas for the splash screen where you can choose play/leaderboard
+	//Create a sceneCanvas where the scene imgae is displayed at the top and text in the rest of the portion
+	private Canvas eventCanvas;
 	private GraphicsContext gameGC;
 	private GraphicsContext rollGC;
 	private GraphicsContext splashGC;
 	private GraphicsContext scoreGC;
+	private GraphicsContext eventGC;   //new add
 	private Button makeMove;
 	private Button playButton;
 	private Button scoresButton;
@@ -117,13 +130,19 @@ public class UIVisual
         splashCanvas = new Canvas(gameWidth, gameHeight);
         //add a leaderboard canvas
         scoresCanvas = new Canvas(gameWidth, gameHeight);
+        //add a scene canvas
+        eventCanvas = new Canvas(gameWidth/2, gameHeight/2);
 		gameGC = gameCanvas.getGraphicsContext2D();
 		rollGC = rollCanvas.getGraphicsContext2D();
 		splashGC = splashCanvas.getGraphicsContext2D();
+		eventGC = eventCanvas.getGraphicsContext2D();
 		//create a score Graphics Context
 		scoreGC = scoresCanvas.getGraphicsContext2D();
         rollCanvas.relocate((gameWidth / 2) - (rollWidth / 2), (gameHeight / 2) - (rollHeight / 2)); //Sets placement of roll window
-        //add fiddy to scoresCanvas
+        //relocate the event screen to middle of the screen like the rollCanvas
+        eventCanvas.relocate((gameWidth / 2) - (rollWidth / 2), (gameHeight / 2) - (rollHeight / 2));
+        
+        
         scoreGC.drawImage(splash, 0, 0 );
         splashGC.drawImage(splash, 0, 0);
 		root.getChildren().add(splashCanvas); //Gotta start with something on the root to set the size of the window
@@ -329,8 +348,22 @@ public class UIVisual
 				play = new Image("/assets/play.png", (gameWidth * 0.1302), (gameHeight * 0.199), true, true);
 				leaderboard = new Image("/assets/leaderboard.png", (gameWidth * 0.3906), (gameHeight * 0.796), true, true);
 				orcActor = new Actor((int) (0.170572917 * gameWidth), (int) (0.278606965 * gameHeight), orc);
+				
+				/*
+				//Set the sizes of the scene images that will go in the sceneCanvas(all the same size)
+				fishingVillage = new Image("/assets/FishingVillage.png", (gameWidth * 0.3906), (gameHeight * 0.796), true, true);
+				forest = new Image("/assets/Forest.png", (gameWidth * 0.3906), (gameHeight * 0.796), true, true);;
+				greyHills = new Image("/assets/GreyHills.png", (gameWidth * 0.3906), (gameHeight * 0.796), true, true);;
+				town = new Image("/assets/Town.png", (gameWidth * 0.3906), (gameHeight * 0.796), true, true);;
+				endGate= new Image("/assets/ChaosEndGate.png", (gameWidth * 0.3906), (gameHeight * 0.796), true, true);;
+				
+				//Set the sizes of end-scene bosses that will go in the sceneCanvas(all the same size)
+				orcThief = new Image("/assets/OrcThief.png", (gameWidth * 0.3906), (gameHeight * 0.796), true, true);;
+				troll = new Image("/assets/Troll.png", (gameWidth * 0.3906), (gameHeight * 0.796), true, true);;
+				flufflesDog = new Image("/assets/Fluffles.png", (gameWidth * 0.3906), (gameHeight * 0.796), true, true);;
+				spider = new Image("/assets/spider.png", (gameWidth * 0.3906), (gameHeight * 0.796), true, true);;
+				*/
 	}
-	
 	
 	public Scene getTheScene() 
 	{
