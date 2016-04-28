@@ -10,6 +10,7 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.control.Button;
+import javafx.scene.text.TextAlignment;
 
 import javafx.animation.AnimationTimer;
 import javafx.event.EventHandler;
@@ -69,12 +70,14 @@ public class UIVisual
 	private Group root;
 	private Scene theScene;
 	//Canvas lets you draw (In this case, through a GraphicsContext)
+	private Canvas scoresCanvas; //Canvas for the leaderboard scores
 	private Canvas gameCanvas; //Canvas for the game board/related things
 	private Canvas rollCanvas; //Canvas for the prompt window where you roll
 	private Canvas splashCanvas; //Canvas for the splash screen where you can choose play/leaderboard
 	private GraphicsContext gameGC;
 	private GraphicsContext rollGC;
 	private GraphicsContext splashGC;
+	private GraphicsContext scoreGC;
 	private Button makeMove;
 	private Button playButton;
 	private Button scoresButton;
@@ -83,7 +86,6 @@ public class UIVisual
 	 */
 	public void initTreeMembers()
 	{
-		//Width/Height of game board
 		//Width/Height of game board
 				int gameWidth = 1024;//width 1536, and 1005
 				int gameHeight = 670;//height
@@ -97,6 +99,7 @@ public class UIVisual
 		//Width/Height of roll canvas (Used for rolling animation)
 		final double rollWidth = .26 * gameWidth;//
 		final double rollHeight = .398 * gameHeight;
+		
 		//Initialize images
 		initImages(gameWidth, gameHeight); 
 		control.initTilePositions(gameWidth, gameHeight);
@@ -112,10 +115,16 @@ public class UIVisual
         gameCanvas = new Canvas(gameWidth, gameHeight);
         rollCanvas = new Canvas(rollWidth, rollHeight);
         splashCanvas = new Canvas(gameWidth, gameHeight);
+        //add a leaderboard canvas
+        scoresCanvas = new Canvas(gameWidth, gameHeight);
 		gameGC = gameCanvas.getGraphicsContext2D();
 		rollGC = rollCanvas.getGraphicsContext2D();
 		splashGC = splashCanvas.getGraphicsContext2D();
+		//create a score Graphics Context
+		scoreGC = scoresCanvas.getGraphicsContext2D();
         rollCanvas.relocate((gameWidth / 2) - (rollWidth / 2), (gameHeight / 2) - (rollHeight / 2)); //Sets placement of roll window
+        //add fiddy to scoresCanvas
+        scoreGC.drawImage(splash, 0, 0 );
         splashGC.drawImage(splash, 0, 0);
 		root.getChildren().add(splashCanvas); //Gotta start with something on the root to set the size of the window
 
@@ -129,7 +138,7 @@ public class UIVisual
 	 */
 	public void startVisual(Stage theStage) 
 	{
-		theStage.setTitle("TBA");
+		theStage.setTitle("Journey to Chaos End");
 		initTreeMembers();
 		theStage.setScene(theScene);
 
@@ -153,7 +162,10 @@ public class UIVisual
 				}
 				else if(curMode == Mode.scores)
 				{
-					
+						playLogic(currentNanoTime);
+						//root.getChildren().clear();
+						//root.getChildren().add(scoresCanvas);
+						//root.getChildren().add(splashCanvas);
 				}
 			}
 		}.start();
@@ -294,6 +306,9 @@ public class UIVisual
 			@Override public void handle(ActionEvent e) 
 			{
 				curMode = Mode.scores;
+				root.getChildren().clear();
+				root.getChildren().add(splashCanvas);
+				//root.getChildren().add(scoresButton);
 			}
 		});
 	 }
