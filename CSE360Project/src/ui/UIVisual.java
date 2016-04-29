@@ -12,6 +12,16 @@ import javafx.scene.control.Button;
 import javafx.geometry.Rectangle2D;
 import javafx.stage.Screen;
 
+import javafx.scene.control.Label;
+import javafx.scene.layout.VBox;
+
+import javafx.geometry.Orientation;
+import javafx.scene.text.Font;
+import javafx.geometry.Insets;
+import javafx.scene.control.ScrollBar;
+import javafx.beans.value.ObservableValue;
+import javafx.beans.value.ChangeListener;
+
 import javafx.animation.AnimationTimer;
 import javafx.event.EventHandler;
 import javafx.event.ActionEvent;
@@ -88,7 +98,7 @@ public class UIVisual
 		int gameWidth = 1536;
 		int gameHeight = 1005;
 		Rectangle2D primaryScreenBounds = Screen.getPrimary().getVisualBounds();
-		if(primaryScreenBounds.getWidth() < 1400 && primaryScreenBounds.getHeight() < 800)
+		if(primaryScreenBounds.getWidth() < 1400 && primaryScreenBounds.getHeight() < 800)//
 		{
 			gameWidth = 1024;
 			gameHeight = 670;
@@ -152,7 +162,42 @@ public class UIVisual
 				}
 				else if(curMode == Mode.scores)
 				{
+					theStage.setTitle("Leaderboards");
+					Rectangle2D primaryScreenBounds = Screen.getPrimary().getVisualBounds();
+					String[] scores = {"1. dfsafdsafdsfa", "2. fdsafsdafdsa"};
+					VBox vb = new VBox();
+				    vb.setPadding(new Insets(25, 50, 50, primaryScreenBounds.getWidth()/3+25)); //(top/right/bottom/left)
+					Label title= new Label("Leaderboards\n");
+					title.setPadding(new Insets(0,0,10,0));
+					title.setFont(Font.font ("Times New Roman", 40));
+					vb.getChildren().add(title);
 					
+					//Strings of the top 10 scores change 2 to 10
+					for(int i = 0; i < 2; i++)
+			        {
+			        	Label txt = new Label(scores[i]);//
+			        	txt.setFont(Font.font("Times New Roman", 18));
+			        	txt.setPadding(new Insets(0,0,5,0));
+			        	vb.getChildren().add(txt);
+			        }
+					ScrollBar sc = new ScrollBar();
+					sc.setMin(0);
+					sc.setMax(primaryScreenBounds.getHeight());
+					sc.setValue(0);
+					sc.setOrientation(Orientation.VERTICAL);
+					sc.setPrefHeight(primaryScreenBounds.getHeight());
+					sc.setLayoutX(theScene.getWidth()-sc.getWidth());
+					sc.valueProperty().addListener(event->{title.setTranslateY(50+sc.getValue());});
+					sc.valueProperty().addListener(event->{vb.setTranslateY(50+sc.getValue());});
+				//	sc.valueProperty().addListener(event->{splashCanvas.setTranslateY(20+sc.getValue());});
+					
+			        root.getChildren().clear();
+			        root.getChildren().add(splashCanvas);
+			        root.getChildren().add(sc);
+			        root.getChildren().add(vb);
+			    	
+			        
+			       
 				}
 			}
 		}.start();
