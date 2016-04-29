@@ -116,4 +116,15 @@ public class UIControl
 	{
 		return currentScore;
 	}
+	
+	public void saveScore()
+	{
+		leaderboard lb = new leaderboard();
+		try {
+			lb.insertScore(currentScore);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 }

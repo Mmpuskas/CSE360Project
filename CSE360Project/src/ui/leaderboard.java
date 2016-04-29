@@ -101,7 +101,7 @@ public class leaderboard
 	 * 	Will open text file that keeps the scores and save to an int array for easier access.
 	 * 	Then use bubble sort on array
 	 */
-	private void setPointsArray() throws Exception
+	public void setPointsArray() throws Exception
 	{
 		//read all points from file and save to array to access easily
 		 String	thisLine = null;
@@ -166,7 +166,7 @@ public class leaderboard
 	 *   2. puts into top ten array
 	 *   3. calls rewriteFIle to save
 	 */
-	private void insertScore(int score) throws IOException
+	void insertScore(int score) throws IOException
 	{
 		int counter = 0;
 		
