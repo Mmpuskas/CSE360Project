@@ -9,6 +9,9 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.control.Button;
 
+import javafx.geometry.Rectangle2D;
+import javafx.stage.Screen;
+
 import javafx.animation.AnimationTimer;
 import javafx.event.EventHandler;
 import javafx.event.ActionEvent;
@@ -22,8 +25,6 @@ public class UIVisual
 {
 	/* ## Instantiating variables that are not part of the javaFX tree ## */
 	private Boolean isRolling; //True during dice roll animation
-	private int startX;
-	private int startY;
 	private int spacesToMove; //The number of spaces from 1-3 that need to be moved based on the dice roll
 	private int curSpace;
     private long startNanoTime;
@@ -54,8 +55,6 @@ public class UIVisual
 	UIVisual(UIControl Control)
 	{
 		//Starting board positions
-		startX = 262;
-		startY = 280;
 		spacesToMove = 0;
 		curSpace = 0;
 
@@ -64,15 +63,6 @@ public class UIVisual
 		isRolling = false;
 		startNanoTime = System.nanoTime();
 
-		//Character and non-interactable assets
-		fiddy = new Image("/assets/111209-50-cent.png", 140, 200, true, true);
-		orc = new Image("/assets/orc.png", 140, 200, true, true);
-		roll1 = new Image("/assets/1.png", 400, 400, false, true);
-		roll2 = new Image("/assets/2.png", 400, 400, false, true);
-		roll3 = new Image("/assets/3.png", 400, 400, false, true);
-		play = new Image("/assets/play.png", 200, 200, true, true);
-		leaderboard = new Image("/assets/leaderboard.png", 600, 800, true, true);
-		orcActor = new Actor(startX, startY, orc);
 	}
 
 	/* ## Instantiating variables that ARE part of the javaFX tree ## */
@@ -95,12 +85,21 @@ public class UIVisual
 	public void initTreeMembers()
 	{
 		//Width/Height of game board
-		final int gameWidth = 1536;
-		final int gameHeight = 1005;
+		int gameWidth = 1536;
+		int gameHeight = 1005;
+		Rectangle2D primaryScreenBounds = Screen.getPrimary().getVisualBounds();
+		if(primaryScreenBounds.getWidth() < 1400 && primaryScreenBounds.getHeight() < 800)
+		{
+			gameWidth = 1024;
+			gameHeight = 670;
+		}
 		//Width/Height of roll canvas (Used for rolling animation)
-		final int rollWidth = 400;
-		final int rollHeight = 400;
-
+		final double rollWidth = .26 * gameWidth;//
+		final double rollHeight = .398 * gameHeight;
+		//Initialize images
+		initImages(gameWidth, gameHeight); 
+		control.initTilePositions(gameWidth, gameHeight);
+		
 		//Background/button assets
 		board = new Image("/assets/board.png", gameWidth, gameHeight, true, true);
 		splash = new Image("/assets/splash.png", gameWidth, gameHeight, true, true);
@@ -238,12 +237,12 @@ public class UIVisual
 	 * @param rollWidth The width of the roll canvas (where the animations are drawn).
 	 * @param rollHeight The height of the roll canvas.
 	 */
-	 private void initButtons(int gameWidth, int gameHeight, int rollWidth, int rollHeight)
+	 private void initButtons(int gameWidth, int gameHeight, double rollWidth, double rollHeight)
 	 {
 		//makeMove button for rolling die
 		makeMove = new Button();
-		makeMove.relocate(gameCanvas.getWidth() / 2 - rollWidth / 2 - 10
-				,gameCanvas.getHeight() / 2 - rollHeight / 2 + 25); //Sets the position of the button
+		makeMove.relocate(gameCanvas.getWidth() / 2 - rollWidth / 2 - (gameWidth * 0.00651)
+				,gameCanvas.getHeight() / 2 - rollHeight / 2 + (gameHeight * 0.02487)); //Sets the position of the button
 		ImageView makeMoveImage = new ImageView();
 		makeMoveImage.imageProperty().set(die);        
 		makeMove.setGraphic(makeMoveImage); //Set the button's graphic to the imageview defined
@@ -269,7 +268,7 @@ public class UIVisual
 		playButtonImage.imageProperty().set(play);        
 		playButton.setGraphic(playButtonImage); 
 		playButton.setStyle("-fx-focus-color: darkgoldenrod;");
-		playButton.relocate(gameWidth - 400, gameHeight / 2);
+		playButton.relocate(gameWidth - (gameWidth * 0.26), gameHeight / 2);
 		playButton.setOnAction(new EventHandler<ActionEvent>() 
 		{
 			@Override public void handle(ActionEvent e) 
@@ -288,7 +287,7 @@ public class UIVisual
 		scoresButtonImage.imageProperty().set(leaderboard);        
 		scoresButton.setGraphic(scoresButtonImage); 
 		scoresButton.setStyle("-fx-focus-color: darkgoldenrod;");
-		scoresButton.relocate(gameWidth - 800, gameHeight * 8 / 12);
+		scoresButton.relocate(gameWidth - (gameWidth * 0.5208), gameHeight * 8 / 12);
 		scoresButton.setOnAction(new EventHandler<ActionEvent>()
 		{
 			@Override public void handle(ActionEvent e) 
@@ -297,7 +296,26 @@ public class UIVisual
 			}
 		});
 	 }
-
+	
+	 /**
+	  * Initializes the size of image files based off of coefficients in relation to gameWidth/gameHeight
+	  * @param gameWidth The width of the game board.
+	  * @param gameHeight The height of the game board.
+	  */
+	public void initImages(int gameWidth, int gameHeight)
+	{
+		//Character and non-interactable assets
+				fiddy = new Image("/assets/111209-50-cent.png", (gameWidth * 0.0911), (gameHeight * 0.199), true, true);
+				orc = new Image("/assets/orc.png", (gameWidth * 0.0911), (gameHeight * 0.199), true, true);
+				roll1 = new Image("/assets/1.png", (gameWidth * 0.2604), (gameHeight * 0.398), false, true);
+				roll2 = new Image("/assets/2.png", (gameWidth * 0.2604), (gameHeight * 0.398), false, true);
+				roll3 = new Image("/assets/3.png", (gameWidth * 0.2604), (gameHeight * 0.398), false, true);
+				play = new Image("/assets/play.png", (gameWidth * 0.1302), (gameHeight * 0.199), true, true);
+				leaderboard = new Image("/assets/leaderboard.png", (gameWidth * 0.3906), (gameHeight * 0.796), true, true);
+				orcActor = new Actor((int) (0.170572917 * gameWidth), (int) (0.278606965 * gameHeight), orc);
+	}
+	
+	
 	public Scene getTheScene() 
 	{
 		return theScene;
