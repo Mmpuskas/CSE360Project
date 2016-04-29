@@ -6,7 +6,7 @@ import java.util.Arrays;
  * 
  * @author Mercedes
  * Purpose: Keep track of the score of the user. 
- * 	Also, utilize ScoreHistory.txt to save all scores and retrieve the highest top 10 scores.
+ * 	Also, utilize leaderboardRepsository.txt to save all scores and retrieve the highest top 10 scores.
  */
 
 public class leaderboard
@@ -80,6 +80,8 @@ public class leaderboard
 	{
 		return convertToString();
 	}
+	
+	
 	//functions that actually do stuff
 	
 	/**
