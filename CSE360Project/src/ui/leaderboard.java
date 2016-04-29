@@ -2,12 +2,11 @@ package ui;
 import java.io.*;
 import java.util.Arrays;
 
-
-/*
- * Author: Mercedes
- * Purpose: Keep track of the score of the user. 
- * 	Also, utilize ScoreHistory.txt to save all scores and retrieve the highest top scores.
+/**
  * 
+ * @author Mercedes
+ * Purpose: Keep track of the score of the user. 
+ * 	Also, utilize ScoreHistory.txt to save all scores and retrieve the highest top 10 scores.
  */
 
 public class leaderboard
@@ -73,6 +72,14 @@ public class leaderboard
 		return topTen;
 	}
 	
+	/**
+	 * getStringData()
+	 * @return a string of scores seperated by tabs
+	 */
+	public String getStringData()
+	{
+		return convertToString();
+	}
 	//functions that actually do stuff
 	
 	/**
@@ -182,31 +189,13 @@ public class leaderboard
 	/**
 	 * rewriteFile()
 	 * @throws IOException
-	 * 	converts the int array to a string one score at a time,
-	 *  separated by a tab rewriting the text file
+	 * 	overwrites the text file with the new array of scores
 	 */
 	private void rewriteFile() throws IOException
 	{
-		//**convert int array to string
-		String allData = Integer.toString(topTen[0]) + "\n";
+		//get string of scores 
+		String allData = convertToString();
 		
-		for(int i = 1; i < TOP_TEN ; i++)
-		{
-			if(TOP_TEN - 1 == i)
-			{
-				allData = allData + Integer.toString(topTen[i]);
-			}
-			else
-			{
-				allData = allData + Integer.toString(topTen[i]) + "\n";	
-			}
-			
-			
-		}
-		
-		//System.out.println(allData);
-		
-		//**Rewrite file
 		String historyPath = new File("").getAbsolutePath() + "/src/text/leaderboardRepository.txt";
 		
 		File tempFile = new File(historyPath);
@@ -214,6 +203,32 @@ public class leaderboard
 		byte[] myBytes = allData.getBytes(); 
 		fStream.write(myBytes);
 		fStream.close();
+	}
+	
+	/**
+	 * convertToString()
+	 * @return string of scores seperated by tab
+	 * 	converts the int array to a string one score at a time,
+	 *  separated by a tab rewriting the text file
+	 */
+	private String convertToString()
+	{
+		//**convert int array to string
+				String allData = Integer.toString(topTen[0]) + "\n";
+				
+				for(int i = 1; i < TOP_TEN ; i++)
+				{
+					if(TOP_TEN - 1 == i)
+					{
+						allData = allData + Integer.toString(topTen[i]);
+					}
+					else
+					{
+						allData = allData + Integer.toString(topTen[i]) + "\n";	
+					}		
+				}
+				
+				return allData;
 	}
 	
 	/*
