@@ -365,6 +365,7 @@ public class UIVisual
 				*/
 	}
 	
+	
 	public Scene getTheScene() 
 	{
 		return theScene;
