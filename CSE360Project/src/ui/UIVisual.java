@@ -187,7 +187,9 @@ public class UIVisual
 					sc.setOrientation(Orientation.VERTICAL);
 					sc.setPrefHeight(primaryScreenBounds.getHeight());
 					sc.setLayoutX(theScene.getWidth()-sc.getWidth());
-					sc.valueProperty().addListener(event->{vb.setTranslateX(20+sc.getValue());});
+					sc.valueProperty().addListener(event->{title.setTranslateY(50+sc.getValue());});
+					sc.valueProperty().addListener(event->{vb.setTranslateY(50+sc.getValue());});
+				//	sc.valueProperty().addListener(event->{splashCanvas.setTranslateY(20+sc.getValue());});
 					
 			        root.getChildren().clear();
 			        root.getChildren().add(splashCanvas);
