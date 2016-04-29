@@ -1,0 +1,220 @@
+Journey to Chaos End
+
+Intro:
+The image before you is that of a young orc. You first notice the size of its eyes, as expansive and black as the night sky. Surrounding them, its thick, green skin, covered in scars carved by hooks and rope. Atop its head is a mane of white hair, knotted, dusty, and tied high on its round skull. As you gaze closely into the mirror, you feel a certain pride for the stories that you have accumulated in your visage. You may not yet be a great warrior, but it's frightfully apparent that the blood of an orc warrior runs through your veins.
+
+Taking a step back, you return to the depressing reality of your physical limitations. Your limbs are short, bony, and are possessed with the finesse of a drowning calf. Your comfortable life has required precious little in terms of athleticism, but not by a lack of desire. Today, you have decided to abandon your former life and set off towards Chaos End, the last refuge between the peaceful orc homelands and the charred battlefields of legend. A twenty-five day walk separates your village from the gates, and you have heard stories of strange happenings along the path, but nothing will stop you from proving your worth and joining the grand armies of your people.
+
+While scanning over your map, you wiggle into your mismatched set of cheap armor. You nearly trip while jamming your foot into a slightly-too-narrow boot as you recall your planned route. First, you'll head across the Grey Hills to the nearest town. From there, you'll have to navigate the Eight-Legged Forest. Once you're on the other side of the forest, you'll be within spitting distance of your final target, the great iron wall called Chaos End. 
+
+You finish donning your gear, say your farewells to your friends and family, and exit the village.
+
+Events:
+
+Fishing Village:
+1)
+As you take your first step outside of the village, your stomach bubbles with excitement. You're finally doing it after all this time. With your chin raised high you breathe your first deep breath as a new adventurer. Your pride quickly sees you through the rest of the day.
++10
+
+2)
+Spending entire days walking has proven to be more harrowing than you expected, but your determination sees you through. You've noticed a small pack of wolves traveling in the same direction as you. You catch glimpses of them resting in the distance every few hours. You've named the big one Brownie. Your desire to see where they end up has proven to be good motivation to keep walking.
++5
+
+3)
+While following the road to town, you encounter a group of young traders heading in the opposite direction. You smile and nod politely to each-other in passing. Just as you begin to inwardly remark about how pleasant of an exchange it was, the back of your head has its own exchange with a foreign object. The type of thing that makes a dull THUNK sound. Maybe a brick, or a large book. A thesaurus, possibly. Regardless, you wake up on the side of the road with a large bump on the back of your head. You were lucky enough to have not been looted by the rapscallions, but you'll think twice before trusting children in the future.
+-10
+
+4)
+As the shadows begin to run long, you look for a good area off the road to set up camp. Soon enough you have two salted fish cooking over a bustling fire. After four days journey you're finally approaching the border to the Grey Hills. You've never been so far from home, but it doesn't scare you. You are starting to feel nostalgic, though. You indulge the compulsion to reminisce as your mind falls on a song that you had learned as a child from some merchants visiting your village. 
+
+Oh, what do you do when the West wind fells you? Ro ho ro ho rum hum hum...
++5
+
+5)
+This is it. The tattered sign in front of you reads, "Grey Hills Ahead." As your foot threatens to pass the border, you're halted by a sharp barking noise. You whirl around just in time to be violently tackled into the dirt by a large animal. It's Fluffles, your family dog! You're delighted to see the lovable little puff ball, but you know that the road ahead will be much too dangerous for him. You attempt to convince him to return home.
+PASS:
+You convince Fluffles to return home. After one more quick belly rub, you both head your separate ways.
++10
+FAIL:
+You fail to convince Fluffles to return home. Instead, you're forced to slap him across the muzzle and yell at him before he gets the idea. He begins to make his way back home with his head hung so low that his nose is nearly scraping the dirt.
+-10
+
+
+Grey Hills:
+1)
+You have quickly grown to hate the Grey Hills. The ground is soft, the air is moist, and there's a slight humming noise that reminds you of a young boy trying to annoy his sister without explicitly doing anything to get in trouble. You can't say that the journey through these lands is a particularly deadly one, more that the frustration caused here is slowly grinding your mind into a pile of cheddar. You begin to consider whether smashing your head with a rock is a bad option. It would end the damned humming at least.
+-5
+
+2)
+You've been following a beetle for the past five hours. It travels slightly slower than you would otherwise, but you find that the slowed pace is worth it in order to finally have a travel companion. He seems like a Rocky, or maybe a Clark. Regardless, you're just glad that he's heading the same way as you.
++5
+
+3)
+Three-hundred and fourteen, three-hundred and fifteen, three-hundred and... What's that? You swear you just heard the faint sound of sand shifting somewhere to your left. Your heart starts racing. You've never been ambushed before. You begin to wonder what it will be like. Will your attacker be a large sand worm? Maybe an antlion! Ooh boy, you can't wait to show it what you're made of!
+You soon realize that you've been daydreaming about fighting an antlion for the past three minutes. Seeing as how you haven't been ambushed yet, the sound must have just been the wind playing tricks. You hang your head slightly lower as you resume your trundle onward. What number were you on again? ... One, two....
++0
+
+4)
+An uneventful morning meal is followed by an uneventful morning walk. That changes around noon however, as you finally find a sign of life. Well, it found you, at least. Or rather, it found your face to closely resemble something that it wanted to kill. It is in fact a bird large enough to have trouble fitting through a standard door, and it's coming right for you. You're terrified. You're frazzled. You don't know what to do. You throw your arms over your face and unleash a loud, terrified wail while the bird... Wait, where did it go? You lower your arms and turn around to see the bird flying away. I guess it wasn't after your face after all.
++10
+
+5)
+In the distance you see three wooden boxes stacked in a pyramid. It's the first thing that you've seen for miles. You slow your pace as you get closer, cautiously approaching the birch bins. Just as you begin to strafe around the left side of the spruce stack, a painfully average orc covered in purple paint jumps out on top of the tallest box. 
+
+"I am Kevin, the road troll!" says Kevin, the road troll. "Pay my fine or I'll smash you into the ground!"
+
+You attempt to reason with him.
+PASS:
+You tell Kevin that you know that he's an orc pretending to be a troll, but you make sure to mention that you won't tell anyone else. You go on to explain that you're making your way to Chaos End, and that you can't afford to give away any of your possessions, as you'll need them for the perilous journey.
+
+"Well then, I feel inclined to let an eagle-eyed orc such as yourself pass unaccosted. I appreciate you keeping my secret safe, it's a large part of what makes me such a successful highwayman."
++10
+FAIL:
+You begin to explain to Kevin that you're on your way to Chaos End. Before you can finish your story, he throws a hand-sized stone at your head, which strikes your helmet with a loud CLANG. Your eyes water from the vibration as you run past the boxes towards the town. You get far enough away that Kevin decides you aren't worth chasing.
+-5
+
+Town:
+1)
+You've finally arrived in town. The busy streets greet you like a fish greets a ham sandwich. That is to say, you're ignored completely. You spend the day searching for an inn to stay at while you replenish your supplies.
+
+A muddy, square sign reads, "The Human's Arm". How it got muddy is quite the mystery, since it's hanging ten feet above the street - attached to a ratty old building. You hear a rowdy crowd clinking iron mugs and singing songs inside. You find the innkeeper near the door, and negotiate a few days lodging. The price is a bit more than you care to part with given the rough shape of the room, but you aren't too picky. After all, it isn't a grey hill.
++0
+
+2)
+You spend the day looking for a shop where you can purchase some breads and salted meats for the trip. You finally arrive at a small butcher's shop, where a very rotund butcher jovially greets you. 
+
+"All sorts of meats for ya sir, what'll ya have?" says the man.
+You order enough to keep you for the rest of your journey, and set off on your way.
++5
+
+3)
+It's your third day in town, and you're almost ready to proceed. You've bought more than enough rations to last for the second leg of your journey, but you still want to learn more about the roads before forging onward.
+
+While eating breakfast, you overhear a group of elderly gentleorcs discussing their mutual hatred of spiders.
+"...and that was'n even the worst o' it. Poor Mok'lur was stannin right unner a tree when they star'ed comin' oot. One o' 'em jumped right on 'is 'ead." Says one of the men. 
+You walk over the the group and ask where this particular encounter occurred.
+"That damned Eight-Legged Forest up the path. We were try'in to find a boy tat went missin' the o'er day, but 'ad to turn back."
+
+You decide that you'll have to spend the rest of the day sharpening your sword and fixing the holes in your armor if you hope to stand up to a bunch of spiders.
+
+You also figure that it would be a good idea to look for someone who possesses some knowledge of spider venom tomorrow.
++5
+
+4)
+After overhearing a group of orcs discussion the dangers of the Eight-Legged Forest during breakfast yesterday, you decided that today would be a good time to find some anti-venom.
+
+You ask the innkeeper if the town has an apothecary. He gives you directions to a building all the way in the far corner of the town walls. Above the door the word "Potions" is drawn in white paint.
+
+The shopkeep is a tiny old orc that walks with a wooden cane carved in the shape of a femur. "Hello adventurer! What can I get you? Some health potions maybe? A cavada berry smoothie, perhaps? Very good for getting a chance at those girls that won't give you the time of day, you know. Fair prices for everything that I sell!" 
+
+You ask the shopkeep about anti-venom for the spiders up ahead. He supplies you with two bottles full of a blue liquid that he assures you will keep your skin on your bones and your head hallucination-free (Or your money back).
++5
+
+5)
+After a few days' rest, you pack your bags and head towards the road out of town. As you approach the gate, a man bumps into you.
+Pass:
+You instinctively reach for your belt and find the man's hand grasping for your coin purse. You seize the man's arm and drag him to a nearby guard who promises that the town doesn't take lightly to thieves.
++10
+Fail:
+You apologize to the man, and he apologizes back. You're delighted by the pleasantry, but can't help but feel that something isn't quite right.
+-10
+
+
+Eight-Legged Forest:
+1)
+You stand at the edge of an enormous forest. Large grey trunks topped with dark green foliage extend as far as you can see in either direction. The trees grow so closely together that you can't imagine how they all survive with no river nearby. There are no paths to be taken, but after a bit of searching you find a gap in the trees around the size of an orc. You take a deep breath and venture inside.
+
+Traveling inside the forest is slow. It's dark, and there's dense growth to cut through everywhere. Eventually the sun begins to set, and the small amount of light that was visible through the tops of the trees disappears. You find a nice flat stone to sleep on.
++0
+
+2)
+Another day passes as you travel through the forest. Though it's been uneventful so far, you know better than to let your guard down. You find yourself exhausting much more quickly than usual, perhaps due to your constant alertness. You clear a small camp as the light fades for the second time.
+
+You wake up partway through the night, though you aren't sure why. You use your flint to light a dead branch. Waving the light around, you occasionally see it reflect off small objects just out of sight. Eyes? Whatever it is, there are a lot of them. They don't seem to be approaching, though. It's almost as if they're observing you.
+
+After thirty minutes, they haven't gotten any closer, and you still can't see what the eyes belong to. You throw dry leaves around your camp to make sure you're awoken if anything tries to approach, and you go back to sleep.
++5
+
+3)
+You've reached a more open portion of the forest. You no longer have to clear the path of growth, but you instead find yourself wading through patches of ankle-high muck. You reason to yourself that since there's no source of water nearby it can't be a swamp. What is it, then?
+
+You find your answer soon enough. As you pass a particularly large, knotted tree you see a pile of what appears to be not-quite-sludge. Something that has partially decayed into the same goo that you're wading through, but still has a bit more form to it. As you approach, you're forced to shield your nose with your arm. A putrid odor is emanating from the pile. Looking more closely, you notice tufts of fur, what appears to be an ear, and bone.
+
+You quickly head away from the disgusting pile of rot, though the smell lingers in your nostrils. The sooner you get out of here, the better.
+-5
+
+4)
+You can tell that you're closing in on the other edge of the forest. The sludge that marked the middle of this ghastly area has been replaced once again with the knotted vines and growth that greeted you when you first entered. 
+
+You've been clearing the way forward for a few hours and your arms are far beyond worn out. Burning was what they were after a half hour. Numb lasted an hour or two after that. At this point, your brain has given up on them coming out of this excursion with any use left, and has stopped acknowledging that they're part of your body. They're just the thing in front of you that makes vines go away.
+
+Growing ever more exhausted and careless, you carry on towards your goal. That is, until a spray of green blood violently wrests you from your malaise. Looking towards your machete, you find it stuck halfway inside of a vine that seems to be bleeding green blood. Immediately your eyes investigate further, and find that the vine is covered in large brown and green patterns. This makes more sense as your eyes finally decide that it's not a vine at all. It's a snake. A large, green and brown, injured snake. 
+
+It bites you immediately. Sinking its fangs into your thick skull proves to be a harder task than it originally expected however, forcing it to let go in order to re-think its options. You duck under its half-severed length and make distance as fast as you can. When you finally feel safe, you decide to down one of your anti-venoms to make sure that you live to see the sky again.
+-10
+
+5)
+You've made it. One last clearing of trees lies between you and the end of this god-forsaken forest. To enter the clearing however, you were forced to cut through thick walls of web. You know what lies ahead, and you're prepared.
+
+You stride valiantly across the sticky webbed floor. The thing that confuses you is why the spiders didn't attack you while you were in the middle of the forest. Surely you would've been easier prey while wading through the muck. Your questions are answered as you begin to notice bodies and bones woven into the silk that covers the room. There must've been a party traveling through recently from Chaos End that kept the spiders busy. 
+
+As you approach the halfway point, an enormous spider begins to slide down a strand of web attached to the ceiling. It's facing its large, distended abdomen at you, on which you can see a grey skull pattern in the hair. At least if it does kill you, it'll be a reasonable death. Not many people would scoff at "Killed by a giant skull spider" in the obituary. It reaches the floor and raises itself on its hind legs, which you takes as your cue to rush towards it with your sword in hand.
+PASS:
+You run under the spider before it can land. It tries to snap at you as you approach, but it isn't quite used to hunting prey that doesn't trip over itself in fear. From under the spider, you pierce your sword into its mighty gut and drag a large, life-ending cut deep into it. As your sword digs through the spider, a wave of viscera washes over you. You're lucky that the spider fell forward in its death throes, else you would've been crushed under its weight. Reeking of spider death and forest rot, you finally exit the forest.
++15
+FAIL:
+You attempt to run under the spider before it can land. Unfortunately for you, running was never your specialty. The spider gnashes a solid bite into your side before you can get past it. It then re-orients itself to face you. You aren't dead, but the muscles in your side are partially cut, and you're bleeding everywhere. Luckily for you, the spider didn't consider that you now have a direct line to the edge of the forest.
+You stumble out of the forest and run twenty paces before collapsing on the ground. You remember that you have an anti venom left and decide your only chance at living is to pour it on the wound and hope that it does everything that the apothecary claimed it to do. It fizzes and foams on the wound, causing an unbearable agony. You quickly succumb to the pain and lose consciousness.
+You awake some time around sunset. Looking at your wound, it appears to have closed. It quite obviously will never fully recover, but you feel able enough to set up camp and survive the night.
+-15
+
+
+Chaos End:
+1)
+This is it. The final stretch. Unfortunately, it's not quite the field of daisies that you were hoping for. Large crags mar the landscape. From them, great eruptions of white hot lava spring forth. The heat is overwhelming. You now realize that the forest behind you must be kept alive by some sort of dark magic, since this landscape would be inhospitable for any mere tree. 
+
+You begin the final leg of your journey. No longer held adrift by your font of optimism, a steadfast resolve now carries you forward. You haven't come this far to be turned away with your goal in your sight.
++10
+
+2)
+You're woken by the intense heat. A font of lava is erupting from a large hole in the earth a hundred yards away from you. You didn't sleep very well. You begin your trek across the ruinous landscape once more. You're fueled by the sight of Chaos End growing ever larger in the distance. 
+
+At midday you reach a large fissure sundering the landscape. It's much too far to jump, so you're forced to find a way around. Unfortunately, that seems a fool's errand as well since the gap stretches as far as the polluted air will let you see in either direction. In searching for a way across, you find a natural bridge that spans the gap, but leads down into a cave in the wall of the fissure. Doubting that you'll be able to find any better pass, you proceed across the bridge into the cave.
+
+You camp at the mouth of the cave where fresh air still flows. You try your best to get a restful night's sleep.
++5
+
+3)
+You awake in the mouth of a cave. Knowing that there are no other paths forward, you proceed into the darkness.
+
+The cave is not particularly foreboding. It does not wind or weave. It has no bats, rats, or other treacherous vermin. It only has darkness. Lots, and lots, of darkness. You would light a torch if you had any suitable wood, but your last encounter with the forest left you little time to plan ahead. Air seems to flow decently in the cave, though you know not how. You do know that you had better not question it though, for fear of that luxury coming to an end. A light ahead guides you to an open chamber. At four points in the chamber, holes have been carved into the walls to allow the magma to provide light. In the middle of the room is a chest.
+
+You have heard of stories involving chests in sunken ships, or in long lost pirate coves, but the middle of an active volcanic site is hardly where you would expect a pirate to travel. There aren't even any boats here. In these stories, however, the chests always contain some amount of gold doubloons, or fancy jewelry. You wonder what could be inside of this particular chest.
+
+Kicking it proves no use, and attempting to listen to it only succeeded in giving you a headache. You must make a decision. To open it, or not. That isn't much of a decision though, since you are, after all, a brave adventurer. It's hard to retain that title while admitting a terrible fear of treasure chests. As such, you slowly, cautiously, open the lid. With excitement steadily filling your gut, you approach the chest. You slowly begin to open it. The hinge whines and wails as you wrench the lid from its long-worn bed. You now feel the excitement overflowing up your esophagus, and perhaps into your appendix a bit as well. With a last rusty shriek, the chest is now open.
+
+Inside the chest is a skeletal hand that has been relieved of the four non-offensive fingers. There is also dust. Lots and lots of dust. You close the lid and make camp in the chamber for the night.
+-5
+
+4) 
+You've spent the past two days inside a dark cavern, and today is no different. Well, except for how little happened in comparison. You spend the day traversing the last of the cave. Around dusk you emerge much closer to Chaos End than you had expected. At this rate, you'll arrive at the gates tomorrow.
++5
+
+5)
+You finally near the massive gate. Realizing you haven't spoken to an orc in over a week, you talk out loud a bit to re-acquaint yourself with your own voice. Feeling as prepared as you expect to ever be, you approach a guard post stationed near the gate's entrance.
+
+"What business do you have here?" Asks a deep, echoing voice. You look up to find a guard addressing you from atop the watchtower. 
+You explain that you have traveled far to join the armies of your people. The guard descends from his post. As he approaches, you realize that, while he is still very easily identifiable as an orc, he stand nearly twice your height. His armor shows bruising and battering, some of which you expect is from war, but you also notice that certain parts seems deliberately hammered out to make room for his expansive muscling.
+
+"I am the gatekeeper." Says the impressive orc. "Approach me and you will be judged. If deemed worthy, I will allow you passage into the lands of chaos. If not, you will be denied and never again  given this chance"
+You gulp audibly. This is it. Your entire adventure has amounted to this. Will you be deemed worthy?
+PASS:
+You step up to the guard and await his verdict. Your confident gaze stays affixed to the opening in the massive gate while he conducts his careful inspection.
+"You have been through many trials young orc, that much is apparent. I have deemed you worthy of joining our armies. Proceed, orc, and know the glory that is battle."
+
+You step towards the massive gates. You find your desire for adventure not sated, but growing with each passing step. As you reach the final step it feels right to pause. You savor the moment, the step forward to greet your future as a great warrior.
+FAIL:
+You step up to the guard and await his verdict. You avert your gaze as he inspects your equipment and frame. After what feels like hours, he finally stops and responds.
+"You are not capable of withstanding the trials of war, young orc. That much is apparent. You have been deemed unworthy." The guard turns and heads back to his post.
+
+You are crushed. After all of this, you will never get a chance to see combat. You don't accept it. You spend the rest of the day laying on the ground where you were inspected. As the sun sets, your last thought before drifting to sleep is whether or not you'll survive the trip back to your village.
