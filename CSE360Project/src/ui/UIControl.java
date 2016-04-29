@@ -2,8 +2,6 @@ package ui;
 
 import java.util.LinkedList;
 import java.util.ListIterator;
-import java.util.NoSuchElementException;
-import java.util.Random;
 
 /* UIControl
  * Date Created: April 10, 2016
@@ -18,6 +16,13 @@ import java.util.Random;
  */
 public class UIControl 
 {
+	private int currentScore = 0;
+
+	public void getEvent()
+	{
+		
+	}
+	
 	LinkedList<Tile> tileList = new LinkedList<>();
 	ListIterator<Tile> tileIterator;
 	public void initTilePositions(int gameWidth, int gameHeight)
@@ -48,5 +53,23 @@ public class UIControl
 		tileList.add(new Tile((int) (0.733723958 * gameWidth), (int) (0.527363184 * gameHeight)));
 		tileList.add(new Tile((int) (0.792317708 * gameWidth), (int) (0.537313433 * gameHeight)));
 		tileIterator = tileList.listIterator();
+	}
+	
+	/** Fills tiles with event classes
+	 * 
+	 */
+	public void initEvents()
+	{
+		
+	}
+	
+	public void setScore(int score)
+	{
+		currentScore = score;
+	}
+	
+	public int getScore()
+	{
+		return currentScore;
 	}
 }

@@ -100,15 +100,14 @@ public class UIVisual
 	public void initTreeMembers()
 	{
 		//Width/Height of game board
-				int gameWidth = 1024;//width 1536, and 1005
-				int gameHeight = 670;//height
-				Rectangle2D primaryScreenBounds = Screen.getPrimary().getVisualBounds();
-				
-				if ((int) primaryScreenBounds.getWidth() > 1400 && (int) primaryScreenBounds.getHeight() > 800)
-				{
-					gameWidth = 1536;
-					gameHeight = 1005;
-				}
+		int gameWidth = 1536;
+		int gameHeight = 1005;
+		Rectangle2D primaryScreenBounds = Screen.getPrimary().getVisualBounds();
+		if(primaryScreenBounds.getWidth() < 1400 && primaryScreenBounds.getHeight() < 800)//
+		{
+			gameWidth = 1024;
+			gameHeight = 670;
+		}
 		//Width/Height of roll canvas (Used for rolling animation)
 		final double rollWidth = .26 * gameWidth;//
 		final double rollHeight = .398 * gameHeight;

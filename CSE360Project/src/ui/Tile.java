@@ -9,6 +9,7 @@ public class Tile
 {
 	int x;
 	int y;
+	Event event;
 	
 	Tile(int X, int Y)
 	{
