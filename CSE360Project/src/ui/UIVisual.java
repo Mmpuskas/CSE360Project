@@ -94,7 +94,7 @@ public class UIVisual
 	private Button makeMove;
 	private Button playButton;
 	private Button scoresButton;
-	
+	//
 	/** Initializes the member variables that pertain to the JavaFX component tree.
 	 */
 	public void initTreeMembers()
