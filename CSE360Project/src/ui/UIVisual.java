@@ -22,6 +22,8 @@ import javafx.scene.control.ScrollBar;
 import javafx.beans.value.ObservableValue;
 import javafx.beans.value.ChangeListener;
 
+import java.io.IOException;
+
 import javafx.animation.AnimationTimer;
 import javafx.event.EventHandler;
 import javafx.event.ActionEvent;
@@ -91,6 +93,7 @@ public class UIVisual
 	private Button scoresButton;
 	
 	/** Initializes the member variables that pertain to the JavaFX component tree.
+	 * @throws IOException 
 	 */
 	public void initTreeMembers()
 	{
@@ -109,6 +112,7 @@ public class UIVisual
 		//Initialize images
 		initImages(gameWidth, gameHeight); 
 		control.initTilePositions(gameWidth, gameHeight);
+		control.initEvents();
 		
 		//Background/button assets
 		board = new Image("/assets/board.png", gameWidth, gameHeight, true, true);

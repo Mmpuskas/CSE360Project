@@ -1,6 +1,7 @@
 Journey to Chaos End
 
 Intro:
+$
 The image before you is that of a young orc. You first notice the size of its eyes, as expansive and black as the night sky. Surrounding them, its thick, green skin, covered in scars carved by hooks and rope. Atop its head is a mane of white hair, knotted, dusty, and tied high on its round skull. As you gaze closely into the mirror, you feel a certain pride for the stories that you have accumulated in your visage. You may not yet be a great warrior, but it's frightfully apparent that the blood of an orc warrior runs through your veins.
 
 Taking a step back, you return to the depressing reality of your physical limitations. Your limbs are short, bony, and are possessed with the finesse of a drowning calf. Your comfortable life has required precious little in terms of athleticism, but not by a lack of desire. Today, you have decided to abandon your former life and set off towards Chaos End, the last refuge between the peaceful orc homelands and the charred battlefields of legend. A twenty-five day walk separates your village from the gates, and you have heard stories of strange happenings along the path, but nothing will stop you from proving your worth and joining the grand armies of your people.
@@ -8,51 +9,61 @@ Taking a step back, you return to the depressing reality of your physical limita
 While scanning over your map, you wiggle into your mismatched set of cheap armor. You nearly trip while jamming your foot into a slightly-too-narrow boot as you recall your planned route. First, you'll head across the Grey Hills to the nearest town. From there, you'll have to navigate the Eight-Legged Forest. Once you're on the other side of the forest, you'll be within spitting distance of your final target, the great iron wall called Chaos End. 
 
 You finish donning your gear, say your farewells to your friends and family, and exit the village.
+@
 
 Events:
 
 Fishing Village:
 1)
 As you take your first step outside of the village, your stomach bubbles with excitement. You're finally doing it after all this time. With your chin raised high you breathe your first deep breath as a new adventurer. Your pride quickly sees you through the rest of the day.
-+10
+@
+10
 
 2)
 Spending entire days walking has proven to be more harrowing than you expected, but your determination sees you through. You've noticed a small pack of wolves traveling in the same direction as you. You catch glimpses of them resting in the distance every few hours. You've named the big one Brownie. Your desire to see where they end up has proven to be good motivation to keep walking.
-+5
+@
+5
 
 3)
 While following the road to town, you encounter a group of young traders heading in the opposite direction. You smile and nod politely to each-other in passing. Just as you begin to inwardly remark about how pleasant of an exchange it was, the back of your head has its own exchange with a foreign object. The type of thing that makes a dull THUNK sound. Maybe a brick, or a large book. A thesaurus, possibly. Regardless, you wake up on the side of the road with a large bump on the back of your head. You were lucky enough to have not been looted by the rapscallions, but you'll think twice before trusting children in the future.
+@
 -10
 
 4)
 As the shadows begin to run long, you look for a good area off the road to set up camp. Soon enough you have two salted fish cooking over a bustling fire. After four days journey you're finally approaching the border to the Grey Hills. You've never been so far from home, but it doesn't scare you. You are starting to feel nostalgic, though. You indulge the compulsion to reminisce as your mind falls on a song that you had learned as a child from some merchants visiting your village. 
 
 Oh, what do you do when the West wind fells you? Ro ho ro ho rum hum hum...
-+5
+@
+5
 
 5)
 This is it. The tattered sign in front of you reads, "Grey Hills Ahead." As your foot threatens to pass the border, you're halted by a sharp barking noise. You whirl around just in time to be violently tackled into the dirt by a large animal. It's Fluffles, your family dog! You're delighted to see the lovable little puff ball, but you know that the road ahead will be much too dangerous for him. You attempt to convince him to return home.
+@
 PASS:
 You convince Fluffles to return home. After one more quick belly rub, you both head your separate ways.
-+10
+@
+10
 FAIL:
 You fail to convince Fluffles to return home. Instead, you're forced to slap him across the muzzle and yell at him before he gets the idea. He begins to make his way back home with his head hung so low that his nose is nearly scraping the dirt.
+@
 -10
 
 
 Grey Hills:
 1)
 You have quickly grown to hate the Grey Hills. The ground is soft, the air is moist, and there's a slight humming noise that reminds you of a young boy trying to annoy his sister without explicitly doing anything to get in trouble. You can't say that the journey through these lands is a particularly deadly one, more that the frustration caused here is slowly grinding your mind into a pile of cheddar. You begin to consider whether smashing your head with a rock is a bad option. It would end the damned humming at least.
+@
 -5
 
 2)
 You've been following a beetle for the past five hours. It travels slightly slower than you would otherwise, but you find that the slowed pace is worth it in order to finally have a travel companion. He seems like a Rocky, or maybe a Clark. Regardless, you're just glad that he's heading the same way as you.
-+5
+@
+5
 
 3)
 Three-hundred and fourteen, three-hundred and fifteen, three-hundred and... What's that? You swear you just heard the faint sound of sand shifting somewhere to your left. Your heart starts racing. You've never been ambushed before. You begin to wonder what it will be like. Will your attacker be a large sand worm? Maybe an antlion! Ooh boy, you can't wait to show it what you're made of!
 You soon realize that you've been daydreaming about fighting an antlion for the past three minutes. Seeing as how you haven't been ambushed yet, the sound must have just been the wind playing tricks. You hang your head slightly lower as you resume your trundle onward. What number were you on again? ... One, two....
-+0
+0
 
 4)
 An uneventful morning meal is followed by an uneventful morning walk. That changes around noon however, as you finally find a sign of life. Well, it found you, at least. Or rather, it found your face to closely resemble something that it wanted to kill. It is in fact a bird large enough to have trouble fitting through a standard door, and it's coming right for you. You're terrified. You're frazzled. You don't know what to do. You throw your arms over your face and unleash a loud, terrified wail while the bird... Wait, where did it go? You lower your arms and turn around to see the bird flying away. I guess it wasn't after your face after all.

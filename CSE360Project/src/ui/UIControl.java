@@ -1,5 +1,10 @@
 package ui;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.LinkedList;
 import java.util.ListIterator;
 
@@ -27,6 +32,7 @@ public class UIControl
 	ListIterator<Tile> tileIterator;
 	public void initTilePositions(int gameWidth, int gameHeight)
 	{
+		tileList.add(new Tile((int) (0.170572917 * gameWidth), (int) (0.178606965 * gameHeight))); //TODO: Fix this position
 		tileList.add(new Tile((int) (0.170572917 * gameWidth), (int) (0.278606965 * gameHeight)));
 		tileList.add(new Tile((int) (0.170572917 * gameWidth), (int) (0.378109453 * gameHeight)));
 		tileList.add(new Tile((int) (0.170572917 * gameWidth), (int) (0.47761194 * gameHeight)));
@@ -56,11 +62,49 @@ public class UIControl
 	}
 	
 	/** Fills tiles with event classes
+	 * @throws IOException 
 	 * 
 	 */
 	public void initEvents()
 	{
+		String line = null;
+		String path = new File("").getAbsolutePath() + "/src/assets/EventText.txt";
+		String fullText = new String();
+	
+		try
+		{
+			BufferedReader br = new BufferedReader(new FileReader(path));
+			while((line = br.readLine()) != null)
+			{
+				fullText += line + "\n";
+			}
+		}
+		catch(IOException ex){
+			System.out.println("ERROR: Event file not found.");
+		}
 		
+		//Set intro text into first tile position
+		String introText = fullText.substring(fullText.indexOf('$') + 2, fullText.indexOf('@'));
+		tileList.get(0).event.setFlavorText(introText);
+
+		//Remove intro text from fullText
+		fullText = fullText.substring(fullText.indexOf(')') + 2);
+		
+		for(int i = 1; i <= 25; i++)
+		{
+			if( (i + 1) % 5 == 0)
+			{
+				
+				
+			}
+			else
+			{
+				
+				
+			}
+		}
+		
+		//System.out.println(fullText);
 	}
 	
 	public void setScore(int score)

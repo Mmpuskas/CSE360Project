@@ -15,6 +15,7 @@ public class Tile
 	{
 		x = X;
 		y = Y;
+		event = new Event();
 	}
 	
 	public int getX()

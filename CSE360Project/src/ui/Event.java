@@ -9,7 +9,7 @@ public class Event implements FrontEndCommunication{
 	private String eventFlavorText;
 	private String passEventText;
 	private String failEventText;
-	private int pointsForPass;
+	private int pointsForSpecEvent;
 	private boolean passedEvent = false;
 	
 	@Override
@@ -29,7 +29,7 @@ public class Event implements FrontEndCommunication{
 	}
 
 	@Override
-	public String getFlavorText() {
+	public String getFlavorText(){
 		return eventFlavorText;
 	}
 	
@@ -61,8 +61,8 @@ public class Event implements FrontEndCommunication{
 	}
 	
 	//getter methods
-	public int getPointsForPass(){
-		return pointsForPass;
+	public int getPointsSpecEvent(){
+		return pointsForSpecEvent;
 	}
 	
 	public String getEventFlavorText() {
