@@ -1,5 +1,7 @@
 package ui;
 
+import javafx.geometry.Rectangle2D;
+import javafx.stage.Screen;
 import javafx.stage.Stage;
 import javafx.scene.Scene;
 import javafx.scene.Group;
@@ -8,19 +10,7 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.control.Button;
-
-import javafx.geometry.Rectangle2D;
-import javafx.stage.Screen;
-
-import javafx.scene.control.Label;
-import javafx.scene.layout.VBox;
-
-import javafx.geometry.Orientation;
-import javafx.scene.text.Font;
-import javafx.geometry.Insets;
-import javafx.scene.control.ScrollBar;
-import javafx.beans.value.ObservableValue;
-import javafx.beans.value.ChangeListener;
+import javafx.scene.text.TextAlignment;
 
 import java.io.IOException;
 
@@ -51,6 +41,16 @@ public class UIVisual
 	private Image roll3;
 	private Image play;
 	private Image leaderboard;
+	private Image fishingVillage;
+	private Image forest;
+	private Image greyHills;
+	private Image town;
+	private Image endGate;
+	private Image orcThief;
+	private Image troll;
+	private Image flufflesDog;
+	private Image spider;
+	
 	
 	private Actor orcActor;
 	
@@ -82,16 +82,20 @@ public class UIVisual
 	private Group root;
 	private Scene theScene;
 	//Canvas lets you draw (In this case, through a GraphicsContext)
+	private Canvas scoresCanvas; //Canvas for the leaderboard scores
 	private Canvas gameCanvas; //Canvas for the game board/related things
 	private Canvas rollCanvas; //Canvas for the prompt window where you roll
 	private Canvas splashCanvas; //Canvas for the splash screen where you can choose play/leaderboard
+	//Create a sceneCanvas where the scene imgae is displayed at the top and text in the rest of the portion
+	private Canvas eventCanvas;
 	private GraphicsContext gameGC;
 	private GraphicsContext rollGC;
 	private GraphicsContext splashGC;
+	private GraphicsContext scoreGC;
+	private GraphicsContext eventGC;   //new add
 	private Button makeMove;
 	private Button playButton;
 	private Button scoresButton;
-	
 	/** Initializes the member variables that pertain to the JavaFX component tree.
 	 * @throws IOException 
 	 */
@@ -109,6 +113,7 @@ public class UIVisual
 		//Width/Height of roll canvas (Used for rolling animation)
 		final double rollWidth = .26 * gameWidth;//
 		final double rollHeight = .398 * gameHeight;
+		
 		//Initialize images
 		initImages(gameWidth, gameHeight); 
 		control.initTilePositions(gameWidth, gameHeight);
@@ -125,10 +130,22 @@ public class UIVisual
         gameCanvas = new Canvas(gameWidth, gameHeight);
         rollCanvas = new Canvas(rollWidth, rollHeight);
         splashCanvas = new Canvas(gameWidth, gameHeight);
+        //add a leaderboard canvas
+        scoresCanvas = new Canvas(gameWidth, gameHeight);
+        //add a scene canvas
+        eventCanvas = new Canvas(gameWidth/2, gameHeight/2);
 		gameGC = gameCanvas.getGraphicsContext2D();
 		rollGC = rollCanvas.getGraphicsContext2D();
 		splashGC = splashCanvas.getGraphicsContext2D();
+		eventGC = eventCanvas.getGraphicsContext2D();
+		//create a score Graphics Context
+		scoreGC = scoresCanvas.getGraphicsContext2D();
         rollCanvas.relocate((gameWidth / 2) - (rollWidth / 2), (gameHeight / 2) - (rollHeight / 2)); //Sets placement of roll window
+        //relocate the event screen to middle of the screen like the rollCanvas
+        eventCanvas.relocate((gameWidth / 2) - (rollWidth / 2), (gameHeight / 2) - (rollHeight / 2));
+        
+        
+        scoreGC.drawImage(splash, 0, 0 );
         splashGC.drawImage(splash, 0, 0);
 		root.getChildren().add(splashCanvas); //Gotta start with something on the root to set the size of the window
 
@@ -142,7 +159,7 @@ public class UIVisual
 	 */
 	public void startVisual(Stage theStage) 
 	{
-		theStage.setTitle("TBA");
+		theStage.setTitle("Journey to Chaos End");
 		initTreeMembers();
 		theStage.setScene(theScene);
 
@@ -166,42 +183,10 @@ public class UIVisual
 				}
 				else if(curMode == Mode.scores)
 				{
-					theStage.setTitle("Leaderboards");
-					Rectangle2D primaryScreenBounds = Screen.getPrimary().getVisualBounds();
-					String[] scores = {"1. dfsafdsafdsfa", "2. fdsafsdafdsa"};
-					VBox vb = new VBox();
-				    vb.setPadding(new Insets(25, 50, 50, primaryScreenBounds.getWidth()/3+25)); //(top/right/bottom/left)
-					Label title= new Label("Leaderboards\n");
-					title.setPadding(new Insets(0,0,10,0));
-					title.setFont(Font.font ("Times New Roman", 40));
-					vb.getChildren().add(title);
-					
-					//Strings of the top 10 scores change 2 to 10
-					for(int i = 0; i < 2; i++)
-			        {
-			        	Label txt = new Label(scores[i]);//
-			        	txt.setFont(Font.font("Times New Roman", 18));
-			        	txt.setPadding(new Insets(0,0,5,0));
-			        	vb.getChildren().add(txt);
-			        }
-					ScrollBar sc = new ScrollBar();
-					sc.setMin(0);
-					sc.setMax(primaryScreenBounds.getHeight());
-					sc.setValue(0);
-					sc.setOrientation(Orientation.VERTICAL);
-					sc.setPrefHeight(primaryScreenBounds.getHeight());
-					sc.setLayoutX(theScene.getWidth()-sc.getWidth());
-					sc.valueProperty().addListener(event->{title.setTranslateY(50+sc.getValue());});
-					sc.valueProperty().addListener(event->{vb.setTranslateY(50+sc.getValue());});
-				//	sc.valueProperty().addListener(event->{splashCanvas.setTranslateY(20+sc.getValue());});
-					
-			        root.getChildren().clear();
-			        root.getChildren().add(splashCanvas);
-			        root.getChildren().add(sc);
-			        root.getChildren().add(vb);
-			    	
-			        
-			       
+						playLogic(currentNanoTime);
+						//root.getChildren().clear();
+						//root.getChildren().add(scoresCanvas);
+						//root.getChildren().add(splashCanvas);
 				}
 			}
 		}.start();
@@ -342,6 +327,9 @@ public class UIVisual
 			@Override public void handle(ActionEvent e) 
 			{
 				curMode = Mode.scores;
+				root.getChildren().clear();
+				root.getChildren().add(splashCanvas);
+				//root.getChildren().add(scoresButton);
 			}
 		});
 	 }
@@ -362,6 +350,21 @@ public class UIVisual
 				play = new Image("/assets/play.png", (gameWidth * 0.1302), (gameHeight * 0.199), true, true);
 				leaderboard = new Image("/assets/leaderboard.png", (gameWidth * 0.3906), (gameHeight * 0.796), true, true);
 				orcActor = new Actor((int) (0.170572917 * gameWidth), (int) (0.278606965 * gameHeight), orc);
+				
+				/*
+				//Set the sizes of the scene images that will go in the sceneCanvas(all the same size)
+				fishingVillage = new Image("/assets/FishingVillage.png", (gameWidth * 0.3906), (gameHeight * 0.796), true, true);
+				forest = new Image("/assets/Forest.png", (gameWidth * 0.3906), (gameHeight * 0.796), true, true);;
+				greyHills = new Image("/assets/GreyHills.png", (gameWidth * 0.3906), (gameHeight * 0.796), true, true);;
+				town = new Image("/assets/Town.png", (gameWidth * 0.3906), (gameHeight * 0.796), true, true);;
+				endGate= new Image("/assets/ChaosEndGate.png", (gameWidth * 0.3906), (gameHeight * 0.796), true, true);;
+				
+				//Set the sizes of end-scene bosses that will go in the sceneCanvas(all the same size)
+				orcThief = new Image("/assets/OrcThief.png", (gameWidth * 0.3906), (gameHeight * 0.796), true, true);;
+				troll = new Image("/assets/Troll.png", (gameWidth * 0.3906), (gameHeight * 0.796), true, true);;
+				flufflesDog = new Image("/assets/Fluffles.png", (gameWidth * 0.3906), (gameHeight * 0.796), true, true);;
+				spider = new Image("/assets/spider.png", (gameWidth * 0.3906), (gameHeight * 0.796), true, true);;
+				*/
 	}
 	
 	
