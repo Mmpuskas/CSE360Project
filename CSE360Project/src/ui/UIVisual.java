@@ -171,6 +171,8 @@ public class UIVisual
 					title.setPadding(new Insets(0,0,10,0));
 					title.setFont(Font.font ("Times New Roman", 40));
 					vb.getChildren().add(title);
+					
+					//Strings of the top 10 scores change 2 to 10
 					for(int i = 0; i < 2; i++)
 			        {
 			        	Label txt = new Label(scores[i]);//
