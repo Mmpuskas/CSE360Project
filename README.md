@@ -8,6 +8,7 @@ The easiest way to play the game is to download the latest executable jar from t
 
 The program can also be compiled, unit tested, and ran as normal.
 When compiling, the build on master will be the most up-to-date. The main program can be built from src/ui/Driver.java
+Tests can be ran from src/ui/JUnitTest.java
 
 This program now automatically adjusts screen resolution depending on the user's current display resolution.
 
