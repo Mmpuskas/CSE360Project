@@ -31,7 +31,7 @@ public class UIControl {
 		tileList.add(new Tile((int) (0.170572917 * gameWidth), (int) (0.178606965 * gameHeight))); 
 		tileList.add(new Tile((int) (0.170572917 * gameWidth), (int) (0.278606965 * gameHeight)));
 		tileList.add(new Tile((int) (0.170572917 * gameWidth), (int) (0.378109453 * gameHeight)));
-		tileList.add(new Tile((int) (0.170572917 * gameWidth), (int) (0.47761194 * gameHeight)));
+		tileList.add(new Tile((int) (0.170572917 * gameWidth), (int) (0.48661194 * gameHeight)));
 		tileList.add(new Tile((int) (0.235677083 * gameWidth), (int) (0.487562189 * gameHeight)));
 		tileList.add(new Tile((int) (0.30078125 * gameWidth), (int) (0.497512438 * gameHeight)));
 		tileList.add(new Tile((int) (0.365885417 * gameWidth), (int) (0.497512438 * gameHeight)));

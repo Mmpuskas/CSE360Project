@@ -341,7 +341,6 @@ public class UIVisual
 					orcActor.setMoving(false);
 					if(orcActor.getMoving()==false)
 					{
-						root.getChildren().add(makeMove);
 						root.getChildren().add(eventCanvas);
 						root.getChildren().add(close);	
 					}
@@ -377,6 +376,7 @@ public class UIVisual
 			 {
 				 root.getChildren().remove(close);
 				 root.getChildren().remove(eventCanvas);
+				 root.getChildren().add(makeMove);
 			 }
 		 });
 		 
@@ -418,7 +418,6 @@ public class UIVisual
 				root.getChildren().clear();
 				root.getChildren().add(gameCanvas);
 				root.getChildren().add(rollCanvas);
-				root.getChildren().add(makeMove);
 				root.getChildren().add(scoreText);
 			}
 		});
