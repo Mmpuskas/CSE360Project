@@ -146,7 +146,7 @@ public class UIVisual
         //add a leaderboard canvas
         scoresCanvas = new Canvas(gameWidth, gameHeight);
         //add a scene canvas
-        eventCanvas = new Canvas(gameWidth, gameHeight);
+        eventCanvas = new Canvas(gameWidth/1.7, gameHeight/1.7);
 		gameGC = gameCanvas.getGraphicsContext2D();
 		rollGC = rollCanvas.getGraphicsContext2D();
 		splashGC = splashCanvas.getGraphicsContext2D();
@@ -155,7 +155,7 @@ public class UIVisual
 		scoreGC = scoresCanvas.getGraphicsContext2D();
         rollCanvas.relocate((gameWidth / 2) - (rollWidth / 2), (gameHeight / 2) - (rollHeight / 2)); //Sets placement of roll window
         //relocate the event screen to middle of the screen like the rollCanvas
-        eventCanvas.relocate((gameWidth / 2) - (rollWidth / 2), (gameHeight / 2) - (rollHeight / 2));
+        eventCanvas.relocate((gameWidth / 5), (gameHeight / 5));
         
         eventGC.drawImage(splash, 0, 0);
         scoreGC.drawImage(splash, 0, 0 );
