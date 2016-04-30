@@ -262,7 +262,7 @@ public class UIVisual
 						sc.valueProperty().addListener(event->{vb.setTranslateY(50+sc.getValue());});
 						//	sc.valueProperty().addListener(event->{splashCanvas.setTranslateY(20+sc.getValue());});
 						
-						playButton.relocate(primaryScreenBounds.getWidth() - (primaryScreenBounds.getWidth()  * .85), primaryScreenBounds.getHeight() / 3);
+						playButton.relocate(primaryScreenBounds.getWidth() * 7.5 / 12, primaryScreenBounds.getHeight() * 9 / 12);
 					
 						root.getChildren().clear();
 						root.getChildren().add(splashCanvas);
