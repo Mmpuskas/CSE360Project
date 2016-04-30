@@ -18,6 +18,13 @@ import javafx.animation.AnimationTimer;
 import javafx.event.EventHandler;
 import javafx.event.ActionEvent;
 
+import javafx.scene.layout.VBox;
+import javafx.geometry.Insets;
+import javafx.scene.control.Label;
+import javafx.scene.text.Font;
+import javafx.geometry.Orientation;
+import javafx.scene.control.ScrollBar;
+
 /** UI class for "Journey to Chaos End"
  * Controls all aspects of drawing to the display, along with some of the control aspects.
  * 
@@ -183,10 +190,49 @@ public class UIVisual
 				}
 				else if(curMode == Mode.scores)
 				{
-						playLogic(currentNanoTime);
-						//root.getChildren().clear();
-						//root.getChildren().add(scoresCanvas);
-						//root.getChildren().add(splashCanvas);
+					theStage.setTitle("Leaderboards");//title
+					Rectangle2D primaryScreenBounds = Screen.getPrimary().getVisualBounds();
+					leaderboard lb = new leaderboard();
+					try {
+						lb.setPointsArray();
+					} catch (Exception e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				
+					int[] array = lb.getTopTen();
+					VBox vb = new VBox();
+				    vb.setPadding(new Insets(25, 50, 50, primaryScreenBounds.getWidth()/3+25)); //(top/right/bottom/left)
+					Label title= new Label("Leaderboards\n");
+					title.setPadding(new Insets(0,0,10,0));
+					title.setFont(Font.font ("Times New Roman", 40));
+					vb.getChildren().add(title);
+					
+					//Strings of the top 10 scores
+					for(int i = 0; i < 10; i++)
+			        {
+			        	Label txt = new Label(Integer.toString(array[i]));//
+			        	txt.setFont(Font.font("Times New Roman", 18));
+			        	txt.setPadding(new Insets(0,0,5,0));
+			        	vb.getChildren().add(txt);
+			        }
+					ScrollBar sc = new ScrollBar();
+					sc.setMin(0);
+					sc.setMax(primaryScreenBounds.getHeight());
+					sc.setValue(0);
+					sc.setOrientation(Orientation.VERTICAL);
+					sc.setPrefHeight(primaryScreenBounds.getHeight());
+					sc.setLayoutX(theScene.getWidth()-sc.getWidth());
+					sc.valueProperty().addListener(event->{title.setTranslateY(50+sc.getValue());});
+					sc.valueProperty().addListener(event->{vb.setTranslateY(50+sc.getValue());});
+				//	sc.valueProperty().addListener(event->{splashCanvas.setTranslateY(20+sc.getValue());});
+					
+			        root.getChildren().clear();
+			        root.getChildren().add(splashCanvas);
+			        root.getChildren().add(sc);
+			        root.getChildren().add(vb);
+			    	
+			        
 				}
 			}
 		}.start();

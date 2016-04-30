@@ -101,8 +101,8 @@ public class leaderboard
 	 * 	Will open text file that keeps the scores and save to an int array for easier access.
 	 * 	Then use bubble sort on array
 	 */
-	private void setPointsArray() throws Exception
-	{
+	public void setPointsArray() throws Exception	
+	{	//keep public
 		//read all points from file and save to array to access easily
 		 String	thisLine = null;
 		 String historyPath = new File("").getAbsolutePath() + "/src/text/leaderboardRepository.txt";
