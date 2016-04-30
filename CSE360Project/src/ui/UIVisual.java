@@ -155,7 +155,7 @@ public class UIVisual
 		scoreGC = scoresCanvas.getGraphicsContext2D();
         rollCanvas.relocate((gameWidth / 2) - (rollWidth / 2), (gameHeight / 2) - (rollHeight / 2)); //Sets placement of roll window
         //relocate the event screen to middle of the screen like the rollCanvas
-        eventCanvas.relocate((gameWidth / 5), (gameHeight / 5));
+        eventCanvas.relocate((gameWidth / 5), (gameHeight / 5));//
         
         eventGC.drawImage(splash, 0, 0);
         scoreGC.drawImage(splash, 0, 0 );
