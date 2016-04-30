@@ -43,6 +43,13 @@ public class UIVisual
 	private Boolean moving = false;
     private long startNanoTime;
 
+    private Rectangle2D primaryScreenBounds;
+    private leaderboard lb;
+    private int[] array;
+    private VBox vb;
+    private Label title;
+    private ScrollBar sc;
+    
 	private Image board;
 	private Image fiddy;
 	private Image orc;
@@ -120,7 +127,7 @@ public class UIVisual
 		//Width/Height of game board
 		int gameWidth = 1536;
 		int gameHeight = 1005;
-		Rectangle2D primaryScreenBounds = Screen.getPrimary().getVisualBounds();
+		primaryScreenBounds = Screen.getPrimary().getVisualBounds();
 		if(primaryScreenBounds.getWidth() < 1400 && primaryScreenBounds.getHeight() < 800)//
 		{
 			gameWidth = 1024;
@@ -212,48 +219,55 @@ public class UIVisual
 				}
 				else if(curMode == Mode.scores)
 				{
-					theStage.setTitle("Leaderboards");//title
-					Rectangle2D primaryScreenBounds = Screen.getPrimary().getVisualBounds();
-					leaderboard lb = new leaderboard();
-					try {
-						lb.setPointsArray();
-					} catch (Exception e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
+					if(!root.getChildren().contains(playButton))
+					{
+						theStage.setTitle("Leaderboards");//title
+						primaryScreenBounds = Screen.getPrimary().getVisualBounds();
+						lb = new leaderboard();
+						try {
+							lb.setPointsArray();
+						} catch (Exception e) {
+							// TODO Auto-generated catch block
+							System.out.println("There aren't any pointers");
+							e.printStackTrace();
+						}
 				
-					int[] array = lb.getTopTen();
-					VBox vb = new VBox();
-				    vb.setPadding(new Insets(25, 50, 50, primaryScreenBounds.getWidth()/3+25)); //(top/right/bottom/left)
-					Label title= new Label("Leaderboards\n");
-					title.setPadding(new Insets(0,0,10,0));
-					title.setFont(Font.font ("Times New Roman", 40));
-					vb.getChildren().add(title);
+						array = lb.getTopTen();
+						vb = new VBox();
+						vb.setPadding(new Insets(25, 50, 50, primaryScreenBounds.getWidth()/3+25)); //(top/right/bottom/left)
+						title= new Label("Leaderboards\n");
+						title.setPadding(new Insets(0,0,10,0));
+						title.setFont(Font.font ("Times New Roman", 40));
+						vb.getChildren().add(title);
 					
-					//Strings of the top 10 scores
-					for(int i = 0; i < 10; i++)
-			        {
-			        	Label txt = new Label(Integer.toString(array[i]));//
-			        	txt.setFont(Font.font("Times New Roman", 18));
-			        	txt.setPadding(new Insets(0,0,5,0));
-			        	vb.getChildren().add(txt);
-			        }
-					ScrollBar sc = new ScrollBar();
-					sc.setMin(0);
-					sc.setMax(primaryScreenBounds.getHeight());
-					sc.setValue(0);
-					sc.setOrientation(Orientation.VERTICAL);
-					sc.setPrefHeight(primaryScreenBounds.getHeight());
-					sc.setLayoutX(theScene.getWidth()-sc.getWidth());
-					sc.valueProperty().addListener(event->{title.setTranslateY(50+sc.getValue());});
-					sc.valueProperty().addListener(event->{vb.setTranslateY(50+sc.getValue());});
-				//	sc.valueProperty().addListener(event->{splashCanvas.setTranslateY(20+sc.getValue());});
+						//Strings of the top 10 scores
+						for(int i = 0; i < 10; i++)
+						{
+							Label txt = new Label(Integer.toString(array[i]));//
+							txt.setFont(Font.font("Times New Roman", 18));
+							txt.setPadding(new Insets(0,0,5,0));
+							vb.getChildren().add(txt);
+						}
+						sc = new ScrollBar();
+						sc.setMin(0);
+						sc.setMax(primaryScreenBounds.getHeight());
+						sc.setValue(0);
+						sc.setOrientation(Orientation.VERTICAL);
+						sc.setPrefHeight(primaryScreenBounds.getHeight());
+						sc.setLayoutX(theScene.getWidth()-sc.getWidth());
+						sc.valueProperty().addListener(event->{title.setTranslateY(50+sc.getValue());});
+						sc.valueProperty().addListener(event->{vb.setTranslateY(50+sc.getValue());});
+						//	sc.valueProperty().addListener(event->{splashCanvas.setTranslateY(20+sc.getValue());});
+						
+						playButton.relocate(primaryScreenBounds.getWidth() - (primaryScreenBounds.getWidth()  * .85), primaryScreenBounds.getHeight() / 3);
 					
-			        root.getChildren().clear();
-			        root.getChildren().add(splashCanvas);
-			        root.getChildren().add(sc);
-			        root.getChildren().add(vb);
-				}
+						root.getChildren().clear();
+						root.getChildren().add(splashCanvas);
+						root.getChildren().add(vb);
+						root.getChildren().add(sc);
+						root.getChildren().add(playButton);
+						}
+					}
 			}
 		}.start();
 
