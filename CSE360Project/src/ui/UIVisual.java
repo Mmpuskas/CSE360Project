@@ -192,18 +192,14 @@ public class UIVisual
 				}
 				else if(curMode == Mode.play)
 				{
-					
+					//adds the eventCanvas at the begining
 					if(moving == false)
 					{
 						root.getChildren().add(eventCanvas);
 						root.getChildren().add(close);
 						moving = true;
 					}
-					
-					
 						playLogic(currentNanoTime);
-						
-
 				}
 				else if(curMode == Mode.scores)
 				{
@@ -248,8 +244,6 @@ public class UIVisual
 			        root.getChildren().add(splashCanvas);
 			        root.getChildren().add(sc);
 			        root.getChildren().add(vb);
-			    	
-			        
 				}
 			}
 		}.start();
@@ -308,9 +302,7 @@ public class UIVisual
 			if(orcActor.curX == orcActor.getTargetX() && orcActor.curY == orcActor.getTargetY())
 			{
 				if(spacesToMove > 0)
-				{
-					
-					
+				{	
 					curSpace++;
 					orcActor.setTargetX(control.tileList.get(curSpace).x);
 					orcActor.setTargetY(control.tileList.get(curSpace).y);
@@ -318,14 +310,13 @@ public class UIVisual
 				}
 				else
 				{
-					//add the stuff
 					orcActor.setMoving(false);
 					if(orcActor.getMoving()==false)
 					{
+						root.getChildren().add(makeMove);
 						root.getChildren().add(eventCanvas);
-						root.getChildren().add(close);
+						root.getChildren().add(close);	
 					}
-					
 				}
 			}
 		}
@@ -354,7 +345,7 @@ public class UIVisual
 					root.getChildren().remove(close); //Get the roll button out of the way
 					//remove the text still needs to be added
 					root.getChildren().remove(eventCanvas);
-					root.getChildren().add(makeMove);
+					//root.getChildren().add(makeMove);
 				}
 			});
 		 
