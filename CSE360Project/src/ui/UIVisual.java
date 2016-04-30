@@ -11,6 +11,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.control.Button;
 import javafx.scene.text.TextAlignment;
+import javafx.scene.text.Text;
 
 import java.io.IOException;
 
@@ -19,6 +20,7 @@ import javafx.event.EventHandler;
 import javafx.event.ActionEvent;
 
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.geometry.Insets;
 import javafx.scene.control.Label;
 import javafx.scene.text.Font;
@@ -103,6 +105,8 @@ public class UIVisual
 	private Button makeMove;
 	private Button playButton;
 	private Button scoresButton;
+	private Text scoreText;
+
 	/** Initializes the member variables that pertain to the JavaFX component tree.
 	 * @throws IOException 
 	 */
@@ -122,9 +126,9 @@ public class UIVisual
 		final double rollHeight = .398 * gameHeight;
 		
 		//Initialize images
-		initImages(gameWidth, gameHeight); 
 		control.initTilePositions(gameWidth, gameHeight);
 		control.initEvents();
+		initImages(gameWidth, gameHeight); 
 		
 		//Background/button assets
 		board = new Image("/assets/board.png", gameWidth, gameHeight, true, true);
@@ -151,6 +155,12 @@ public class UIVisual
         //relocate the event screen to middle of the screen like the rollCanvas
         eventCanvas.relocate((gameWidth / 2) - (rollWidth / 2), (gameHeight / 2) - (rollHeight / 2));
         
+        //Score text sits at the top of the screen
+        scoreText = new Text("" + control.getScore());
+        scoreText.setFont(Font.font("Verdana", 50)); //Possibly import font object
+        scoreText.relocate(gameWidth / 2,  gameHeight * .005);
+        scoreText.setStroke(Color.BLACK);
+        scoreText.setFill(Color.GRAY);
         
         scoreGC.drawImage(splash, 0, 0 );
         splashGC.drawImage(splash, 0, 0);
@@ -231,7 +241,6 @@ public class UIVisual
 			        root.getChildren().add(splashCanvas);
 			        root.getChildren().add(sc);
 			        root.getChildren().add(vb);
-			    	
 			        
 				}
 			}
@@ -308,6 +317,7 @@ public class UIVisual
 		//We always want to draw the board and main character
 		gameGC.drawImage(board, 0, 0);
 		gameGC.drawImage(orcActor.charImage, orcActor.curX, orcActor.curY);
+		scoreText.setText("" + control.getScore());
 	}
 	
 	/** Initializes all buttons and button handlers.
@@ -358,6 +368,7 @@ public class UIVisual
 				root.getChildren().add(gameCanvas);
 				root.getChildren().add(rollCanvas);
 				root.getChildren().add(makeMove);
+				root.getChildren().add(scoreText);
 			}
 		});
 
@@ -395,8 +406,8 @@ public class UIVisual
 				roll3 = new Image("/assets/3.png", (gameWidth * 0.2604), (gameHeight * 0.398), false, true);
 				play = new Image("/assets/play.png", (gameWidth * 0.1302), (gameHeight * 0.199), true, true);
 				leaderboard = new Image("/assets/leaderboard.png", (gameWidth * 0.3906), (gameHeight * 0.796), true, true);
-				orcActor = new Actor((int) (0.170572917 * gameWidth), (int) (0.278606965 * gameHeight), orc);
-				
+				orcActor = new Actor(control.tileList.get(0).x, control.tileList.get(0).y, orc);
+
 				/*
 				//Set the sizes of the scene images that will go in the sceneCanvas(all the same size)
 				fishingVillage = new Image("/assets/FishingVillage.png", (gameWidth * 0.3906), (gameHeight * 0.796), true, true);
