@@ -11,6 +11,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.control.Button;
 import javafx.scene.text.TextAlignment;
+import javafx.scene.paint.Color;
 
 import java.io.IOException;
 
@@ -93,16 +94,17 @@ public class UIVisual
 	private Canvas gameCanvas; //Canvas for the game board/related things
 	private Canvas rollCanvas; //Canvas for the prompt window where you roll
 	private Canvas splashCanvas; //Canvas for the splash screen where you can choose play/leaderboard
-	//Create a sceneCanvas where the scene imgae is displayed at the top and text in the rest of the portion
-	private Canvas eventCanvas;
+	private Canvas eventCanvas; //Canvas for the event window
 	private GraphicsContext gameGC;
 	private GraphicsContext rollGC;
 	private GraphicsContext splashGC;
 	private GraphicsContext scoreGC;
-	private GraphicsContext eventGC;   //new add
+	private GraphicsContext eventGC;
+	
 	private Button makeMove;
 	private Button playButton;
 	private Button scoresButton;
+	private Button closeButton;
 	/** Initializes the member variables that pertain to the JavaFX component tree.
 	 * @throws IOException 
 	 */
@@ -137,23 +139,23 @@ public class UIVisual
         gameCanvas = new Canvas(gameWidth, gameHeight);
         rollCanvas = new Canvas(rollWidth, rollHeight);
         splashCanvas = new Canvas(gameWidth, gameHeight);
-        //add a leaderboard canvas
         scoresCanvas = new Canvas(gameWidth, gameHeight);
-        //add a scene canvas
-        eventCanvas = new Canvas(gameWidth/2, gameHeight/2);
+        eventCanvas = new Canvas(gameWidth/3, gameHeight/3);
 		gameGC = gameCanvas.getGraphicsContext2D();
 		rollGC = rollCanvas.getGraphicsContext2D();
 		splashGC = splashCanvas.getGraphicsContext2D();
-		eventGC = eventCanvas.getGraphicsContext2D();
+		eventGC = eventCanvas.getGraphicsContext2D();	
 		//create a score Graphics Context
 		scoreGC = scoresCanvas.getGraphicsContext2D();
         rollCanvas.relocate((gameWidth / 2) - (rollWidth / 2), (gameHeight / 2) - (rollHeight / 2)); //Sets placement of roll window
         //relocate the event screen to middle of the screen like the rollCanvas
         eventCanvas.relocate((gameWidth / 2) - (rollWidth / 2), (gameHeight / 2) - (rollHeight / 2));
         
-        
         scoreGC.drawImage(splash, 0, 0 );
         splashGC.drawImage(splash, 0, 0);
+        //draw splash image in event window
+        splashGC.drawImage(splash, (gameWidth / 2) - (rollWidth / 2), (gameHeight / 2) - (rollHeight / 2));
+        
 		root.getChildren().add(splashCanvas); //Gotta start with something on the root to set the size of the window
 
         //Interactables
@@ -190,7 +192,7 @@ public class UIVisual
 				}
 				else if(curMode == Mode.scores)
 				{
-					theStage.setTitle("Leaderboards");//title
+					theStage.setTitle("Leaderboards"); //title
 					Rectangle2D primaryScreenBounds = Screen.getPrimary().getVisualBounds();
 					leaderboard lb = new leaderboard();
 					try {
@@ -199,7 +201,7 @@ public class UIVisual
 						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
-				
+					
 					int[] array = lb.getTopTen();
 					VBox vb = new VBox();
 				    vb.setPadding(new Insets(25, 50, 50, primaryScreenBounds.getWidth()/3+25)); //(top/right/bottom/left)
@@ -208,7 +210,7 @@ public class UIVisual
 					title.setFont(Font.font ("Times New Roman", 40));
 					vb.getChildren().add(title);
 					
-					//Strings of the top 10 scores
+					//Convert array of top 10 scores into strings
 					for(int i = 0; i < 10; i++)
 			        {
 			        	Label txt = new Label(Integer.toString(array[i]));//
@@ -216,6 +218,7 @@ public class UIVisual
 			        	txt.setPadding(new Insets(0,0,5,0));
 			        	vb.getChildren().add(txt);
 			        }
+					//Creates a scroll bar for the leaderboard scores window
 					ScrollBar sc = new ScrollBar();
 					sc.setMin(0);
 					sc.setMax(primaryScreenBounds.getHeight());
@@ -225,7 +228,6 @@ public class UIVisual
 					sc.setLayoutX(theScene.getWidth()-sc.getWidth());
 					sc.valueProperty().addListener(event->{title.setTranslateY(50+sc.getValue());});
 					sc.valueProperty().addListener(event->{vb.setTranslateY(50+sc.getValue());});
-				//	sc.valueProperty().addListener(event->{splashCanvas.setTranslateY(20+sc.getValue());});
 					
 			        root.getChildren().clear();
 			        root.getChildren().add(splashCanvas);
@@ -286,6 +288,7 @@ public class UIVisual
 		}
 		else if(orcActor.getMoving()) //Triggers after roll, moves the character
 		{
+			
 			orcActor.moveToPosition();
 			
 			if(orcActor.curX == orcActor.getTargetX() && orcActor.curY == orcActor.getTargetY())
@@ -301,6 +304,8 @@ public class UIVisual
 				{
 					orcActor.setMoving(false);
 					root.getChildren().add(makeMove);
+					root.getChildren().add(eventCanvas);
+					root.getChildren().add(closeButton);
 				}
 			}
 		}
@@ -376,6 +381,24 @@ public class UIVisual
 				root.getChildren().clear();
 				root.getChildren().add(splashCanvas);
 				//root.getChildren().add(scoresButton);
+			}
+		});
+		
+		//Event button to exit out of event window
+		closeButton = new Button("CLOSE");
+		closeButton.relocate(gameCanvas.getWidth() / 2 - rollWidth / 2 - (gameWidth * 0.00651)
+				,gameCanvas.getHeight() / 2 - rollHeight / 2 + (gameHeight * 0.02487)); //Sets the position of the button
+		ImageView scoreButtonImage = new ImageView();
+		scoreButtonImage.imageProperty().set(spider);
+		closeButton.setGraphic(scoreButtonImage);
+		closeButton.setOnAction(new EventHandler<ActionEvent>() 
+		{
+			@Override public void handle(ActionEvent e) 
+			{
+				curMode = Mode.play;
+				//Remove the eventCanvas when clicked
+				root.getChildren().remove(eventCanvas);
+				root.getChildren().add(gameCanvas);
 			}
 		});
 	 }
