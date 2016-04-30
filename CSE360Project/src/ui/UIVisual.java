@@ -11,6 +11,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.control.Button;
 import javafx.scene.text.TextAlignment;
+import javafx.scene.text.Text;
 
 import java.io.IOException;
 
@@ -19,11 +20,14 @@ import javafx.event.EventHandler;
 import javafx.event.ActionEvent;
 
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.geometry.Insets;
 import javafx.scene.control.Label;
 import javafx.scene.text.Font;
 import javafx.geometry.Orientation;
 import javafx.scene.control.ScrollBar;
+import javafx.scene.paint.Paint;
+
 
 /** UI class for "Journey to Chaos End"
  * Controls all aspects of drawing to the display, along with some of the control aspects.
@@ -36,8 +40,16 @@ public class UIVisual
 	private Boolean isRolling; //True during dice roll animation
 	private int spacesToMove; //The number of spaces from 1-3 that need to be moved based on the dice roll
 	private int curSpace;
+	private Boolean moving = false;
     private long startNanoTime;
 
+    private Rectangle2D primaryScreenBounds;
+    private leaderboard lb;
+    private int[] array;
+    private VBox vb;
+    private Label title;
+    private ScrollBar sc;
+    
 	private Image board;
 	private Image fiddy;
 	private Image orc;
@@ -48,6 +60,8 @@ public class UIVisual
 	private Image roll3;
 	private Image play;
 	private Image leaderboard;
+	private Image eventbackground;
+	private Image closeText;
 	private Image fishingVillage;
 	private Image forest;
 	private Image greyHills;
@@ -93,6 +107,7 @@ public class UIVisual
 	private Canvas gameCanvas; //Canvas for the game board/related things
 	private Canvas rollCanvas; //Canvas for the prompt window where you roll
 	private Canvas splashCanvas; //Canvas for the splash screen where you can choose play/leaderboard
+
 	//Create a sceneCanvas where the scene imgae is displayed at the top and text in the rest of the portion
 	private Canvas eventCanvas;
 	private GraphicsContext gameGC;
@@ -103,6 +118,9 @@ public class UIVisual
 	private Button makeMove;
 	private Button playButton;
 	private Button scoresButton;
+	private Text scoreText;
+	private Button close;
+	
 	/** Initializes the member variables that pertain to the JavaFX component tree.
 	 * @throws IOException 
 	 */
@@ -111,7 +129,7 @@ public class UIVisual
 		//Width/Height of game board
 		int gameWidth = 1536;
 		int gameHeight = 1005;
-		Rectangle2D primaryScreenBounds = Screen.getPrimary().getVisualBounds();
+		primaryScreenBounds = Screen.getPrimary().getVisualBounds();
 		if(primaryScreenBounds.getWidth() < 1400 && primaryScreenBounds.getHeight() < 800)//
 		{
 			gameWidth = 1024;
@@ -122,9 +140,9 @@ public class UIVisual
 		final double rollHeight = .398 * gameHeight;
 		
 		//Initialize images
-		initImages(gameWidth, gameHeight); 
 		control.initTilePositions(gameWidth, gameHeight);
 		control.initEvents();
+		initImages(gameWidth, gameHeight); 
 		
 		//Background/button assets
 		board = new Image("/assets/board.png", gameWidth, gameHeight, true, true);
@@ -137,23 +155,30 @@ public class UIVisual
         gameCanvas = new Canvas(gameWidth, gameHeight);
         rollCanvas = new Canvas(rollWidth, rollHeight);
         splashCanvas = new Canvas(gameWidth, gameHeight);
-        //add a leaderboard canvas
         scoresCanvas = new Canvas(gameWidth, gameHeight);
-        //add a scene canvas
-        eventCanvas = new Canvas(gameWidth/2, gameHeight/2);
+        eventCanvas = new Canvas(gameWidth/1.75, gameHeight/1.2);
+
 		gameGC = gameCanvas.getGraphicsContext2D();
 		rollGC = rollCanvas.getGraphicsContext2D();
 		splashGC = splashCanvas.getGraphicsContext2D();
-		eventGC = eventCanvas.getGraphicsContext2D();
-		//create a score Graphics Context
 		scoreGC = scoresCanvas.getGraphicsContext2D();
+		eventGC = eventCanvas.getGraphicsContext2D();
+
         rollCanvas.relocate((gameWidth / 2) - (rollWidth / 2), (gameHeight / 2) - (rollHeight / 2)); //Sets placement of roll window
-        //relocate the event screen to middle of the screen like the rollCanvas
-        eventCanvas.relocate((gameWidth / 2) - (rollWidth / 2), (gameHeight / 2) - (rollHeight / 2));
+        eventCanvas.relocate((gameWidth / 2 - gameWidth / 3.7), (gameHeight / 12));//
         
-        
+        //Score text sits at the top of the screen
+        scoreText = new Text("" + control.getScore());
+        scoreText.setFont(Font.font("Verdana", 50)); //Possibly import font object
+        scoreText.relocate(gameWidth / 2,  gameHeight * .005);
+        scoreText.setStroke(Color.BLACK);
+        scoreText.setFill(Color.GRAY);
+
+        //Set up backgrounds
         scoreGC.drawImage(splash, 0, 0 );
         splashGC.drawImage(splash, 0, 0);
+        eventGC.drawImage(eventbackground, 0, 0);
+
 		root.getChildren().add(splashCanvas); //Gotta start with something on the root to set the size of the window
 
         //Interactables
@@ -186,54 +211,66 @@ public class UIVisual
 				}
 				else if(curMode == Mode.play)
 				{
+					//adds the eventCanvas at the begining
+					if(moving == false)
+					{
+						root.getChildren().add(eventCanvas);
+						root.getChildren().add(close);
+						moving = true;
+					}
 						playLogic(currentNanoTime);
 				}
 				else if(curMode == Mode.scores)
 				{
-					theStage.setTitle("Leaderboards");//title
-					Rectangle2D primaryScreenBounds = Screen.getPrimary().getVisualBounds();
-					leaderboard lb = new leaderboard();
-					try {
-						lb.setPointsArray();
-					} catch (Exception e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
+					if(!root.getChildren().contains(playButton))
+					{
+						theStage.setTitle("Leaderboards");//title
+						primaryScreenBounds = Screen.getPrimary().getVisualBounds();
+						lb = new leaderboard();
+						try {
+							lb.setPointsArray();
+						} catch (Exception e) {
+							// TODO Auto-generated catch block
+							System.out.println("There aren't any pointers");
+							e.printStackTrace();
+						}
 				
-					int[] array = lb.getTopTen();
-					VBox vb = new VBox();
-				    vb.setPadding(new Insets(25, 50, 50, primaryScreenBounds.getWidth()/3+25)); //(top/right/bottom/left)
-					Label title= new Label("Leaderboards\n");
-					title.setPadding(new Insets(0,0,10,0));
-					title.setFont(Font.font ("Times New Roman", 40));
-					vb.getChildren().add(title);
+						array = lb.getTopTen();
+						vb = new VBox();
+						vb.setPadding(new Insets(25, 50, 50, primaryScreenBounds.getWidth()/3+25)); //(top/right/bottom/left)
+						title= new Label("Leaderboards\n");
+						title.setPadding(new Insets(0,0,10,0));
+						title.setFont(Font.font ("Times New Roman", 40));
+						vb.getChildren().add(title);
 					
-					//Strings of the top 10 scores
-					for(int i = 0; i < 10; i++)
-			        {
-			        	Label txt = new Label(Integer.toString(array[i]));//
-			        	txt.setFont(Font.font("Times New Roman", 18));
-			        	txt.setPadding(new Insets(0,0,5,0));
-			        	vb.getChildren().add(txt);
-			        }
-					ScrollBar sc = new ScrollBar();
-					sc.setMin(0);
-					sc.setMax(primaryScreenBounds.getHeight());
-					sc.setValue(0);
-					sc.setOrientation(Orientation.VERTICAL);
-					sc.setPrefHeight(primaryScreenBounds.getHeight());
-					sc.setLayoutX(theScene.getWidth()-sc.getWidth());
-					sc.valueProperty().addListener(event->{title.setTranslateY(50+sc.getValue());});
-					sc.valueProperty().addListener(event->{vb.setTranslateY(50+sc.getValue());});
-				//	sc.valueProperty().addListener(event->{splashCanvas.setTranslateY(20+sc.getValue());});
+						//Strings of the top 10 scores
+						for(int i = 0; i < 10; i++)
+						{
+							Label txt = new Label(Integer.toString(array[i]));//
+							txt.setFont(Font.font("Times New Roman", 18));
+							txt.setPadding(new Insets(0,0,5,0));
+							vb.getChildren().add(txt);
+						}
+						sc = new ScrollBar();
+						sc.setMin(0);
+						sc.setMax(primaryScreenBounds.getHeight());
+						sc.setValue(0);
+						sc.setOrientation(Orientation.VERTICAL);
+						sc.setPrefHeight(primaryScreenBounds.getHeight());
+						sc.setLayoutX(theScene.getWidth()-sc.getWidth());
+						sc.valueProperty().addListener(event->{title.setTranslateY(50+sc.getValue());});
+						sc.valueProperty().addListener(event->{vb.setTranslateY(50+sc.getValue());});
+						//	sc.valueProperty().addListener(event->{splashCanvas.setTranslateY(20+sc.getValue());});
+						
+						playButton.relocate(primaryScreenBounds.getWidth() * 7.5 / 12, primaryScreenBounds.getHeight() * 9 / 12);
 					
-			        root.getChildren().clear();
-			        root.getChildren().add(splashCanvas);
-			        root.getChildren().add(sc);
-			        root.getChildren().add(vb);
-			    	
-			        
-				}
+						root.getChildren().clear();
+						root.getChildren().add(splashCanvas);
+						root.getChildren().add(vb);
+						root.getChildren().add(sc);
+						root.getChildren().add(playButton);
+						}
+					}
 			}
 		}.start();
 
@@ -291,7 +328,7 @@ public class UIVisual
 			if(orcActor.curX == orcActor.getTargetX() && orcActor.curY == orcActor.getTargetY())
 			{
 				if(spacesToMove > 0)
-				{
+				{	
 					curSpace++;
 					orcActor.setTargetX(control.tileList.get(curSpace).x);
 					orcActor.setTargetY(control.tileList.get(curSpace).y);
@@ -300,7 +337,12 @@ public class UIVisual
 				else
 				{
 					orcActor.setMoving(false);
-					root.getChildren().add(makeMove);
+					if(orcActor.getMoving()==false)
+					{
+						root.getChildren().add(makeMove);
+						root.getChildren().add(eventCanvas);
+						root.getChildren().add(close);	
+					}
 				}
 			}
 		}
@@ -308,6 +350,7 @@ public class UIVisual
 		//We always want to draw the board and main character
 		gameGC.drawImage(board, 0, 0);
 		gameGC.drawImage(orcActor.charImage, orcActor.curX, orcActor.curY);
+		scoreText.setText("" + control.getScore());
 	}
 	
 	/** Initializes all buttons and button handlers.
@@ -319,6 +362,22 @@ public class UIVisual
 	 */
 	 private void initButtons(int gameWidth, int gameHeight, double rollWidth, double rollHeight)
 	 {
+		 //close button
+		 close = new Button();
+		 close.relocate(gameCanvas.getWidth() / 2 - close.getWidth(), gameCanvas.getHeight() * 10.95 / 12);
+		 ImageView closeImage = new ImageView();
+		 closeImage.imageProperty().set(closeText);        
+		 close.setGraphic(closeImage);
+		 close.setStyle("-fx-focus-color: darkgoldenrod;");
+		 close.setOnAction(new EventHandler<ActionEvent>() 
+		 {
+			 @Override public void handle(ActionEvent e) 
+			 {
+				 root.getChildren().remove(close);
+				 root.getChildren().remove(eventCanvas);
+			 }
+		 });
+		 
 		//makeMove button for rolling die
 		makeMove = new Button();
 		makeMove.relocate(gameCanvas.getWidth() / 2 - rollWidth / 2 - (gameWidth * 0.00651)
@@ -358,6 +417,7 @@ public class UIVisual
 				root.getChildren().add(gameCanvas);
 				root.getChildren().add(rollCanvas);
 				root.getChildren().add(makeMove);
+				root.getChildren().add(scoreText);
 			}
 		});
 
@@ -395,8 +455,10 @@ public class UIVisual
 				roll3 = new Image("/assets/3.png", (gameWidth * 0.2604), (gameHeight * 0.398), false, true);
 				play = new Image("/assets/play.png", (gameWidth * 0.1302), (gameHeight * 0.199), true, true);
 				leaderboard = new Image("/assets/leaderboard.png", (gameWidth * 0.3906), (gameHeight * 0.796), true, true);
-				orcActor = new Actor((int) (0.170572917 * gameWidth), (int) (0.278606965 * gameHeight), orc);
-				
+				orcActor = new Actor(control.tileList.get(0).x, control.tileList.get(0).y, orc);
+				closeText = new Image("/assets/close.png", (gameWidth * 0.05), (gameHeight * 0.05), true, true);
+				eventbackground = new Image("/assets/eventbackground.png", gameWidth / 1.75, gameHeight / 1.2, true, false);
+
 				/*
 				//Set the sizes of the scene images that will go in the sceneCanvas(all the same size)
 				fishingVillage = new Image("/assets/FishingVillage.png", (gameWidth * 0.3906), (gameHeight * 0.796), true, true);
