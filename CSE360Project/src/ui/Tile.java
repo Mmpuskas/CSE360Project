@@ -15,7 +15,11 @@ public class Tile
 	{
 		x = X;
 		y = Y;
-		event = new Event();
+		
+	}
+	
+	public void setEvent(String flavorText, int pointsChange){
+		event = new Event(flavorText, pointsChange);
 	}
 	
 	public int getX()
