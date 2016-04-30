@@ -85,7 +85,7 @@ public class UIControl
 		
 		//Set intro text into first tile position
 		String introText = fullText.substring(fullText.indexOf('$') + 2, fullText.indexOf('@'));
-		tileList.get(0).event.setFlavorText(introText);
+		
 
 		//Remove intro text from fullText
 		fullText = fullText.substring(fullText.indexOf(')') + 2);
