@@ -26,6 +26,8 @@ import javafx.scene.control.Label;
 import javafx.scene.text.Font;
 import javafx.geometry.Orientation;
 import javafx.scene.control.ScrollBar;
+import javafx.scene.paint.Paint;
+
 
 /** UI class for "Journey to Chaos End"
  * Controls all aspects of drawing to the display, along with some of the control aspects.
@@ -38,6 +40,7 @@ public class UIVisual
 	private Boolean isRolling; //True during dice roll animation
 	private int spacesToMove; //The number of spaces from 1-3 that need to be moved based on the dice roll
 	private int curSpace;
+	private Boolean moving = false;
     private long startNanoTime;
 
 	private Image board;
@@ -95,6 +98,7 @@ public class UIVisual
 	private Canvas gameCanvas; //Canvas for the game board/related things
 	private Canvas rollCanvas; //Canvas for the prompt window where you roll
 	private Canvas splashCanvas; //Canvas for the splash screen where you can choose play/leaderboard
+
 	//Create a sceneCanvas where the scene imgae is displayed at the top and text in the rest of the portion
 	private Canvas eventCanvas;
 	private GraphicsContext gameGC;
@@ -106,7 +110,8 @@ public class UIVisual
 	private Button playButton;
 	private Button scoresButton;
 	private Text scoreText;
-
+	private Button close;
+	
 	/** Initializes the member variables that pertain to the JavaFX component tree.
 	 * @throws IOException 
 	 */
@@ -144,7 +149,7 @@ public class UIVisual
         //add a leaderboard canvas
         scoresCanvas = new Canvas(gameWidth, gameHeight);
         //add a scene canvas
-        eventCanvas = new Canvas(gameWidth/2, gameHeight/2);
+        eventCanvas = new Canvas(gameWidth/1.7, gameHeight/1.7);
 		gameGC = gameCanvas.getGraphicsContext2D();
 		rollGC = rollCanvas.getGraphicsContext2D();
 		splashGC = splashCanvas.getGraphicsContext2D();
@@ -153,7 +158,7 @@ public class UIVisual
 		scoreGC = scoresCanvas.getGraphicsContext2D();
         rollCanvas.relocate((gameWidth / 2) - (rollWidth / 2), (gameHeight / 2) - (rollHeight / 2)); //Sets placement of roll window
         //relocate the event screen to middle of the screen like the rollCanvas
-        eventCanvas.relocate((gameWidth / 2) - (rollWidth / 2), (gameHeight / 2) - (rollHeight / 2));
+        eventCanvas.relocate((gameWidth / 5), (gameHeight / 5));//
         
         //Score text sits at the top of the screen
         scoreText = new Text("" + control.getScore());
@@ -161,7 +166,7 @@ public class UIVisual
         scoreText.relocate(gameWidth / 2,  gameHeight * .005);
         scoreText.setStroke(Color.BLACK);
         scoreText.setFill(Color.GRAY);
-        
+        eventGC.drawImage(splash, 0, 0);
         scoreGC.drawImage(splash, 0, 0 );
         splashGC.drawImage(splash, 0, 0);
 		root.getChildren().add(splashCanvas); //Gotta start with something on the root to set the size of the window
@@ -196,6 +201,13 @@ public class UIVisual
 				}
 				else if(curMode == Mode.play)
 				{
+					//adds the eventCanvas at the begining
+					if(moving == false)
+					{
+						root.getChildren().add(eventCanvas);
+						root.getChildren().add(close);
+						moving = true;
+					}
 						playLogic(currentNanoTime);
 				}
 				else if(curMode == Mode.scores)
@@ -241,7 +253,6 @@ public class UIVisual
 			        root.getChildren().add(splashCanvas);
 			        root.getChildren().add(sc);
 			        root.getChildren().add(vb);
-			        
 				}
 			}
 		}.start();
@@ -300,7 +311,7 @@ public class UIVisual
 			if(orcActor.curX == orcActor.getTargetX() && orcActor.curY == orcActor.getTargetY())
 			{
 				if(spacesToMove > 0)
-				{
+				{	
 					curSpace++;
 					orcActor.setTargetX(control.tileList.get(curSpace).x);
 					orcActor.setTargetY(control.tileList.get(curSpace).y);
@@ -309,7 +320,12 @@ public class UIVisual
 				else
 				{
 					orcActor.setMoving(false);
-					root.getChildren().add(makeMove);
+					if(orcActor.getMoving()==false)
+					{
+						root.getChildren().add(makeMove);
+						root.getChildren().add(eventCanvas);
+						root.getChildren().add(close);	
+					}
 				}
 			}
 		}
@@ -329,6 +345,20 @@ public class UIVisual
 	 */
 	 private void initButtons(int gameWidth, int gameHeight, double rollWidth, double rollHeight)
 	 {
+		//close button
+		 close = new Button("Close");
+		 close.relocate(gameCanvas.getWidth()/5,gameCanvas.getHeight()/5);
+		 close.setOnAction(new EventHandler<ActionEvent>() 
+		 {
+				@Override public void handle(ActionEvent e) 
+				{
+					root.getChildren().remove(close); //Get the roll button out of the way
+					//remove the text still needs to be added
+					root.getChildren().remove(eventCanvas);
+					//root.getChildren().add(makeMove);
+				}
+			});
+		 
 		//makeMove button for rolling die
 		makeMove = new Button();
 		makeMove.relocate(gameCanvas.getWidth() / 2 - rollWidth / 2 - (gameWidth * 0.00651)
