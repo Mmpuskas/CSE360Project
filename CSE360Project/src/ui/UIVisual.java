@@ -22,6 +22,7 @@ import javafx.event.ActionEvent;
 import javafx.scene.layout.VBox;
 import javafx.geometry.Insets;
 import javafx.scene.control.Label;
+import javafx.scene.text.Text;
 import javafx.scene.text.Font;
 import javafx.geometry.Orientation;
 import javafx.scene.control.ScrollBar;
@@ -94,12 +95,13 @@ public class UIVisual
 	private Canvas gameCanvas; //Canvas for the game board/related things
 	private Canvas rollCanvas; //Canvas for the prompt window where you roll
 	private Canvas splashCanvas; //Canvas for the splash screen where you can choose play/leaderboard
-	private Canvas eventCanvas; //Canvas for the event window
+	private Canvas eventCanvas; //Canvas for the event window that pops up displaying story events
 	private GraphicsContext gameGC;
 	private GraphicsContext rollGC;
 	private GraphicsContext splashGC;
 	private GraphicsContext scoreGC;
 	private GraphicsContext eventGC;
+	private Text t;
 	
 	private Button makeMove;
 	private Button playButton;
@@ -136,11 +138,14 @@ public class UIVisual
 		//Control Objects
 		root = new Group();
 		theScene = new Scene(root);
+		//Create a text box
+		String sampleString = "Test test test test";
+		Text t = new Text(800,500, sampleString);
         gameCanvas = new Canvas(gameWidth, gameHeight);
         rollCanvas = new Canvas(rollWidth, rollHeight);
         splashCanvas = new Canvas(gameWidth, gameHeight);
         scoresCanvas = new Canvas(gameWidth, gameHeight);
-        eventCanvas = new Canvas(gameWidth/3, gameHeight/3);
+        eventCanvas = new Canvas(gameWidth/1.7, gameHeight/1.7);
 		gameGC = gameCanvas.getGraphicsContext2D();
 		rollGC = rollCanvas.getGraphicsContext2D();
 		splashGC = splashCanvas.getGraphicsContext2D();
@@ -149,12 +154,12 @@ public class UIVisual
 		scoreGC = scoresCanvas.getGraphicsContext2D();
         rollCanvas.relocate((gameWidth / 2) - (rollWidth / 2), (gameHeight / 2) - (rollHeight / 2)); //Sets placement of roll window
         //relocate the event screen to middle of the screen like the rollCanvas
-        eventCanvas.relocate(gameWidth - gameWidth/4, gameHeight - gameHeight / 3);
+        eventCanvas.relocate((gameWidth / 5), (gameHeight / 5));
         
         scoreGC.drawImage(splash, 0, 0 );
         splashGC.drawImage(splash, 0, 0);
         //draw splash image in event window
-        eventGC.drawImage(splash, (gameWidth / 2) - (rollWidth / 2), (gameHeight / 2) - (rollHeight / 2));
+        eventGC.drawImage(splash, 0, 0);
         
 		root.getChildren().add(splashCanvas); //Gotta start with something on the root to set the size of the window
 
