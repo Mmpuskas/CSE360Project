@@ -18,8 +18,12 @@ public class Tile
 		
 	}
 	
-	public void setEvent(String flavorText, int pointsChange){
-		event = new Event(flavorText, pointsChange);
+	public void setGenericEvent(String flavorText, int pointsChange){
+		event = new GenericEvent(flavorText, pointsChange);
+	}
+	
+	public void setBossEvent(String flavorText, String passText, String failText, int passPoints, int failPoints){
+		event = new BossEvent(flavorText, passText, failText, passPoints, failPoints);
 	}
 	
 	public int getX()

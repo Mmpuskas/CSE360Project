@@ -7,6 +7,7 @@ Contributors: Mercedes Perguson, Michael Puskas, William Chen, Yifan Li, Tony Ju
 The easiest way to play the game is to download the latest executable jar from the "Release" tab.
 
 The program can also be compiled, unit tested, and ran as normal.
+When compiling, build from src/Driver.java
 
 Note: The program is currently targeted for 1920x1080 resolution displays. The final release will have alternatives for lower resolutions.
 
