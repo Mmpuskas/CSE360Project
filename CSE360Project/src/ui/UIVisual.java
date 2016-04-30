@@ -337,7 +337,7 @@ public class UIVisual
 				}
 				else
 				{
-					//control.setScore(control.getScore() + control.tileList.get(curSpace).
+					control.updateScoreFromTile(curSpace);
 					orcActor.setMoving(false);
 					if(orcActor.getMoving()==false)
 					{

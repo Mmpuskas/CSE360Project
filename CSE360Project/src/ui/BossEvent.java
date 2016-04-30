@@ -32,6 +32,7 @@ public class BossEvent extends Event{
 		
 	}
 	
+	@Override
 	public String getFlavorText(){
 		return flavorText;
 	}
@@ -45,6 +46,7 @@ public class BossEvent extends Event{
 		}
 	}
 	
+	@Override
 	public int getPointsChange(){
 		if(passedEvent){
 			return passPoints;

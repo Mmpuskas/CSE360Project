@@ -105,11 +105,28 @@ public class UIControl {
 		}
 
 	}
-
-	public void setScore(int score) {
-		currentScore = score;
+	 
+	//these 3 methods chain getter methods in Tile class and Event classes
+	
+	//this is the new control.setScore(control.getScore() + control.tileList.get(curSpace).whateverCrap();
+	//call like control.updateScoreFromTile(curSpace), it does the above^ without being confusing
+	public void updateScoreFromTile(int currentTileNum){
+		Tile currentTile = this.tileList.get(currentTileNum);
+		int scoreDeltaChange = currentTile.getScoreChangeFromEvent();
+		currentScore += scoreDeltaChange;
 	}
-
+	
+	//gets the flavor text from a tile object's index
+	public String getFlavorTextFromTile(int currentTileNum){
+		return this.tileList.get(currentTileNum).getEventFlavorText();
+	}
+	
+	//gets the aftermath text (pass/fail) from a tile object's index
+	//don't call this if its not a BossEvent, it will return null
+	public String getAftermathTextFromTile(int currentTileNum){
+		return this.tileList.get(currentTileNum).getEventAftermathText();
+	}
+	
 	public int getScore() {
 		return currentScore;
 	}
