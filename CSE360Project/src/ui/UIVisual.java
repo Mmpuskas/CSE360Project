@@ -149,12 +149,12 @@ public class UIVisual
 		scoreGC = scoresCanvas.getGraphicsContext2D();
         rollCanvas.relocate((gameWidth / 2) - (rollWidth / 2), (gameHeight / 2) - (rollHeight / 2)); //Sets placement of roll window
         //relocate the event screen to middle of the screen like the rollCanvas
-        eventCanvas.relocate((gameWidth / 2) - (rollWidth / 2), (gameHeight / 2) - (rollHeight / 2));
+        eventCanvas.relocate(gameWidth - gameWidth/4, gameHeight - gameHeight / 3);
         
         scoreGC.drawImage(splash, 0, 0 );
         splashGC.drawImage(splash, 0, 0);
         //draw splash image in event window
-        splashGC.drawImage(splash, (gameWidth / 2) - (rollWidth / 2), (gameHeight / 2) - (rollHeight / 2));
+        eventGC.drawImage(splash, (gameWidth / 2) - (rollWidth / 2), (gameHeight / 2) - (rollHeight / 2));
         
 		root.getChildren().add(splashCanvas); //Gotta start with something on the root to set the size of the window
 
@@ -386,10 +386,8 @@ public class UIVisual
 		
 		//Event button to exit out of event window
 		closeButton = new Button("CLOSE");
-		closeButton.relocate(gameCanvas.getWidth() / 2 - rollWidth / 2 - (gameWidth * 0.00651)
-				,gameCanvas.getHeight() / 2 - rollHeight / 2 + (gameHeight * 0.02487)); //Sets the position of the button
+		closeButton.relocate(gameCanvas.getWidth() / 4 ,gameCanvas.getHeight() / 4); //Sets the position of the button
 		ImageView scoreButtonImage = new ImageView();
-		scoreButtonImage.imageProperty().set(spider);
 		closeButton.setGraphic(scoreButtonImage);
 		closeButton.setOnAction(new EventHandler<ActionEvent>() 
 		{
@@ -397,6 +395,7 @@ public class UIVisual
 			{
 				curMode = Mode.play;
 				//Remove the eventCanvas when clicked
+				root.getChildren().add(rollCanvas);
 				root.getChildren().remove(eventCanvas);
 				root.getChildren().add(gameCanvas);
 			}
