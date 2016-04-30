@@ -60,6 +60,8 @@ public class UIVisual
 	private Image roll3;
 	private Image play;
 	private Image leaderboard;
+	private Image eventbackground;
+	private Image closeText;
 	private Image fishingVillage;
 	private Image forest;
 	private Image greyHills;
@@ -153,19 +155,17 @@ public class UIVisual
         gameCanvas = new Canvas(gameWidth, gameHeight);
         rollCanvas = new Canvas(rollWidth, rollHeight);
         splashCanvas = new Canvas(gameWidth, gameHeight);
-        //add a leaderboard canvas
         scoresCanvas = new Canvas(gameWidth, gameHeight);
-        //add a scene canvas
-        eventCanvas = new Canvas(gameWidth/1.7, gameHeight/1.7);
+        eventCanvas = new Canvas(gameWidth/1.75, gameHeight/1.2);
+
 		gameGC = gameCanvas.getGraphicsContext2D();
 		rollGC = rollCanvas.getGraphicsContext2D();
 		splashGC = splashCanvas.getGraphicsContext2D();
-		eventGC = eventCanvas.getGraphicsContext2D();
-		//create a score Graphics Context
 		scoreGC = scoresCanvas.getGraphicsContext2D();
+		eventGC = eventCanvas.getGraphicsContext2D();
+
         rollCanvas.relocate((gameWidth / 2) - (rollWidth / 2), (gameHeight / 2) - (rollHeight / 2)); //Sets placement of roll window
-        //relocate the event screen to middle of the screen like the rollCanvas
-        eventCanvas.relocate((gameWidth / 5), (gameHeight / 5));//
+        eventCanvas.relocate((gameWidth / 2 - gameWidth / 3.7), (gameHeight / 12));//
         
         //Score text sits at the top of the screen
         scoreText = new Text("" + control.getScore());
@@ -173,9 +173,12 @@ public class UIVisual
         scoreText.relocate(gameWidth / 2,  gameHeight * .005);
         scoreText.setStroke(Color.BLACK);
         scoreText.setFill(Color.GRAY);
-        eventGC.drawImage(splash, 0, 0);
+
+        //Set up backgrounds
         scoreGC.drawImage(splash, 0, 0 );
         splashGC.drawImage(splash, 0, 0);
+        eventGC.drawImage(eventbackground, 0, 0);
+
 		root.getChildren().add(splashCanvas); //Gotta start with something on the root to set the size of the window
 
         //Interactables
@@ -359,19 +362,21 @@ public class UIVisual
 	 */
 	 private void initButtons(int gameWidth, int gameHeight, double rollWidth, double rollHeight)
 	 {
-		//close button
-		 close = new Button("Close");
-		 close.relocate(gameCanvas.getWidth()/5,gameCanvas.getHeight()/5);
+		 //close button
+		 close = new Button();
+		 close.relocate(gameCanvas.getWidth() / 2 - close.getWidth(), gameCanvas.getHeight() * 10.95 / 12);
+		 ImageView closeImage = new ImageView();
+		 closeImage.imageProperty().set(closeText);        
+		 close.setGraphic(closeImage);
+		 close.setStyle("-fx-focus-color: darkgoldenrod;");
 		 close.setOnAction(new EventHandler<ActionEvent>() 
 		 {
-				@Override public void handle(ActionEvent e) 
-				{
-					root.getChildren().remove(close); //Get the roll button out of the way
-					//remove the text still needs to be added
-					root.getChildren().remove(eventCanvas);
-					//root.getChildren().add(makeMove);
-				}
-			});
+			 @Override public void handle(ActionEvent e) 
+			 {
+				 root.getChildren().remove(close);
+				 root.getChildren().remove(eventCanvas);
+			 }
+		 });
 		 
 		//makeMove button for rolling die
 		makeMove = new Button();
@@ -451,6 +456,8 @@ public class UIVisual
 				play = new Image("/assets/play.png", (gameWidth * 0.1302), (gameHeight * 0.199), true, true);
 				leaderboard = new Image("/assets/leaderboard.png", (gameWidth * 0.3906), (gameHeight * 0.796), true, true);
 				orcActor = new Actor(control.tileList.get(0).x, control.tileList.get(0).y, orc);
+				closeText = new Image("/assets/close.png", (gameWidth * 0.05), (gameHeight * 0.05), true, true);
+				eventbackground = new Image("/assets/eventbackground.png", gameWidth / 1.75, gameHeight / 1.2, true, false);
 
 				/*
 				//Set the sizes of the scene images that will go in the sceneCanvas(all the same size)
