@@ -28,10 +28,7 @@ public class UIControl {
 	ListIterator<Tile> tileIterator;
 
 	public void initTilePositions(int gameWidth, int gameHeight) {
-		tileList.add(new Tile((int) (0.170572917 * gameWidth), (int) (0.178606965 * gameHeight))); // TODO:
-																									// Fix
-																									// this
-																									// position
+		tileList.add(new Tile((int) (0.170572917 * gameWidth), (int) (0.178606965 * gameHeight))); 
 		tileList.add(new Tile((int) (0.170572917 * gameWidth), (int) (0.278606965 * gameHeight)));
 		tileList.add(new Tile((int) (0.170572917 * gameWidth), (int) (0.378109453 * gameHeight)));
 		tileList.add(new Tile((int) (0.170572917 * gameWidth), (int) (0.47761194 * gameHeight)));
@@ -82,6 +79,7 @@ public class UIControl {
 
 		// Set intro text into first tile position
 		String introText = fullText.substring(fullText.indexOf('$') + 2, fullText.indexOf('@'));
+		tileList.get(0).setGenericEvent(introText, 0);
 		String intermediateText;
 
 		// Remove intro text from fullText

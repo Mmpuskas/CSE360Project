@@ -14,6 +14,7 @@ import javafx.scene.text.TextAlignment;
 import javafx.scene.text.Text;
 
 import java.io.IOException;
+import java.util.spi.CurrencyNameProvider;
 
 import javafx.animation.AnimationTimer;
 import javafx.event.EventHandler;
@@ -336,6 +337,7 @@ public class UIVisual
 				}
 				else
 				{
+					//control.setScore(control.getScore() + control.tileList.get(curSpace).
 					orcActor.setMoving(false);
 					if(orcActor.getMoving()==false)
 					{
