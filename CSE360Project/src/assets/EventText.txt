@@ -63,11 +63,13 @@ You've been following a beetle for the past five hours. It travels slightly slow
 3)
 Three-hundred and fourteen, three-hundred and fifteen, three-hundred and... What's that? You swear you just heard the faint sound of sand shifting somewhere to your left. Your heart starts racing. You've never been ambushed before. You begin to wonder what it will be like. Will your attacker be a large sand worm? Maybe an antlion! Ooh boy, you can't wait to show it what you're made of!
 You soon realize that you've been daydreaming about fighting an antlion for the past three minutes. Seeing as how you haven't been ambushed yet, the sound must have just been the wind playing tricks. You hang your head slightly lower as you resume your trundle onward. What number were you on again? ... One, two....
+@
 0
 
 4)
 An uneventful morning meal is followed by an uneventful morning walk. That changes around noon however, as you finally find a sign of life. Well, it found you, at least. Or rather, it found your face to closely resemble something that it wanted to kill. It is in fact a bird large enough to have trouble fitting through a standard door, and it's coming right for you. You're terrified. You're frazzled. You don't know what to do. You throw your arms over your face and unleash a loud, terrified wail while the bird... Wait, where did it go? You lower your arms and turn around to see the bird flying away. I guess it wasn't after your face after all.
-+10
+@
+10
 
 5)
 In the distance you see three wooden boxes stacked in a pyramid. It's the first thing that you've seen for miles. You slow your pace as you get closer, cautiously approaching the birch bins. Just as you begin to strafe around the left side of the spruce stack, a painfully average orc covered in purple paint jumps out on top of the tallest box. 
