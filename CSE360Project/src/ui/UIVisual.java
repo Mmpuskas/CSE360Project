@@ -10,11 +10,9 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.control.Button;
-import javafx.scene.text.TextAlignment;
 import javafx.scene.text.Text;
 
 import java.io.IOException;
-import java.util.spi.CurrencyNameProvider;
 
 import javafx.animation.AnimationTimer;
 import javafx.event.EventHandler;
@@ -27,7 +25,6 @@ import javafx.scene.control.Label;
 import javafx.scene.text.Font;
 import javafx.geometry.Orientation;
 import javafx.scene.control.ScrollBar;
-import javafx.scene.paint.Paint;
 
 
 /** UI class for "Journey to Chaos End"
@@ -171,7 +168,7 @@ public class UIVisual
         //Score text sits at the top of the screen
         scoreText = new Text("" + control.getScore());
         scoreText.setFont(Font.font("Verdana", 50)); //Possibly import font object
-        scoreText.relocate(gameWidth / 2,  gameHeight * .005);
+        scoreText.relocate(eventCanvas.getLayoutX() + eventCanvas.getWidth() / 2 - scoreText.getFont().getSize() / 2,  gameHeight * .005);
         scoreText.setStroke(Color.BLACK);
         scoreText.setFill(Color.GRAY);
 
@@ -231,9 +228,7 @@ public class UIVisual
 						try {
 							lb.setPointsArray();
 						} catch (Exception e) {
-							// TODO Auto-generated catch block
 							System.out.println("There aren't any pointers");
-							e.printStackTrace();
 						}
 				
 						array = lb.getTopTen();
@@ -330,16 +325,28 @@ public class UIVisual
 			{
 				if(spacesToMove > 0)
 				{	
-					curSpace++;
-					orcActor.setTargetX(control.tileList.get(curSpace).x);
-					orcActor.setTargetY(control.tileList.get(curSpace).y);
-					spacesToMove--;
+					if(curSpace % 5 == 0 && curSpace > 0 && !control.getTileVisited(curSpace))
+					{
+						spacesToMove = 0;
+						control.setTileVisited(curSpace);
+					}
+					else
+					{
+						curSpace++;
+						orcActor.setTargetX(control.tileList.get(curSpace).x);
+						orcActor.setTargetY(control.tileList.get(curSpace).y);
+						spacesToMove--;
+					}
 				}
 				else
 				{
+					if(curSpace % 5 == 0 && curSpace > 0)
+						control.setTileVisited(curSpace);;
+
 					control.updateScoreFromTile(curSpace);
 					orcActor.setMoving(false);
-					if(orcActor.getMoving()==false)
+
+					if(orcActor.getMoving() == false)
 					{
 						root.getChildren().add(eventCanvas);
 						root.getChildren().add(close);	
@@ -365,7 +372,7 @@ public class UIVisual
 	 {
 		 //close button
 		 close = new Button();
-		 close.relocate(gameCanvas.getWidth() / 2 - close.getWidth(), gameCanvas.getHeight() * 10.95 / 12);
+		 close.relocate(eventCanvas.getLayoutX() + eventCanvas.getWidth() / 2 - closeText.getWidth() / 1.6, gameCanvas.getHeight() * 10.95 / 12);
 		 ImageView closeImage = new ImageView();
 		 closeImage.imageProperty().set(closeText);        
 		 close.setGraphic(closeImage);
@@ -374,9 +381,12 @@ public class UIVisual
 		 {
 			 @Override public void handle(ActionEvent e) 
 			 {
-				 root.getChildren().remove(close);
-				 root.getChildren().remove(eventCanvas);
-				 root.getChildren().add(makeMove);
+				 if(curSpace < 25)
+				 {
+					 root.getChildren().remove(close);
+					 root.getChildren().remove(eventCanvas);
+					 root.getChildren().add(makeMove);
+				 }
 			 }
 		 });
 		 
@@ -394,9 +404,6 @@ public class UIVisual
 			{
 				root.getChildren().remove(makeMove); //Get the roll button out of the way
 				spacesToMove = (int) (Math.random() * 3) + 1; //Set the spaces to move to a random number
-
-				orcActor.setTargetX(control.tileList.get(curSpace + 1).x);
-				orcActor.setTargetY(control.tileList.get(curSpace).y + 1);
 
 				startNanoTime = System.nanoTime();
 				isRolling = true;
@@ -456,9 +463,11 @@ public class UIVisual
 				roll3 = new Image("/assets/3.png", (gameWidth * 0.2604), (gameHeight * 0.398), false, true);
 				play = new Image("/assets/play.png", (gameWidth * 0.1302), (gameHeight * 0.199), true, true);
 				leaderboard = new Image("/assets/leaderboard.png", (gameWidth * 0.3906), (gameHeight * 0.796), true, true);
-				orcActor = new Actor(control.tileList.get(0).x, control.tileList.get(0).y, orc);
 				closeText = new Image("/assets/close.png", (gameWidth * 0.05), (gameHeight * 0.05), true, true);
 				eventbackground = new Image("/assets/eventbackground.png", gameWidth / 1.75, gameHeight / 1.2, true, false);
+				orcActor = new Actor(control.tileList.get(0).x, control.tileList.get(0).y, orc);
+				orcActor.setTargetX(control.tileList.get(0).x);
+				orcActor.setTargetY(control.tileList.get(0).y);
 
 				/*
 				//Set the sizes of the scene images that will go in the sceneCanvas(all the same size)

@@ -11,6 +11,7 @@ public class Tile
 	int y;
 	Event event;
 	boolean isGenericEvent; //maybe i should have used isInstanceOf
+	boolean wasVisited = false;
 	
 	Tile(int X, int Y)
 	{
@@ -56,5 +57,15 @@ public class Tile
 			return ((BossEvent) event).getAftermathText();
 		}
 		
+	}
+	
+	public void setVisited()
+	{
+		wasVisited = true;
+	}
+	
+	public boolean getVisited()
+	{
+		return wasVisited;
 	}
 }
