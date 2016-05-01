@@ -364,17 +364,17 @@ public class UIVisual
 					orcActor.setMoving(false);
 					control.updateScoreFromTile(curSpace);
 
-					txt.setText(control.getFlavorTextFromTile(curSpace));
-					root.getChildren().add(eventCanvas);
-					root.getChildren().add(vb);
-					root.getChildren().add(close);	
-
 					if(curSpace % 5 == 0 && curSpace > 0)
 					{
 						control.setTileVisited(curSpace);
 						afterMath.setText(control.getAftermathTextFromTile(curSpace));
-						root.getChildren().add(bossCanvas);
+						vb.getChildren().add(afterMath);
+;						root.getChildren().add(bossCanvas);
 					}
+					txt.setText(control.getFlavorTextFromTile(curSpace));
+					root.getChildren().add(eventCanvas);
+					root.getChildren().add(vb);
+					root.getChildren().add(close);	
 				}
 			}
 		}
