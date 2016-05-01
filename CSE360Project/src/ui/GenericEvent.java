@@ -1,4 +1,10 @@
 package ui;
+/** Represents a generic event, (non boss fight)
+ * 
+ * @author Yifan Li
+ *
+ */
+
 
 public class GenericEvent extends Event{
 	private String flavorText;
