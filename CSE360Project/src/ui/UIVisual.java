@@ -383,12 +383,15 @@ public class UIVisual
 		 {
 			 @Override public void handle(ActionEvent e) 
 			 {
-				 root.getChildren().remove(close);
-				 root.getChildren().remove(eventCanvas);
-				 if(curSpace % 5 == 0 && curSpace != 0){
+				 if(curSpace % 5 == 0 && curSpace != 0)
 					 root.getChildren().remove(bossCanvas);
+				 
+				 if(curSpace < 25)
+				 {
+					 root.getChildren().remove(close);
+					 root.getChildren().remove(eventCanvas);
+					 root.getChildren().add(makeMove);
 				 }
-				 root.getChildren().add(makeMove);
 			 }
 		 });
 		 

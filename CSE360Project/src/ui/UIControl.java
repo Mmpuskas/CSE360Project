@@ -130,4 +130,14 @@ public class UIControl {
 	public int getScore() {
 		return currentScore;
 	}
+	
+	public void setTileVisited(int currentTileNum)
+	{
+		this.tileList.get(currentTileNum).setVisited();
+	}
+	
+	public boolean getTileVisited(int currentTileNum)
+	{
+		return this.tileList.get(currentTileNum).getVisited();
+	}
 }
