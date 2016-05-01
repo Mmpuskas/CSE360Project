@@ -351,6 +351,10 @@ public class UIVisual
 				}
 				else
 				{
+					if(curSpace % 5 == 0 && curSpace > 0)
+						control.setTileVisited(curSpace);
+
+					control.updateScoreFromTile(curSpace);
 					orcActor.setMoving(false);
 					control.updateScoreFromTile(curSpace);
 
