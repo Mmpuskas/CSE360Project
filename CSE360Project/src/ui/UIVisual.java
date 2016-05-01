@@ -196,7 +196,14 @@ public class UIVisual
 		vb.setPadding(new Insets(primaryScreenBounds.getHeight()/10, 50, 500, primaryScreenBounds.getWidth()/5.5)); //(top/right/bottom/left)
 		vb.getChildren().add(txt);
 		afterMath.setWrappingWidth(primaryScreenBounds.getWidth()/2.45);
-
+		txt.setFont(Font.font ("Times New Roman", 17));
+		afterMath.setFont(Font.font ("Times New Roman", 17));
+		if(primaryScreenBounds.getHeight()>800 &&primaryScreenBounds.getWidth()>1000)
+		{
+			//edit the screen size for 1080 res
+			txt.setFont(Font.font ("Times New Roman", 24));
+			afterMath.setFont(Font.font ("Times New Roman", 24));
+		}
         //Interactables
         initButtons(gameWidth, gameHeight, rollWidth, rollHeight);
 	}
