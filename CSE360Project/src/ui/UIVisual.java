@@ -10,12 +10,9 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.control.Button;
-import javafx.scene.text.TextAlignment;
 import javafx.scene.text.Text;
 
-import java.awt.TextField;
 import java.io.IOException;
-import java.util.spi.CurrencyNameProvider;
 
 import javafx.animation.AnimationTimer;
 import javafx.event.EventHandler;
@@ -28,7 +25,6 @@ import javafx.scene.control.Label;
 import javafx.scene.text.Font;
 import javafx.geometry.Orientation;
 import javafx.scene.control.ScrollBar;
-import javafx.scene.paint.Paint;
 
 
 /** UI class for "Journey to Chaos End"
@@ -272,7 +268,7 @@ public class UIVisual
 							txt.setPadding(new Insets(0,0,5,0));
 							vb.getChildren().add(txt);
 						}
-						//scrollbars
+
 						sc = new ScrollBar();
 						sc.setMin(0);
 						sc.setMax(primaryScreenBounds.getHeight());
@@ -282,7 +278,6 @@ public class UIVisual
 						sc.setLayoutX(theScene.getWidth()-sc.getWidth());
 						sc.valueProperty().addListener(event->{title.setTranslateY(50+sc.getValue());});
 						sc.valueProperty().addListener(event->{vb.setTranslateY(50+sc.getValue());});
-						//	sc.valueProperty().addListener(event->{splashCanvas.setTranslateY(20+sc.getValue());});
 						
 						playButton.relocate(primaryScreenBounds.getWidth() * 7.5 / 12, primaryScreenBounds.getHeight() * 9 / 12);
 					
