@@ -396,7 +396,6 @@ public class UIVisual
 		 {
 			 @Override public void handle(ActionEvent e) 
 			 {
-
 				 if(curSpace % 5 == 0 && curSpace != 0)
 					 root.getChildren().remove(bossCanvas);
 				 
