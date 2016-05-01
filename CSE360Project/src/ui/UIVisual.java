@@ -38,7 +38,6 @@ public class UIVisual
 	private Boolean isRolling; //True during dice roll animation
 	private int spacesToMove; //The number of spaces from 1-3 that need to be moved based on the dice roll
 	private int curSpace;
-	private Boolean moving = false;
     private long startNanoTime;
 
 	private Image board;
