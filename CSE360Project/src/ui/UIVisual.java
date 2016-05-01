@@ -117,6 +117,7 @@ public class UIVisual
     private Rectangle2D primaryScreenBounds;
     private int[] array;
     private VBox vb;
+    private VBox leaderboardVB;
     private Label title;
     private ScrollBar sc;
     
@@ -188,12 +189,14 @@ public class UIVisual
 		root.getChildren().add(splashCanvas); //Gotta start with something on the root to set the size of the window
 
 		vb = new VBox();
+		leaderboardVB = new VBox();
 		txt = new Text();
 		afterMath = new Text();
 
 		txt.setWrappingWidth(primaryScreenBounds.getWidth()/2.45);
 		txt.setText(control.getFlavorTextFromTile(0));
 		vb.setPadding(new Insets(primaryScreenBounds.getHeight()/10, 50, 500, primaryScreenBounds.getWidth()/5.5)); //(top/right/bottom/left)
+		leaderboardVB.setPadding(new Insets(primaryScreenBounds.getHeight()/10, 50, 500, primaryScreenBounds.getWidth()/5.5)); //(top/r
 		vb.getChildren().add(txt);
 		afterMath.setWrappingWidth(primaryScreenBounds.getWidth()/2.45);
 		txt.setFont(Font.font ("Times New Roman", 15));
@@ -240,7 +243,7 @@ public class UIVisual
 				{
 					if(!root.getChildren().contains(playButton))
 					{
-						vb.getChildren().clear();
+						leaderboardVB.getChildren().clear();
 						theStage.setTitle("Leaderboards");//title
 						primaryScreenBounds = Screen.getPrimary().getVisualBounds();
 						try {
@@ -250,11 +253,11 @@ public class UIVisual
 						}
 				
 						array = lb.getTopTen();
-						vb.setPadding(new Insets(25, 50, 50, primaryScreenBounds.getWidth()/3+25)); //(top/right/bottom/left)
+						leaderboardVB.setPadding(new Insets(25, 50, 50, primaryScreenBounds.getWidth()/3+25)); //(top/right/bottom/left)
 						title= new Label("Leaderboards\n");
 						title.setPadding(new Insets(0,0,10,0));
 						title.setFont(Font.font ("Times New Roman", 40));
-						vb.getChildren().add(title);
+						leaderboardVB.getChildren().add(title);
 					
 						//Strings of the top 10 scores
 						for(int i = 0; i < 10; i++)
@@ -262,7 +265,7 @@ public class UIVisual
 							Label txt = new Label(Integer.toString(array[i]));//
 							txt.setFont(Font.font("Times New Roman", 18));
 							txt.setPadding(new Insets(0,0,5,0));
-							vb.getChildren().add(txt);
+							leaderboardVB.getChildren().add(txt);
 						}
 
 						sc = new ScrollBar();
@@ -272,13 +275,14 @@ public class UIVisual
 						sc.setOrientation(Orientation.VERTICAL);
 						sc.setPrefHeight(primaryScreenBounds.getHeight());
 						sc.setLayoutX(theScene.getWidth()-sc.getWidth());
-						sc.valueProperty().addListener(event->{vb.setTranslateY(50-sc.getValue());});
+						sc.valueProperty().addListener(event->{title.setTranslateY(50-sc.getValue());});
+						sc.valueProperty().addListener(event->{leaderboardVB.setTranslateY(50-sc.getValue());});
 						
 						playButton.relocate(primaryScreenBounds.getWidth() * 7.5 / 12, primaryScreenBounds.getHeight() * 9 / 12);
 						
 						root.getChildren().clear();
 						root.getChildren().add(splashCanvas);
-						root.getChildren().add(vb);
+						root.getChildren().add(leaderboardVB);
 						root.getChildren().add(sc);
 						root.getChildren().add(playButton);
 						}
@@ -462,6 +466,7 @@ public class UIVisual
 			@Override public void handle(ActionEvent e) 
 			{
 				curMode = Mode.play;
+				curSpace=0;
 				root.getChildren().clear();
 				root.getChildren().add(gameCanvas);
 				root.getChildren().add(rollCanvas);
