@@ -38,7 +38,6 @@ public class UIVisual
 	private Boolean isRolling; //True during dice roll animation
 	private int spacesToMove; //The number of spaces from 1-3 that need to be moved based on the dice roll
 	private int curSpace;
-	private int count = 0; //count the number of spaces to draw text event
 	private Boolean moving = false;
     private long startNanoTime;
 
@@ -355,7 +354,7 @@ public class UIVisual
 					orcActor.setMoving(false);
 					control.updateScoreFromTile(curSpace);
 
-					txt.setText(control.getFlavorTextFromTile(count));
+					txt.setText(control.getFlavorTextFromTile(curSpace));
 					root.getChildren().add(eventCanvas);
 					root.getChildren().add(vb);
 					root.getChildren().add(close);	
@@ -363,7 +362,7 @@ public class UIVisual
 					if(curSpace % 5 == 0 && curSpace > 0)
 					{
 						control.setTileVisited(curSpace);
-						afterMath.setText(control.getAftermathTextFromTile(count));
+						afterMath.setText(control.getAftermathTextFromTile(curSpace));
 						root.getChildren().add(bossCanvas);
 					}
 				}
@@ -423,7 +422,6 @@ public class UIVisual
 			{
 				root.getChildren().remove(makeMove); //Get the roll button out of the way
 				spacesToMove = (int) (Math.random() * 3) + 1; //Set the spaces to move to a random number
-				count+=spacesToMove;
 				
 				orcActor.setTargetX(control.tileList.get(curSpace + 1).x);
 				orcActor.setTargetY(control.tileList.get(curSpace).y + 1);
