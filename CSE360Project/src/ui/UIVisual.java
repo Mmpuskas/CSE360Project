@@ -352,7 +352,6 @@ public class UIVisual
 					orcActor.setTargetY(control.tileList.get(curSpace).y);
 					spacesToMove--;
 				}
-				////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 				else
 				{
 					control.updateScoreFromTile(curSpace);
