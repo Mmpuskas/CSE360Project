@@ -493,31 +493,31 @@ public class UIVisual
 	public void initImages(int gameWidth, int gameHeight)
 	{
 		//Character and non-interactable assets
-				fiddy = new Image("/assets/111209-50-cent.png", (gameWidth * 0.0911), (gameHeight * 0.199), true, true);
-				orc = new Image("/assets/orc.png", (gameWidth * 0.0911), (gameHeight * 0.199), true, true);
-				roll1 = new Image("/assets/1.png", (gameWidth * 0.2604), (gameHeight * 0.398), false, true);
-				roll2 = new Image("/assets/2.png", (gameWidth * 0.2604), (gameHeight * 0.398), false, true);
-				roll3 = new Image("/assets/3.png", (gameWidth * 0.2604), (gameHeight * 0.398), false, true);
-				play = new Image("/assets/play.png", (gameWidth * 0.1302), (gameHeight * 0.199), true, true);
-				leaderboard = new Image("/assets/leaderboard.png", (gameWidth * 0.3906), (gameHeight * 0.796), true, true);
-				orcActor = new Actor(control.tileList.get(0).x, control.tileList.get(0).y, orc);
-				closeText = new Image("/assets/close.png", (gameWidth * 0.05), (gameHeight * 0.05), true, true);
-				eventbackground = new Image("/assets/eventbackground.png", gameWidth / 1.75, gameHeight / 1.2, true, false);
+		fiddy = new Image("/assets/111209-50-cent.png", (gameWidth * 0.0911), (gameHeight * 0.199), true, true);
+		orc = new Image("/assets/orc.png", (gameWidth * 0.0911), (gameHeight * 0.199), true, true);
+		roll1 = new Image("/assets/1.png", (gameWidth * 0.2604), (gameHeight * 0.398), false, true);
+		roll2 = new Image("/assets/2.png", (gameWidth * 0.2604), (gameHeight * 0.398), false, true);
+		roll3 = new Image("/assets/3.png", (gameWidth * 0.2604), (gameHeight * 0.398), false, true);
+		play = new Image("/assets/play.png", (gameWidth * 0.1302), (gameHeight * 0.199), true, true);
+		leaderboard = new Image("/assets/leaderboard.png", (gameWidth * 0.3906), (gameHeight * 0.796), true, true);
+		orcActor = new Actor(control.tileList.get(0).x, control.tileList.get(0).y, orc);
+		closeText = new Image("/assets/close.png", (gameWidth * 0.05), (gameHeight * 0.05), true, true);
+		eventbackground = new Image("/assets/eventbackground.png", gameWidth / 1.75, gameHeight / 1.2, true, false);
 
-				/*
-				//Set the sizes of the scene images that will go in the sceneCanvas(all the same size)
-				fishingVillage = new Image("/assets/FishingVillage.png", (gameWidth * 0.3906), (gameHeight * 0.796), true, true);
-				forest = new Image("/assets/Forest.png", (gameWidth * 0.3906), (gameHeight * 0.796), true, true);;
-				greyHills = new Image("/assets/GreyHills.png", (gameWidth * 0.3906), (gameHeight * 0.796), true, true);;
-				town = new Image("/assets/Town.png", (gameWidth * 0.3906), (gameHeight * 0.796), true, true);;
-				endGate= new Image("/assets/ChaosEndGate.png", (gameWidth * 0.3906), (gameHeight * 0.796), true, true);;
-				
-				//Set the sizes of end-scene bosses that will go in the sceneCanvas(all the same size)
-				orcThief = new Image("/assets/OrcThief.png", (gameWidth * 0.3906), (gameHeight * 0.796), true, true);;
-				troll = new Image("/assets/Troll.png", (gameWidth * 0.3906), (gameHeight * 0.796), true, true);;
-				flufflesDog = new Image("/assets/Fluffles.png", (gameWidth * 0.3906), (gameHeight * 0.796), true, true);;
-				spider = new Image("/assets/spider.png", (gameWidth * 0.3906), (gameHeight * 0.796), true, true);;
-				*/
+		/*
+		//Set the sizes of the scene images that will go in the sceneCanvas(all the same size)
+		fishingVillage = new Image("/assets/FishingVillage.png", (gameWidth * 0.3906), (gameHeight * 0.796), true, true);
+		forest = new Image("/assets/Forest.png", (gameWidth * 0.3906), (gameHeight * 0.796), true, true);;
+		greyHills = new Image("/assets/GreyHills.png", (gameWidth * 0.3906), (gameHeight * 0.796), true, true);;
+		town = new Image("/assets/Town.png", (gameWidth * 0.3906), (gameHeight * 0.796), true, true);;
+		endGate= new Image("/assets/ChaosEndGate.png", (gameWidth * 0.3906), (gameHeight * 0.796), true, true);;
+		
+		//Set the sizes of end-scene bosses that will go in the sceneCanvas(all the same size)
+		orcThief = new Image("/assets/OrcThief.png", (gameWidth * 0.3906), (gameHeight * 0.796), true, true);;
+		troll = new Image("/assets/Troll.png", (gameWidth * 0.3906), (gameHeight * 0.796), true, true);;
+		flufflesDog = new Image("/assets/Fluffles.png", (gameWidth * 0.3906), (gameHeight * 0.796), true, true);;
+		spider = new Image("/assets/spider.png", (gameWidth * 0.3906), (gameHeight * 0.796), true, true);;
+		*/
 	}
 	
 	
