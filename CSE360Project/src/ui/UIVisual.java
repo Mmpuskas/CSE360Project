@@ -14,6 +14,7 @@ import javafx.scene.text.TextAlignment;
 import javafx.scene.text.Text;
 
 import java.io.IOException;
+import java.util.spi.CurrencyNameProvider;
 
 import javafx.animation.AnimationTimer;
 import javafx.event.EventHandler;
@@ -336,10 +337,10 @@ public class UIVisual
 				}
 				else
 				{
+					control.updateScoreFromTile(curSpace);
 					orcActor.setMoving(false);
 					if(orcActor.getMoving()==false)
 					{
-						root.getChildren().add(makeMove);
 						root.getChildren().add(eventCanvas);
 						root.getChildren().add(close);	
 					}
@@ -375,6 +376,7 @@ public class UIVisual
 			 {
 				 root.getChildren().remove(close);
 				 root.getChildren().remove(eventCanvas);
+				 root.getChildren().add(makeMove);
 			 }
 		 });
 		 
@@ -416,7 +418,6 @@ public class UIVisual
 				root.getChildren().clear();
 				root.getChildren().add(gameCanvas);
 				root.getChildren().add(rollCanvas);
-				root.getChildren().add(makeMove);
 				root.getChildren().add(scoreText);
 			}
 		});

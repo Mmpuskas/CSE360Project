@@ -7,9 +7,10 @@ Contributors: Mercedes Perguson, Michael Puskas, William Chen, Yifan Li, Tony Ju
 The easiest way to play the game is to download the latest executable jar from the "Release" tab.
 
 The program can also be compiled, unit tested, and ran as normal.
-When compiling, build from src/Driver.java
+When compiling, the build on master will be the most up-to-date. The main program can be built from src/ui/Driver.java
+Tests can be ran from src/ui/JUnitTest.java
 
-Note: The program is currently targeted for 1920x1080 resolution displays. The final release will have alternatives for lower resolutions.
+This program now automatically adjusts screen resolution depending on the user's current display resolution.
 
 # Documentation
 Use Case Diagram, User Stories, Backlog in Docs folder.

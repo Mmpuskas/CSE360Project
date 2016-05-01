@@ -28,13 +28,10 @@ public class UIControl {
 	ListIterator<Tile> tileIterator;
 
 	public void initTilePositions(int gameWidth, int gameHeight) {
-		tileList.add(new Tile((int) (0.170572917 * gameWidth), (int) (0.178606965 * gameHeight))); // TODO:
-																									// Fix
-																									// this
-																									// position
+		tileList.add(new Tile((int) (0.170572917 * gameWidth), (int) (0.178606965 * gameHeight))); 
 		tileList.add(new Tile((int) (0.170572917 * gameWidth), (int) (0.278606965 * gameHeight)));
 		tileList.add(new Tile((int) (0.170572917 * gameWidth), (int) (0.378109453 * gameHeight)));
-		tileList.add(new Tile((int) (0.170572917 * gameWidth), (int) (0.47761194 * gameHeight)));
+		tileList.add(new Tile((int) (0.170572917 * gameWidth), (int) (0.48661194 * gameHeight)));
 		tileList.add(new Tile((int) (0.235677083 * gameWidth), (int) (0.487562189 * gameHeight)));
 		tileList.add(new Tile((int) (0.30078125 * gameWidth), (int) (0.497512438 * gameHeight)));
 		tileList.add(new Tile((int) (0.365885417 * gameWidth), (int) (0.497512438 * gameHeight)));
@@ -82,6 +79,7 @@ public class UIControl {
 
 		// Set intro text into first tile position
 		String introText = fullText.substring(fullText.indexOf('$') + 2, fullText.indexOf('@'));
+		tileList.get(0).setGenericEvent(introText, 0);
 		String intermediateText;
 
 		// Remove intro text from fullText
@@ -107,11 +105,28 @@ public class UIControl {
 		}
 
 	}
-
-	public void setScore(int score) {
-		currentScore = score;
+	 
+	//these 3 methods chain getter methods in Tile class and Event classes
+	
+	//this is the new control.setScore(control.getScore() + control.tileList.get(curSpace).whateverCrap();
+	//call like control.updateScoreFromTile(curSpace), it does the above^ without being confusing
+	public void updateScoreFromTile(int currentTileNum){
+		Tile currentTile = this.tileList.get(currentTileNum);
+		int scoreDeltaChange = currentTile.getScoreChangeFromEvent();
+		currentScore += scoreDeltaChange;
 	}
-
+	
+	//gets the flavor text from a tile object's index
+	public String getFlavorTextFromTile(int currentTileNum){
+		return this.tileList.get(currentTileNum).getEventFlavorText();
+	}
+	
+	//gets the aftermath text (pass/fail) from a tile object's index
+	//don't call this if its not a BossEvent, it will return null
+	public String getAftermathTextFromTile(int currentTileNum){
+		return this.tileList.get(currentTileNum).getEventAftermathText();
+	}
+	
 	public int getScore() {
 		return currentScore;
 	}
