@@ -272,6 +272,7 @@ public class UIVisual
 							txt.setPadding(new Insets(0,0,5,0));
 							vb.getChildren().add(txt);
 						}
+						//scrollbar
 						sc = new ScrollBar();
 						sc.setMin(0);
 						sc.setMax(primaryScreenBounds.getHeight());
