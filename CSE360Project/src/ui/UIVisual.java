@@ -42,17 +42,6 @@ public class UIVisual
 	private Boolean moving = false;
     private long startNanoTime;
 
-    
-    private Rectangle2D primaryScreenBounds;
-    private leaderboard lb;
-    private int[] array;
-    private VBox vb;
-    private Label title;
-    private ScrollBar sc;
-    
-	private Text txt;// it is the text events
-	private Text afterMath;
-    
 	private Image board;
 	private Image fiddy;
 	private Image orc;
@@ -75,7 +64,6 @@ public class UIVisual
 	private Image flufflesDog;
 	private Image spider;
 	
-	
 	private Actor orcActor;
 	
 	private enum Mode
@@ -87,6 +75,7 @@ public class UIVisual
 	private Mode curMode = Mode.splash;
 	
 	private UIControl control;
+    private leaderboard lb;
 
 	UIVisual(UIControl Control)
 	{
@@ -99,6 +88,7 @@ public class UIVisual
 		isRolling = false;
 		startNanoTime = System.nanoTime();
 
+		lb = new leaderboard();
 	}
 
 	/* ## Instantiating variables that ARE part of the javaFX tree ## */
@@ -125,6 +115,15 @@ public class UIVisual
 	private Button scoresButton;
 	private Text scoreText;
 	private Button close;
+    
+    private Rectangle2D primaryScreenBounds;
+    private int[] array;
+    private VBox vb;
+    private Label title;
+    private ScrollBar sc;
+    
+	private Text txt;// it is the text events
+	private Text afterMath;
 	
 	/** Initializes the member variables that pertain to the JavaFX component tree.
 	 * @throws IOException 
@@ -190,6 +189,16 @@ public class UIVisual
 
 		root.getChildren().add(splashCanvas); //Gotta start with something on the root to set the size of the window
 
+		vb = new VBox();
+		txt = new Text();
+		afterMath = new Text();
+
+		txt.setWrappingWidth(primaryScreenBounds.getWidth()/2.45);
+		txt.setText(control.getFlavorTextFromTile(0));
+		vb.setPadding(new Insets(primaryScreenBounds.getHeight()/10, 50, 500, primaryScreenBounds.getWidth()/5.5)); //(top/right/bottom/left)
+		vb.getChildren().add(txt);
+		afterMath.setWrappingWidth(primaryScreenBounds.getWidth()/2.45);
+
         //Interactables
         initButtons(gameWidth, gameHeight, rollWidth, rollHeight);
 	}
@@ -220,22 +229,7 @@ public class UIVisual
 				}
 				else if(curMode == Mode.play)
 				{
-					//adds the eventCanvas at the begining
-					if(moving == false)
-					{
-						vb = new VBox();
-						txt = new Text();
-						txt.setWrappingWidth(primaryScreenBounds.getWidth()/2.45);
-						txt.setText(control.getFlavorTextFromTile(0));
-						vb.setPadding(new Insets(primaryScreenBounds.getHeight()/10, 50, 500, primaryScreenBounds.getWidth()/5.5)); //(top/right/bottom/left)
-						vb.getChildren().add(txt);
-						
-						root.getChildren().add(eventCanvas);
-						root.getChildren().add(vb);
-						root.getChildren().add(close);
-						moving = true;
-					}
-						playLogic(currentNanoTime);
+					playLogic(currentNanoTime);
 				}
 				else if(curMode == Mode.scores)
 				{
@@ -243,17 +237,13 @@ public class UIVisual
 					{
 						theStage.setTitle("Leaderboards");//title
 						primaryScreenBounds = Screen.getPrimary().getVisualBounds();
-						lb = new leaderboard();
 						try {
 							lb.setPointsArray();
 						} catch (Exception e) {
-							// TODO Auto-generated catch block
 							System.out.println("There aren't any pointers");
-							e.printStackTrace();
 						}
 				
 						array = lb.getTopTen();
-						vb = new VBox();
 						vb.setPadding(new Insets(25, 50, 50, primaryScreenBounds.getWidth()/3+25)); //(top/right/bottom/left)
 						title= new Label("Leaderboards\n");
 						title.setPadding(new Insets(0,0,10,0));
@@ -354,29 +344,19 @@ public class UIVisual
 				}
 				else
 				{
-					control.updateScoreFromTile(curSpace);
 					orcActor.setMoving(false);
-					if(orcActor.getMoving()==false)
+					control.updateScoreFromTile(curSpace);
+
+					txt.setText(control.getFlavorTextFromTile(count));
+					root.getChildren().add(eventCanvas);
+					root.getChildren().add(vb);
+					root.getChildren().add(close);	
+
+					if(curSpace % 5 == 0 && curSpace > 0)
 					{
-						vb = new VBox();
-						txt = new Text();
-						afterMath = new Text();
-						txt.setWrappingWidth(primaryScreenBounds.getWidth()/2.45);
-						txt.setText(control.getFlavorTextFromTile(count));
-						if(count % 5 == 0 && count!=0)
-							{
-								afterMath.setWrappingWidth(primaryScreenBounds.getWidth()/2.45);
-								afterMath.setText(control.getAftermathTextFromTile(count));
-							}
-						vb.setPadding(new Insets(primaryScreenBounds.getHeight()/10, 50, 500, primaryScreenBounds.getWidth()/5.5)); //(top/right/bottom/left)
-						vb.getChildren().add(txt);
-						vb.getChildren().add(afterMath);
-						root.getChildren().add(eventCanvas);
-						root.getChildren().add(vb);
-						root.getChildren().add(close);	
-						if(curSpace % 5 == 0 && curSpace != 0){ 
-							root.getChildren().add(bossCanvas);
-						}
+						control.setTileVisited(curSpace);
+						afterMath.setText(control.getAftermathTextFromTile(count));
+						root.getChildren().add(bossCanvas);
 					}
 				}
 			}
@@ -462,6 +442,10 @@ public class UIVisual
 				root.getChildren().add(gameCanvas);
 				root.getChildren().add(rollCanvas);
 				root.getChildren().add(scoreText);
+						
+				root.getChildren().add(eventCanvas);
+				root.getChildren().add(vb);
+				root.getChildren().add(close);
 			}
 		});
 
