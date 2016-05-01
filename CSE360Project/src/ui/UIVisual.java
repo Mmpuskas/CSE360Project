@@ -400,7 +400,7 @@ public class UIVisual
 	 {
 		 //close button
 		 close = new Button();
-		 close.relocate(gameCanvas.getWidth() / 2 - close.getWidth(), gameCanvas.getHeight() * 10.95 / 12);
+		 close.relocate(eventCanvas.getLayoutX() + eventCanvas.getWidth() / 2 - closeText.getWidth() / 1.6, gameCanvas.getHeight() * 10.95 / 12);
 		 ImageView closeImage = new ImageView();
 		 closeImage.imageProperty().set(closeText);        
 		 close.setGraphic(closeImage);
