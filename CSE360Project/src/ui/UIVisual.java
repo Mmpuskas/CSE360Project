@@ -13,6 +13,7 @@ import javafx.scene.control.Button;
 import javafx.scene.text.TextAlignment;
 import javafx.scene.text.Text;
 
+import java.awt.TextField;
 import java.io.IOException;
 import java.util.spi.CurrencyNameProvider;
 
@@ -41,15 +42,20 @@ public class UIVisual
 	private Boolean isRolling; //True during dice roll animation
 	private int spacesToMove; //The number of spaces from 1-3 that need to be moved based on the dice roll
 	private int curSpace;
+	private int count = 0; //count the number of spaces to draw text event
 	private Boolean moving = false;
     private long startNanoTime;
 
+    
     private Rectangle2D primaryScreenBounds;
     private leaderboard lb;
     private int[] array;
     private VBox vb;
     private Label title;
     private ScrollBar sc;
+    
+	private Text txt;// it is the text events
+	private Text afterMath;
     
 	private Image board;
 	private Image fiddy;
@@ -215,7 +221,15 @@ public class UIVisual
 					//adds the eventCanvas at the begining
 					if(moving == false)
 					{
+						vb = new VBox();
+						txt = new Text();
+						txt.setWrappingWidth(primaryScreenBounds.getWidth()/2.45);
+						txt.setText(control.getFlavorTextFromTile(0));
+						vb.setPadding(new Insets(primaryScreenBounds.getHeight()/10, 50, 500, primaryScreenBounds.getWidth()/5.5)); //(top/right/bottom/left)
+						vb.getChildren().add(txt);
+						
 						root.getChildren().add(eventCanvas);
+						root.getChildren().add(vb);
 						root.getChildren().add(close);
 						moving = true;
 					}
@@ -284,6 +298,7 @@ public class UIVisual
 	 */
 	public void playLogic(long currentNanoTime)
 	{
+		
 		if(isRolling) //Trigger this when you want to roll the dice
 		{
 			int timeDif = (int) ((currentNanoTime - startNanoTime) / 100000000);
@@ -335,13 +350,28 @@ public class UIVisual
 					orcActor.setTargetY(control.tileList.get(curSpace).y);
 					spacesToMove--;
 				}
+				////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 				else
 				{
 					control.updateScoreFromTile(curSpace);
 					orcActor.setMoving(false);
 					if(orcActor.getMoving()==false)
 					{
+						vb = new VBox();
+						txt = new Text();
+						afterMath = new Text();
+						txt.setWrappingWidth(primaryScreenBounds.getWidth()/2.45);
+						txt.setText(control.getFlavorTextFromTile(count));
+						if(count % 5 == 0 && count!=0)
+							{
+								afterMath.setWrappingWidth(primaryScreenBounds.getWidth()/2.45);
+								afterMath.setText(control.getAftermathTextFromTile(count));
+							}
+						vb.setPadding(new Insets(primaryScreenBounds.getHeight()/10, 50, 500, primaryScreenBounds.getWidth()/5.5)); //(top/right/bottom/left)
+						vb.getChildren().add(txt);
+						vb.getChildren().add(afterMath);
 						root.getChildren().add(eventCanvas);
+						root.getChildren().add(vb);
 						root.getChildren().add(close);	
 					}
 				}
@@ -375,6 +405,7 @@ public class UIVisual
 			 @Override public void handle(ActionEvent e) 
 			 {
 				 root.getChildren().remove(close);
+				 root.getChildren().remove(vb);
 				 root.getChildren().remove(eventCanvas);
 				 root.getChildren().add(makeMove);
 			 }
@@ -394,7 +425,8 @@ public class UIVisual
 			{
 				root.getChildren().remove(makeMove); //Get the roll button out of the way
 				spacesToMove = (int) (Math.random() * 3) + 1; //Set the spaces to move to a random number
-
+				count+=spacesToMove;
+				
 				orcActor.setTargetX(control.tileList.get(curSpace + 1).x);
 				orcActor.setTargetY(control.tileList.get(curSpace).y + 1);
 
