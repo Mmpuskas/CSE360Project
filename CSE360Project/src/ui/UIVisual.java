@@ -196,13 +196,13 @@ public class UIVisual
 		vb.setPadding(new Insets(primaryScreenBounds.getHeight()/10, 50, 500, primaryScreenBounds.getWidth()/5.5)); //(top/right/bottom/left)
 		vb.getChildren().add(txt);
 		afterMath.setWrappingWidth(primaryScreenBounds.getWidth()/2.45);
-		txt.setFont(Font.font ("Times New Roman", 17));
-		afterMath.setFont(Font.font ("Times New Roman", 17));
+		txt.setFont(Font.font ("Times New Roman", 15));
+		afterMath.setFont(Font.font ("Times New Roman", 15));
 		if(primaryScreenBounds.getHeight()>800 &&primaryScreenBounds.getWidth()>1000)
 		{
 			//edit the screen size for 1080 res
-			txt.setFont(Font.font ("Times New Roman", 24));
-			afterMath.setFont(Font.font ("Times New Roman", 24));
+			txt.setFont(Font.font ("Times New Roman", 18));
+			afterMath.setFont(Font.font ("Times New Roman", 18));
 		}
         //Interactables
         initButtons(gameWidth, gameHeight, rollWidth, rollHeight);
@@ -240,6 +240,7 @@ public class UIVisual
 				{
 					if(!root.getChildren().contains(playButton))
 					{
+						vb.getChildren().clear();
 						theStage.setTitle("Leaderboards");//title
 						primaryScreenBounds = Screen.getPrimary().getVisualBounds();
 						try {
@@ -271,11 +272,10 @@ public class UIVisual
 						sc.setOrientation(Orientation.VERTICAL);
 						sc.setPrefHeight(primaryScreenBounds.getHeight());
 						sc.setLayoutX(theScene.getWidth()-sc.getWidth());
-						sc.valueProperty().addListener(event->{title.setTranslateY(50+sc.getValue());});
-						sc.valueProperty().addListener(event->{vb.setTranslateY(50+sc.getValue());});
+						sc.valueProperty().addListener(event->{vb.setTranslateY(50-sc.getValue());});
 						
 						playButton.relocate(primaryScreenBounds.getWidth() * 7.5 / 12, primaryScreenBounds.getHeight() * 9 / 12);
-					
+						
 						root.getChildren().clear();
 						root.getChildren().add(splashCanvas);
 						root.getChildren().add(vb);
@@ -369,7 +369,7 @@ public class UIVisual
 						control.setTileVisited(curSpace);
 						afterMath.setText(control.getAftermathTextFromTile(curSpace));
 						vb.getChildren().add(afterMath);
-;						root.getChildren().add(bossCanvas);
+						root.getChildren().add(bossCanvas);
 					}
 					txt.setText(control.getFlavorTextFromTile(curSpace));
 					root.getChildren().add(eventCanvas);
@@ -405,9 +405,18 @@ public class UIVisual
 		 {
 			 @Override public void handle(ActionEvent e) 
 			 {
+				 if(curSpace==25)
+				 {
+					 root.getChildren().remove(close);
+					 root.getChildren().remove(vb);
+					 root.getChildren().remove(eventCanvas);
+					 root.getChildren().add(scoresButton); 
+				 }
 				 if(curSpace % 5 == 0 && curSpace != 0)
+				 { 
 					 root.getChildren().remove(bossCanvas);
-				 
+				   	 vb.getChildren().remove(afterMath);
+				 }
 				 if(curSpace < 25)
 				 {
 					 root.getChildren().remove(close);
