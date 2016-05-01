@@ -111,11 +111,13 @@ public class UIVisual
 
 	//Create a sceneCanvas where the scene imgae is displayed at the top and text in the rest of the portion
 	private Canvas eventCanvas;
+	private Canvas bossCanvas; // for drawing boss 
 	private GraphicsContext gameGC;
 	private GraphicsContext rollGC;
 	private GraphicsContext splashGC;
 	private GraphicsContext scoreGC;
 	private GraphicsContext eventGC;   //new add
+	private GraphicsContext bossGC; 
 	private Button makeMove;
 	private Button playButton;
 	private Button scoresButton;
@@ -158,15 +160,18 @@ public class UIVisual
         splashCanvas = new Canvas(gameWidth, gameHeight);
         scoresCanvas = new Canvas(gameWidth, gameHeight);
         eventCanvas = new Canvas(gameWidth/1.75, gameHeight/1.2);
+        bossCanvas = new Canvas(rollWidth*3/5, rollHeight*4/5);
 
 		gameGC = gameCanvas.getGraphicsContext2D();
 		rollGC = rollCanvas.getGraphicsContext2D();
 		splashGC = splashCanvas.getGraphicsContext2D();
 		scoreGC = scoresCanvas.getGraphicsContext2D();
 		eventGC = eventCanvas.getGraphicsContext2D();
-
+		bossGC = bossCanvas.getGraphicsContext2D();
+		
         rollCanvas.relocate((gameWidth / 2) - (rollWidth / 2), (gameHeight / 2) - (rollHeight / 2)); //Sets placement of roll window
         eventCanvas.relocate((gameWidth / 2 - gameWidth / 3.7), (gameHeight / 12));//
+        bossCanvas.relocate(gameWidth * 5/6, gameHeight * 1/6);
         
         //Score text sits at the top of the screen
         scoreText = new Text("" + control.getScore());
@@ -179,6 +184,7 @@ public class UIVisual
         scoreGC.drawImage(splash, 0, 0 );
         splashGC.drawImage(splash, 0, 0);
         eventGC.drawImage(eventbackground, 0, 0);
+        bossGC.drawImage(splash, 0, 0);
 
 		root.getChildren().add(splashCanvas); //Gotta start with something on the root to set the size of the window
 
@@ -343,6 +349,9 @@ public class UIVisual
 					{
 						root.getChildren().add(eventCanvas);
 						root.getChildren().add(close);	
+						if(curSpace % 5 == 0 && curSpace != 0){ 
+							root.getChildren().add(bossCanvas);
+						}
 					}
 				}
 			}
@@ -376,6 +385,9 @@ public class UIVisual
 			 {
 				 root.getChildren().remove(close);
 				 root.getChildren().remove(eventCanvas);
+				 if(curSpace % 5 == 0 && curSpace != 0){
+					 root.getChildren().remove(bossCanvas);
+				 }
 				 root.getChildren().add(makeMove);
 			 }
 		 });
