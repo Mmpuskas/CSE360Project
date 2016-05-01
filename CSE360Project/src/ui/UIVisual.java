@@ -337,10 +337,18 @@ public class UIVisual
 			{
 				if(spacesToMove > 0)
 				{	
-					curSpace++;
-					orcActor.setTargetX(control.tileList.get(curSpace).x);
-					orcActor.setTargetY(control.tileList.get(curSpace).y);
-					spacesToMove--;
+					if(curSpace % 5 == 0 && curSpace > 0 && !control.getTileVisited(curSpace))
+					{
+						spacesToMove = 0;
+						control.setTileVisited(curSpace);
+					}
+					else
+					{
+						curSpace++;
+						orcActor.setTargetX(control.tileList.get(curSpace).x);
+						orcActor.setTargetY(control.tileList.get(curSpace).y);
+						spacesToMove--;
+					}
 				}
 				else
 				{
