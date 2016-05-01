@@ -4,7 +4,7 @@ import java.util.Arrays;
 
 /**
  * 
- * @author Mercedes
+ * @author  Mercedes, Yifan
  * Purpose: Keep track of the score of the user. 
  * 	Also, utilize leaderboardRepsository.txt to save all scores and retrieve the highest top 10 scores.
  */
@@ -20,10 +20,51 @@ public class leaderboard
 	//default construct
 	public leaderboard()
 	{
-		totalScore = 0;
-		highestScore = 0;
+		try{
+			setPointsArray();
+		}
+		catch(Exception ex){
+			ex.printStackTrace();
+		}
+		
 	}
-
+	
+	public void setNewScore(int newScore) throws IOException{
+		insertScore(newScore);
+	}
+	
+	/**
+	 * getTopTen()
+	 * @return the array of top 10 scores
+	 */
+	public int[] getTopTen()
+	{
+		return topTen;
+	}
+	
+	public void setScoreTableForUnitTest() throws IOException{
+		
+		String allData;
+		StringBuilder sb = new StringBuilder();
+		for(int i = 1; i <= 10; i++){
+			sb.append(i);
+			sb.append("\n");
+		}
+		allData = sb.toString();
+		
+		String historyPath = new File("").getAbsolutePath() + "/src/text/leaderboardRepository.txt";
+		
+		File tempFile = new File(historyPath);
+		FileOutputStream fStream = new FileOutputStream(tempFile, false);	                                                                
+		byte[] myBytes = allData.getBytes(); 
+		fStream.write(myBytes);
+		fStream.close();
+		 
+	
+	}
+	
+	
+	
 	//getters & setters
 	
 	/**
@@ -63,14 +104,8 @@ public class leaderboard
 		this.highestScore = highestScore;
 	}
 	
-	/**
-	 * getTopTen()
-	 * @return the array of top 10 scores
-	 */
-	public int[] getTopTen()
-	{
-		return topTen;
-	}
+	
+	
 	
 	/**
 	 * getStringData()
@@ -128,10 +163,7 @@ public class leaderboard
 			 
 		 bubbleSort(topTen);
 		 
-		 /*for(int i = 0; i < TOP_TEN; i++)
-		 {
-			 System.out.println(topTen[i]);
-		 }*/
+		 
 	}
 	
 	/**

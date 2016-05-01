@@ -1,4 +1,9 @@
 package ui;
+/** Represents a boss event
+ * 
+ * @author Yifan Li
+ *
+ */
 
 import java.util.Random;
 

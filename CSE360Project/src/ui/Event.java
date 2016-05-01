@@ -1,4 +1,9 @@
 package ui;
+/** Inherited by boss event and Generic event.
+ * 
+ * @author Yifan Li
+ *
+ */
 
 abstract class Event{
 	private String flavorText;
