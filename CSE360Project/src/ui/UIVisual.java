@@ -206,7 +206,7 @@ public class UIVisual
 
 		txt.setText(control.getFlavorTextFromTile(0));
 		vb.getChildren().add(txt);
-		vb.getChildren().add(afterMath);
+		
 		leaderboardVB.getChildren().add(title);
 		sc.setOrientation(Orientation.VERTICAL);
 		sc.setMin(0);
@@ -225,8 +225,8 @@ public class UIVisual
 		vb.setPadding(new Insets(.11 * gameHeight, .047 * gameWidth, .75 * gameHeight, .25 * gameWidth)); //(top/right/bottom/left)
 		title.setPadding(new Insets(0, 0, .0097 * gameWidth, 0));
 		title.setFont(Font.font("Times New Roman", .059 * gameHeight));
-		txt.setFont(Font.font("Times New Roman", .022 * gameHeight));
-		afterMath.setFont(Font.font("Times New Roman", .022 * gameHeight));
+		txt.setFont(Font.font("Times New Roman", .021 * gameHeight));
+		afterMath.setFont(Font.font("Times New Roman", .021 * gameHeight));
 		leaderboardVB.relocate(gameWidth * 6.2/12, gameHeight * 1.3/25);
 		for(int i = 0; i < 10; i++)
 		{
@@ -375,8 +375,8 @@ public class UIVisual
 					if(curSpace % 5 == 0 && curSpace > 0)
 					{
 						control.setTileVisited(curSpace);
-						afterMath.setText(control.getAftermathTextFromTile(curSpace));
-						
+						afterMath.setText("\n" + control.getAftermathTextFromTile(curSpace));
+						vb.getChildren().add(afterMath); 
 						bossGC.clearRect(0, 0, bossCanvas.getWidth(), bossCanvas.getHeight());
 						switch(curSpace / 5)
 						{
@@ -460,6 +460,7 @@ public class UIVisual
 		{
 			@Override public void handle(ActionEvent e) 
 			{
+				vb.getChildren().remove(afterMath);
 				root.getChildren().remove(makeMove); //Get the roll button out of the way
 				spacesToMove = (int) (Math.random() * 3) + 1; //Set the spaces to move to a random number
 				
