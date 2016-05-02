@@ -49,6 +49,16 @@ public class Actor
 		targetY = y;
 	}
 	
+	public void setCurX(int x)
+	{
+		curX = x;
+	}
+
+	public void setCurY(int y)
+	{
+		curY = y;
+	}
+
 	public void setMoving(boolean b)
 	{
 		isMoving = b;

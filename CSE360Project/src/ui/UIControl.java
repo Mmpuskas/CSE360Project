@@ -127,6 +127,11 @@ public class UIControl {
 		return this.tileList.get(currentTileNum).getEventAftermathText();
 	}
 	
+	public void setScore(int score)
+	{
+		currentScore = score;
+	}
+
 	public int getScore() {
 		return currentScore;
 	}
@@ -136,6 +141,11 @@ public class UIControl {
 		this.tileList.get(currentTileNum).setVisited();
 	}
 	
+	public void setTileNotVisited(int currentTileNum)
+	{
+		this.tileList.get(currentTileNum).setNotVisited();
+	}
+
 	public boolean getTileVisited(int currentTileNum)
 	{
 		return this.tileList.get(currentTileNum).getVisited();

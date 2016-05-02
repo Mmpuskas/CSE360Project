@@ -61,7 +61,12 @@ public class Tile
 	
 	public void setVisited()
 	{
-		wasVisited = true;
+			wasVisited = true;
+	}
+	
+	public void setNotVisited()
+	{
+			wasVisited = false;
 	}
 	
 	public boolean getVisited()

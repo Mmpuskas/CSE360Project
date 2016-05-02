@@ -201,6 +201,7 @@ public class UIVisual
 		vb.setPadding(new Insets(primaryScreenBounds.getHeight()/10, 50, 500, primaryScreenBounds.getWidth()/5.5)); //(top/right/bottom/left)
 		leaderboardVB.setPadding(new Insets(primaryScreenBounds.getHeight()/10, 50, 500, primaryScreenBounds.getWidth()/5.5)); //(top/r
 		vb.getChildren().add(txt);
+		vb.getChildren().add(afterMath);
 		afterMath.setWrappingWidth(primaryScreenBounds.getWidth()/2.45);
 		txt.setFont(Font.font ("Times New Roman", 15));
 		afterMath.setFont(Font.font ("Times New Roman", 15));
@@ -369,7 +370,6 @@ public class UIVisual
 					{
 						control.setTileVisited(curSpace);
 						afterMath.setText(control.getAftermathTextFromTile(curSpace));
-						vb.getChildren().add(afterMath);
 						root.getChildren().add(bossCanvas);
 					}
 					txt.setText(control.getFlavorTextFromTile(curSpace));
@@ -446,9 +446,6 @@ public class UIVisual
 				root.getChildren().remove(makeMove); //Get the roll button out of the way
 				spacesToMove = (int) (Math.random() * 3) + 1; //Set the spaces to move to a random number
 				
-				orcActor.setTargetX(control.tileList.get(curSpace + 1).x);
-				orcActor.setTargetY(control.tileList.get(curSpace).y + 1);
-
 				startNanoTime = System.nanoTime();
 				isRolling = true;
 			}
@@ -475,6 +472,15 @@ public class UIVisual
 				root.getChildren().add(eventCanvas);
 				root.getChildren().add(vb);
 				root.getChildren().add(close);
+
+				orcActor.setTargetX(control.tileList.get(0).x);
+				orcActor.setTargetY(control.tileList.get(0).y);
+				orcActor.setCurX(control.tileList.get(0).x);
+				orcActor.setCurY(control.tileList.get(0).y);
+				control.setScore(0);
+				
+				for(int i = 0; i < 25; i++)
+					control.setTileNotVisited(i);
 			}
 		});
 
