@@ -62,6 +62,11 @@ public class UIVisual
 	private Image troll;
 	private Image flufflesDog;
 	private Image spider;
+	private Image boss1;
+	private Image boss2;
+	private Image boss3;
+	private Image boss4;
+	private Image boss5;
 	
 	private Actor orcActor;
 	
@@ -162,7 +167,7 @@ public class UIVisual
         splashCanvas = new Canvas(gameWidth, gameHeight);
         scoresCanvas = new Canvas(gameWidth, gameHeight);
         eventCanvas = new Canvas(gameWidth/1.75, gameHeight/1.2);
-        bossCanvas = new Canvas(rollWidth*3/5, rollHeight*4/5);
+        bossCanvas = new Canvas(rollWidth * 3/4, rollHeight * 3/4);
 
 		gameGC = gameCanvas.getGraphicsContext2D();
 		rollGC = rollCanvas.getGraphicsContext2D();
@@ -173,7 +178,7 @@ public class UIVisual
 		
         rollCanvas.relocate((gameWidth / 2) - (rollWidth / 2), (gameHeight / 2) - (rollHeight / 2)); //Sets placement of roll window
         eventCanvas.relocate((gameWidth / 2 - gameWidth / 3.7), (gameHeight / 12));//
-        bossCanvas.relocate(gameWidth * 5/6, gameHeight * 1/6);
+        bossCanvas.relocate(gameWidth * 4.8/6, gameHeight * 1/6);
         
         //Score text sits at the top of the screen
         scoreText = new Text("" + control.getScore());
@@ -370,6 +375,17 @@ public class UIVisual
 					{
 						control.setTileVisited(curSpace);
 						afterMath.setText(control.getAftermathTextFromTile(curSpace));
+						
+						bossGC.clearRect(0, 0, bossCanvas.getWidth(), bossCanvas.getHeight());
+						switch(curSpace / 5)
+						{
+							case 1: bossGC.drawImage(boss1, 0, 0); break;
+							case 2: bossGC.drawImage(boss2, 0, 0); break;
+							case 3: bossGC.drawImage(boss3, 0, 0); break;
+							case 4: bossGC.drawImage(boss4, 0, 0); break;
+							case 5: bossGC.drawImage(boss5, 0, 0); break;
+						}
+						
 						root.getChildren().add(bossCanvas);
 					}
 					txt.setText(control.getFlavorTextFromTile(curSpace));
@@ -481,6 +497,8 @@ public class UIVisual
 				
 				for(int i = 0; i < 25; i++)
 					control.setTileNotVisited(i);
+
+				txt.setText(control.getFlavorTextFromTile(0));
 			}
 		});
 
@@ -537,7 +555,6 @@ public class UIVisual
 	public void initImages(int gameWidth, int gameHeight)
 	{
 		//Character and non-interactable assets
-		fiddy = new Image("/assets/111209-50-cent.png", (gameWidth * 0.0911), (gameHeight * 0.199), true, true);
 		orc = new Image("/assets/orc.png", (gameWidth * 0.0911), (gameHeight * 0.199), true, true);
 		roll1 = new Image("/assets/1.png", (gameWidth * 0.2604), (gameHeight * 0.398), false, true);
 		roll2 = new Image("/assets/2.png", (gameWidth * 0.2604), (gameHeight * 0.398), false, true);
@@ -548,6 +565,11 @@ public class UIVisual
 		closeText = new Image("/assets/close.png", (gameWidth * 0.05), (gameHeight * 0.05), true, true);
 		eventbackground = new Image("/assets/eventbackground.png", gameWidth / 1.75, gameHeight / 1.2, true, false);
 		endGameImage = new Image("/assets/leaderboard.png", (gameWidth * 0.05), (gameHeight * 0.05), true, true);
+		boss1 = new Image("/assets/boss1.png", (gameWidth * 3/4 * 0.2604), (gameHeight * 3/4 * 0.398), true, true);
+		boss2 = new Image("/assets/boss2.png", (gameWidth * 3/4 * 0.2604), (gameHeight * 3/4 * 0.398), true, true);
+		boss3 = new Image("/assets/boss3.png", (gameWidth * 3/4 * 0.2604), (gameHeight * 3/4 * 0.398), true, true);
+		boss4 = new Image("/assets/boss4.png", (gameWidth * 3/4 * 0.2604), (gameHeight * 3/4 * 0.398), true, true);
+		boss5 = new Image("/assets/111209-50-cent.png", (gameWidth * 3/4 * 0.2604), (gameHeight * 3/4 * 0.398), true, true);
 
 		/*
 		//Set the sizes of the scene images that will go in the sceneCanvas(all the same size)
