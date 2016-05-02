@@ -52,7 +52,7 @@ public class leaderboard
 		}
 		allData = sb.toString();
 		
-		String historyPath = new File("").getAbsolutePath() + "/src/text/leaderboardRepository.txt";
+		String historyPath = "src/text/leaderboardRepository.txt";
 		
 		File tempFile = new File(historyPath);
 		FileOutputStream fStream = new FileOutputStream(tempFile, false);	                                                                
@@ -101,9 +101,6 @@ public class leaderboard
 		this.highestScore = highestScore;
 	}
 	
-	
-	
-	
 	/**
 	 * getStringData()
 	 * @return a string of scores seperated by tabs
@@ -137,30 +134,21 @@ public class leaderboard
 	{	//keep public
 		//read all points from file and save to array to access easily
 		 String	thisLine = null;
-		 String historyPath = new File("").getAbsolutePath() + "/src/text/leaderboardRepository.txt";
 		 int counter = 0;
 		 int tempHolder;
+ 		 InputStream in = getClass().getResourceAsStream("/text/leaderboardRepository.txt");
+		 BufferedReader br = new BufferedReader(new InputStreamReader(in));	
 		 
-		 try
+		 while(((thisLine = br.readLine()) != null) && (counter < TOP_TEN))
 		 {
-			 BufferedReader br = new BufferedReader(new FileReader(historyPath));
-			 
-			 while(((thisLine = br.readLine()) != null) && (counter < TOP_TEN))
-			 {
-				 tempHolder = Integer.parseInt(thisLine);
-				 topTen[counter] = tempHolder;
-				// System.out.println(topTen[counter]);
-				 counter++;
-			 }	 
-		 }
-		 catch(Exception e)
-		 {
-			 e.printStackTrace();
+			 tempHolder = Integer.parseInt(thisLine);
+			 topTen[counter] = tempHolder;
+			// System.out.println(topTen[counter]);
+			 counter++;
 		 }	 
 			 
 		 bubbleSort(topTen);
-		 
-		 
+		 br.close();
 	}
 	
 	/**

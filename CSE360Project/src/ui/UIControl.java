@@ -2,9 +2,12 @@ package ui;
 
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.LinkedList;
 import java.util.ListIterator;
 
@@ -63,16 +66,17 @@ public class UIControl {
 	 * @throws IOException
 	 * 
 	 */
-	public void initEvents() {
+	public void initEvents(){
 		String line = null;
-		String path = new File("").getAbsolutePath() + "/src/text/EventText.txt";
 		String fullText = new String();
+		InputStream in = getClass().getResourceAsStream("/text/EventText.txt");
+		BufferedReader br = new BufferedReader(new InputStreamReader(in));	
 
-		try {
-			BufferedReader br = new BufferedReader(new FileReader(path));
-			while ((line = br.readLine()) != null) {
+		try 
+		{
+			while ((line = br.readLine()) != null) 
 				fullText += line + "\n";
-			}
+			br.close();
 		} catch (IOException ex) {
 			System.out.println("ERROR: Event file not found.");
 		}
@@ -103,7 +107,6 @@ public class UIControl {
 				tileList.get(i).setGenericEvent(flavorText, pointsChange);
 			}
 		}
-
 	}
 	 
 	//these 3 methods chain getter methods in Tile class and Event classes
