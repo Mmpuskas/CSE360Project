@@ -23,7 +23,7 @@ As you take your first step outside of the village, your stomach bubbles with ex
 Spending entire days walking has proven to be more harrowing than you expected, but your determination sees you through. You've noticed a small pack of wolves traveling in the same direction as you. You catch glimpses of them resting in the distance every few hours. You've named the big one Brownie. Your desire to see where they end up has proven to be good motivation to keep walking.
 @
 5
-
+	
 3)
 While following the road to town, you encounter a group of young traders heading in the opposite direction. You smile and nod politely to each-other in passing. Just as you begin to inwardly remark about how pleasant of an exchange it was, the back of your head has its own exchange with a foreign object. The type of thing that makes a dull THUNK sound. Maybe a brick, or a large book. A thesaurus, possibly. Regardless, you wake up on the side of the road with a large bump on the back of your head. You were lucky enough to have not been looted by the rapscallions, but you'll think twice before trusting children in the future.
 @
@@ -43,11 +43,12 @@ PASS:
 You convince Fluffles to return home. After one more quick belly rub, you both head your separate ways.
 @
 10
+@
 FAIL:
 You fail to convince Fluffles to return home. Instead, you're forced to slap him across the muzzle and yell at him before he gets the idea. He begins to make his way back home with his head hung so low that his nose is nearly scraping the dirt.
 @
 -10
-
+@
 
 Grey Hills:
 1)
@@ -61,7 +62,8 @@ You've been following a beetle for the past five hours. It travels slightly slow
 5
 
 3)
-Three-hundred and fourteen, three-hundred and fifteen, three-hundred and... What's that? You swear you just heard the faint sound of sand shifting somewhere to your left. Your heart starts racing. You've never been ambushed before. You begin to wonder what it will be like. Will your attacker be a large sand worm? Maybe an antlion! Ooh boy, you can't wait to show it what you're made of!
+Three-hundred and fourteen, three-hundred and fifteen, three-hundred and... What's that? 
+You swear you just heard the faint sound of sand shifting somewhere to your left. Your heart starts racing. You've never been ambushed before. You begin to wonder what it will be like. Will your attacker be a large sand worm? Maybe an antlion! Ooh boy, you can't wait to show it what you're made of!
 You soon realize that you've been daydreaming about fighting an antlion for the past three minutes. Seeing as how you haven't been ambushed yet, the sound must have just been the wind playing tricks. You hang your head slightly lower as you resume your trundle onward. What number were you on again? ... One, two....
 @
 0
@@ -84,10 +86,12 @@ You tell Kevin that you know that he's an orc pretending to be a troll, but you 
 "Well then, I feel inclined to let an eagle-eyed orc such as yourself pass unaccosted. I appreciate you keeping my secret safe, it's a large part of what makes me such a successful highwayman."
 @
 10
+@
 FAIL:
 You begin to explain to Kevin that you're on your way to Chaos End. Before you can finish your story, he throws a hand-sized stone at your head, which strikes your helmet with a loud CLANG. Your eyes water from the vibration as you run past the boxes towards the town. You get far enough away that Kevin decides you aren't worth chasing.
 @
 -5
+@
 
 Town:
 1)
@@ -126,29 +130,30 @@ You ask the innkeeper if the town has an apothecary. He gives you directions to 
 
 The shopkeep is a tiny old orc that walks with a wooden cane carved in the shape of a femur. "Hello adventurer! What can I get you? Some health potions maybe? A cavada berry smoothie, perhaps? Very good for getting a chance at those girls that won't give you the time of day, you know. Fair prices for everything that I sell!" 
 
-You ask the shopkeep about anti-venom for the spiders up ahead. He supplies you with two bottles full of a blue liquid that he assures you will keep your skin on your bones and your head hallucination-free (Or your money back).
+You ask the shopkeep about anti-venom for the spiders up ahead. He supplies you with two bottles full of a blue liquid that he assures you will keep your skin on your bones and your head hallucination-free [Or your money back].
 @
 5
 
 5)
 After a few days' rest, you pack your bags and head towards the road out of town. As you approach the gate, a man bumps into you.
+@
 Pass:
 You instinctively reach for your belt and find the man's hand grasping for your coin purse. You seize the man's arm and drag him to a nearby guard who promises that the town doesn't take lightly to thieves.
 @
 10
+@
 Fail:
 You apologize to the man, and he apologizes back. You're delighted by the pleasantry, but can't help but feel that something isn't quite right.
 @
 -10
-
-
+@
 Eight-Legged Forest:
 1)
 You stand at the edge of an enormous forest. Large grey trunks topped with dark green foliage extend as far as you can see in either direction. The trees grow so closely together that you can't imagine how they all survive with no river nearby. There are no paths to be taken, but after a bit of searching you find a gap in the trees around the size of an orc. You take a deep breath and venture inside.
 
 Traveling inside the forest is slow. It's dark, and there's dense growth to cut through everywhere. Eventually the sun begins to set, and the small amount of light that was visible through the tops of the trees disappears. You find a nice flat stone to sleep on.
 @
-0
++0
 
 2)
 Another day passes as you travel through the forest. Though it's been uneventful so far, you know better than to let your guard down. You find yourself exhausting much more quickly than usual, perhaps due to your constant alertness. You clear a small camp as the light fades for the second time.
@@ -189,14 +194,15 @@ As you approach the halfway point, an enormous spider begins to slide down a str
 PASS:
 You run under the spider before it can land. It tries to snap at you as you approach, but it isn't quite used to hunting prey that doesn't trip over itself in fear. From under the spider, you pierce your sword into its mighty gut and drag a large, life-ending cut deep into it. As your sword digs through the spider, a wave of viscera washes over you. You're lucky that the spider fell forward in its death throes, else you would've been crushed under its weight. Reeking of spider death and forest rot, you finally exit the forest.
 @
-15
++15
+@
 FAIL:
 You attempt to run under the spider before it can land. Unfortunately for you, running was never your specialty. The spider gnashes a solid bite into your side before you can get past it. It then re-orients itself to face you. You aren't dead, but the muscles in your side are partially cut, and you're bleeding everywhere. Luckily for you, the spider didn't consider that you now have a direct line to the edge of the forest.
 You stumble out of the forest and run twenty paces before collapsing on the ground. You remember that you have an anti venom left and decide your only chance at living is to pour it on the wound and hope that it does everything that the apothecary claimed it to do. It fizzes and foams on the wound, causing an unbearable agony. You quickly succumb to the pain and lose consciousness.
 You awake some time around sunset. Looking at your wound, it appears to have closed. It quite obviously will never fully recover, but you feel able enough to set up camp and survive the night.
 @
 -15
-
+@
 
 Chaos End:
 1)
@@ -204,7 +210,7 @@ This is it. The final stretch. Unfortunately, it's not quite the field of daisie
 
 You begin the final leg of your journey. No longer held adrift by your font of optimism, a steadfast resolve now carries you forward. You haven't come this far to be turned away with your goal in your sight.
 @
-10
++10
 
 2)
 You're woken by the intense heat. A font of lava is erupting from a large hole in the earth a hundred yards away from you. You didn't sleep very well. You begin your trek across the ruinous landscape once more. You're fueled by the sight of Chaos End growing ever larger in the distance. 
@@ -213,7 +219,7 @@ At midday you reach a large fissure sundering the landscape. It's much too far t
 
 You camp at the mouth of the cave where fresh air still flows. You try your best to get a restful night's sleep.
 @
-5
++5
 
 3)
 You awake in the mouth of a cave. Knowing that there are no other paths forward, you proceed into the darkness.
@@ -249,10 +255,13 @@ You step up to the guard and await his verdict. Your confident gaze stays affixe
 You step towards the massive gates. You find your desire for adventure not sated, but growing with each passing step. As you reach the final step it feels right to pause. You savor the moment, the step forward to greet your future as a great warrior.
 @
 20
+@
 FAIL:
 You step up to the guard and await his verdict. You avert your gaze as he inspects your equipment and frame. After what feels like hours, he finally stops and responds.
 "You are not capable of withstanding the trials of war, young orc. That much is apparent. You have been deemed unworthy." The guard turns and heads back to his post.
 
 You are crushed. After all of this, you will never get a chance to see combat. You don't accept it. You spend the rest of the day laying on the ground where you were inspected. As the sun sets, your last thought before drifting to sleep is whether or not you'll survive the trip back to your village.
 @
--20
+-100  
+)
+

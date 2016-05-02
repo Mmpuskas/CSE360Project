@@ -193,6 +193,7 @@ public class UIVisual
 		txt = new Text();
 		afterMath = new Text();
 
+		/* TODO: Convert the positioning on all of these to be based on gameheight/gamewidth */
 		txt.setWrappingWidth(primaryScreenBounds.getWidth()/2.45);
 		txt.setText(control.getFlavorTextFromTile(0));
 		vb.setPadding(new Insets(primaryScreenBounds.getHeight()/10, 50, 500, primaryScreenBounds.getWidth()/5.5)); //(top/right/bottom/left)
@@ -207,6 +208,22 @@ public class UIVisual
 			txt.setFont(Font.font ("Times New Roman", 18));
 			afterMath.setFont(Font.font ("Times New Roman", 18));
 		}
+		title = new Label("Leaderboards\n");
+		title.setPadding(new Insets(0,0,10,0));
+		title.setFont(Font.font ("Times New Roman", 40));
+		leaderboardVB.getChildren().add(title);
+		sc = new ScrollBar();
+		sc.setMin(0);
+		sc.setMax(primaryScreenBounds.getHeight());
+		sc.setValue(0);
+		sc.setOrientation(Orientation.VERTICAL);
+		sc.setPrefHeight(primaryScreenBounds.getHeight());
+		sc.setLayoutX(theScene.getWidth()-sc.getWidth());
+		sc.valueProperty().addListener(event->{title.setTranslateY(50-sc.getValue());});
+		sc.valueProperty().addListener(event->{leaderboardVB.setTranslateY(50-sc.getValue());});
+		/* TODO: Convert the positioning on all of these to be based on gameheight/gamewidth */
+		leaderboardVB.relocate(gameWidth * 4/12, gameHeight * 1/25); //Did this one myself
+
         //Interactables
         initButtons(gameWidth, gameHeight, rollWidth, rollHeight);
 	}
@@ -243,21 +260,14 @@ public class UIVisual
 				{
 					if(!root.getChildren().contains(playButton))
 					{
-						leaderboardVB.getChildren().clear();
-						theStage.setTitle("Leaderboards");//title
 						primaryScreenBounds = Screen.getPrimary().getVisualBounds();
+
 						try {
 							lb.setPointsArray();
 						} catch (Exception e) {
-							System.out.println("There aren't any pointers");
+							System.out.println("There aren't any points");
 						}
-				
 						array = lb.getTopTen();
-						leaderboardVB.setPadding(new Insets(25, 50, 50, primaryScreenBounds.getWidth()/3+25)); //(top/right/bottom/left)
-						title= new Label("Leaderboards\n");
-						title.setPadding(new Insets(0,0,10,0));
-						title.setFont(Font.font ("Times New Roman", 40));
-						leaderboardVB.getChildren().add(title);
 					
 						//Strings of the top 10 scores
 						for(int i = 0; i < 10; i++)
@@ -267,26 +277,11 @@ public class UIVisual
 							txt.setPadding(new Insets(0,0,5,0));
 							leaderboardVB.getChildren().add(txt);
 						}
-
-						sc = new ScrollBar();
-						sc.setMin(0);
-						sc.setMax(primaryScreenBounds.getHeight());
-						sc.setValue(0);
-						sc.setOrientation(Orientation.VERTICAL);
-						sc.setPrefHeight(primaryScreenBounds.getHeight());
-						sc.setLayoutX(theScene.getWidth()-sc.getWidth());
-						sc.valueProperty().addListener(event->{title.setTranslateY(50-sc.getValue());});
-						sc.valueProperty().addListener(event->{leaderboardVB.setTranslateY(50-sc.getValue());});
 						
 						playButton.relocate(primaryScreenBounds.getWidth() * 7.5 / 12, primaryScreenBounds.getHeight() * 9 / 12);
-						
-						root.getChildren().clear();
-						root.getChildren().add(splashCanvas);
-						root.getChildren().add(leaderboardVB);
-						root.getChildren().add(sc);
 						root.getChildren().add(playButton);
-						}
 					}
+				}
 			}
 		}.start();
 
@@ -492,7 +487,8 @@ public class UIVisual
 				curMode = Mode.scores;
 				root.getChildren().clear();
 				root.getChildren().add(splashCanvas);
-				//root.getChildren().add(scoresButton);
+				root.getChildren().add(leaderboardVB);
+				root.getChildren().add(sc);
 			}
 		});
 	 }

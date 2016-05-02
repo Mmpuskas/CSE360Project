@@ -65,7 +65,7 @@ public class UIControl {
 	 */
 	public void initEvents() {
 		String line = null;
-		String path = new File("").getAbsolutePath() + "/src/assets/EventText.txt";
+		String path = new File("").getAbsolutePath() + "/src/text/EventText.txt";
 		String fullText = new String();
 
 		try {
