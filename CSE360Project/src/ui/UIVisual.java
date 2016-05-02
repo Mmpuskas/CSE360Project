@@ -130,6 +130,7 @@ public class UIVisual
     
 	private Text txt;// it is the text events
 	private Text afterMath;
+	private Label textLabel[]; //For adding scores to the leaderboard
 	
 	/** Initializes the member variables that pertain to the JavaFX component tree.
 	 * @throws IOException 
@@ -153,7 +154,7 @@ public class UIVisual
 		control.initTilePositions(gameWidth, gameHeight);
 		control.initEvents();
 		initImages(gameWidth, gameHeight); 
-		//
+
 		//Background/button assets 
 		board = new Image("/assets/board.png", gameWidth, gameHeight, true, true);
 		splash = new Image("/assets/splash.png", gameWidth, gameHeight, true, true);
@@ -199,38 +200,40 @@ public class UIVisual
 		leaderboardVB = new VBox();
 		txt = new Text();
 		afterMath = new Text();
+		sc = new ScrollBar();
+		title = new Label("Leaderboard\n");
+		textLabel = new Label[10];
 
-		/* TODO: Convert the positioning on all of these to be based on gameheight/gamewidth */
-		txt.setWrappingWidth(primaryScreenBounds.getWidth()/2.45);
 		txt.setText(control.getFlavorTextFromTile(0));
-		vb.setPadding(new Insets(primaryScreenBounds.getHeight()/10, 50, 500, primaryScreenBounds.getWidth()/5.5)); //(top/right/bottom/left)
-		leaderboardVB.setPadding(new Insets(primaryScreenBounds.getHeight()/10, 50, 500, primaryScreenBounds.getWidth()/5.5)); //(top/r
 		vb.getChildren().add(txt);
 		vb.getChildren().add(afterMath);
-		afterMath.setWrappingWidth(primaryScreenBounds.getWidth()/2.45);
-		txt.setFont(Font.font ("Times New Roman", 15));
-		afterMath.setFont(Font.font ("Times New Roman", 15));
-		if(primaryScreenBounds.getHeight()>800 &&primaryScreenBounds.getWidth()>1000)
-		{
-			//edit the screen size for 1080 res
-			txt.setFont(Font.font ("Times New Roman", 18));
-			afterMath.setFont(Font.font ("Times New Roman", 18));
-		}
-		title = new Label("Leaderboards\n");
-		title.setPadding(new Insets(0,0,10,0));
-		title.setFont(Font.font ("Times New Roman", 40));
 		leaderboardVB.getChildren().add(title);
-		sc = new ScrollBar();
-		sc.setMin(0);
-		sc.setMax(primaryScreenBounds.getHeight());
-		sc.setValue(0);
 		sc.setOrientation(Orientation.VERTICAL);
-		sc.setPrefHeight(primaryScreenBounds.getHeight());
-		sc.setLayoutX(theScene.getWidth()-sc.getWidth());
-		sc.valueProperty().addListener(event->{title.setTranslateY(50-sc.getValue());});
-		sc.valueProperty().addListener(event->{leaderboardVB.setTranslateY(50-sc.getValue());});
+		sc.setMin(0);
+		sc.setValue(0);
+
 		/* TODO: Convert the positioning on all of these to be based on gameheight/gamewidth */
-		leaderboardVB.relocate(gameWidth * 4/12, gameHeight * 1/25); //Did this one myself
+		sc.setMax(primaryScreenBounds.getHeight());
+		sc.setPrefHeight(primaryScreenBounds.getHeight());
+		sc.setLayoutX(theScene.getWidth() - sc.getWidth());
+		sc.valueProperty().addListener(event->{title.setTranslateY(50 - sc.getValue());});
+		sc.valueProperty().addListener(event->{leaderboardVB.setTranslateY(50 - sc.getValue());});
+		/* TODO: Convert the positioning on all of these to be based on gameheight/gamewidth */
+
+		afterMath.setWrappingWidth(.306 * gameWidth);
+		txt.setWrappingWidth(.54 * gameWidth);
+		vb.setPadding(new Insets(.11 * gameHeight, .047 * gameWidth, .75 * gameHeight, .25 * gameWidth)); //(top/right/bottom/left)
+		title.setPadding(new Insets(0, 0, .0097 * gameWidth, 0));
+		title.setFont(Font.font("Times New Roman", .059 * gameHeight));
+		txt.setFont(Font.font("Times New Roman", .022 * gameHeight));
+		afterMath.setFont(Font.font("Times New Roman", .022 * gameHeight));
+		leaderboardVB.relocate(gameWidth * 6.2/12, gameHeight * 1.3/25);
+		for(int i = 0; i < 10; i++)
+		{
+			textLabel[i] = new Label();
+			textLabel[i].setFont(Font.font("Times New Roman", .022 * gameHeight));
+			textLabel[i].setPadding(new Insets(0, 0, .0048 * gameWidth, 0));
+		}
 
         //Interactables
         initButtons(gameWidth, gameHeight, rollWidth, rollHeight);
@@ -280,10 +283,8 @@ public class UIVisual
 						//Strings of the top 10 scores
 						for(int i = 0; i < 10; i++)
 						{
-							Label txt = new Label(Integer.toString(array[i]));//
-							txt.setFont(Font.font("Times New Roman", 18));
-							txt.setPadding(new Insets(0,0,5,0));
-							leaderboardVB.getChildren().add(txt);
+							textLabel[i].setText(Integer.toString(array[i]));
+							leaderboardVB.getChildren().add(textLabel[i]);
 						}
 						
 						playButton.relocate(primaryScreenBounds.getWidth() * 7.5 / 12, primaryScreenBounds.getHeight() * 9 / 12);
