@@ -52,6 +52,7 @@ public class UIVisual
 	private Image leaderboard;
 	private Image eventbackground;
 	private Image closeText;
+	private Image endGameImage;
 	private Image fishingVillage;
 	private Image forest;
 	private Image greyHills;
@@ -111,8 +112,9 @@ public class UIVisual
 	private Button makeMove;
 	private Button playButton;
 	private Button scoresButton;
-	private Text scoreText;
 	private Button close;
+	private Button endGameButton;
+	private Text scoreText;
     
     private Rectangle2D primaryScreenBounds;
     private int[] array;
@@ -373,7 +375,10 @@ public class UIVisual
 					txt.setText(control.getFlavorTextFromTile(curSpace));
 					root.getChildren().add(eventCanvas);
 					root.getChildren().add(vb);
-					root.getChildren().add(close);	
+					if(curSpace == 25)
+						root.getChildren().add(endGameButton);
+					else
+						root.getChildren().add(close);	
 				}
 			}
 		}
@@ -491,6 +496,31 @@ public class UIVisual
 				root.getChildren().add(sc);
 			}
 		});
+
+		//Pops at 25 tile, saves the curScore and goes back to the leaderboard
+		endGameButton = new Button();
+		ImageView endGameButtonImage = new ImageView();
+		endGameButtonImage.imageProperty().set(endGameImage);        
+		endGameButton.setGraphic(endGameButtonImage); 
+		endGameButton.setStyle("-fx-focus-color: darkgoldenrod;");
+		endGameButton.relocate(eventCanvas.getLayoutX() + eventCanvas.getWidth() / 2 - closeText.getWidth() / 1.6, gameCanvas.getHeight() * 10.95 / 12);
+		endGameButton.setOnAction(new EventHandler<ActionEvent>()
+		{
+			@Override public void handle(ActionEvent e) 
+			{
+				try 
+				{
+					lb.setNewScore(control.getScore());
+				} catch (IOException e1) {
+					System.out.println("Error setting final score.");
+				}
+				curMode = Mode.scores;
+				root.getChildren().clear();
+				root.getChildren().add(splashCanvas);
+				root.getChildren().add(leaderboardVB);
+				root.getChildren().add(sc);
+			}
+		});
 	 }
 	
 	 /**
@@ -511,6 +541,7 @@ public class UIVisual
 		orcActor = new Actor(control.tileList.get(0).x, control.tileList.get(0).y, orc);
 		closeText = new Image("/assets/close.png", (gameWidth * 0.05), (gameHeight * 0.05), true, true);
 		eventbackground = new Image("/assets/eventbackground.png", gameWidth / 1.75, gameHeight / 1.2, true, false);
+		endGameImage = new Image("/assets/leaderboard.png", (gameWidth * 0.05), (gameHeight * 0.05), true, true);
 
 		/*
 		//Set the sizes of the scene images that will go in the sceneCanvas(all the same size)

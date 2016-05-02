@@ -63,10 +63,7 @@ public class leaderboard
 	
 	}
 	
-	
-	
 	//getters & setters
-	
 	/**
 	 * getTotalScore()
 	 * @return the total score kept throughout the game
