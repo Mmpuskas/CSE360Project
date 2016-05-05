@@ -156,7 +156,7 @@ public class UIVisual
 		initImages(gameWidth, gameHeight); 
 
 		//Background/button assets 
-		board = new Image("/assets/board.png", gameWidth, gameHeight, true, true);
+		board = new Image("/assets/newBoard.png", gameWidth, gameHeight, true, true);
 		splash = new Image("/assets/splash.png", gameWidth, gameHeight, true, true);
 		die = new Image("/assets/die.png", rollWidth, rollHeight, true, true);
 
